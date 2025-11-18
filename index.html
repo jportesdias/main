@@ -44,7 +44,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 80px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -70,7 +70,7 @@
         }
 
         .logo-container img {
-            height: 52px;          /* controla somente a altura */
+            height: 120px;          /* controla somente a altura */
             width: auto;           /* mantém proporção, sem distorcer */
             display: block;
         }
@@ -249,16 +249,26 @@
         }
 
         .hero-media-inner {
-            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 60%);
-            border-radius: 20px;
-            padding: 32px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
+			background: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 60%);
+			border-radius: 20px;
+			padding: 32px 24px;
+			border: 1px solid rgba(255, 255, 255, 0.03);
+
+			/* ALINHAMENTO CORRETO */
+			display: flex;
+			flex-direction: column;
+			align-items: center;     /* Centraliza horizontalmente */
+			justify-content: center; /* Centraliza verticalmente (opcional) */
+
+			text-align: center;      /* Garante centralização dos textos */
+			gap: 16px;               /* Espaçamento entre logo, título e texto */
+}
+
 
         .hero-media img {
             display: block;
             margin: 0 auto 24px;
-            height: 96px;    /* controla apenas a altura */
+            height: 500px;    /* controla apenas a altura */
             width: auto;     /* mantém proporção da logo */
         }
 
@@ -535,7 +545,7 @@
         <div class="navbar-inner">
             <div class="logo-container">
                 <!-- Substitua o src abaixo pelo caminho exato da sua logo, sem alterar proporção -->
-                <img C:\Documentos\Site Portes Dias Buffet="logo-portes-dias-buffet.png" alt="Portes Dias Buffet Logo" />
+                <img src="portesdias_logo.png" alt="Portes Dias Buffet Logo" />
                 <div class="brand-text">
                     <span>PORTES DIAS</span>
                     <span>Buffet · Parrilla · Steakhouse</span>
@@ -558,7 +568,7 @@
             <div>
                 <div class="hero-kicker">Private Steakhouse Experience</div>
                 <h1 class="hero-title">
-                    A steakhouse <span>premiada</span>, cuidadosamente montada dentro da sua casa.
+                    A steakhouse <span>PREMIUM</span>, cuidadosamente montada dentro da sua casa.
                 </h1>
                 <p class="hero-subtitle">
                     A arte da parrilla, cortes nobres como Ribeye, Tomahawk e Bife Ancho, execução impecável
@@ -572,8 +582,12 @@
                 </div>
 
                 <div class="hero-ctas">
-                    <a href="#contato" class="btn-primary">Reservar experiência</a>
-                    <a href="#produtos" class="btn-secondary">Ver cortes & menu</a>
+                    <div class="hero-ctas">
+					<a href="cardapios.html" class="btn-primary">Ver Cardápios</a>
+					<a href="#produtos" class="btn-secondary">Cortes & Experiência</a>
+					<a href="#contato" class="btn-secondary">Reservar</a>
+				</div>
+
                 </div>
 
                 <p class="hero-note">
@@ -582,31 +596,53 @@
                 </p>
             </div>
 
-            <aside class="hero-media">
-                <div class="hero-media-inner">
-                    <img C:\Documentos\Site Portes Dias Buffet="logo-portes-dias-buffet.png" alt="Portes Dias Buffet Logo" />
-                    <h2>Portes Dias Buffet</h2>
-                    <p>
-                        A união entre técnica, fogo e hospitalidade. Uma curadoria de carnes e atendimento
-                        pensada para quem leva a sério o prazer de receber bem.
-                    </p>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <strong>Parrilla</strong>
-                            <span>Estilo hermanos, com cortes clássicos e ponto perfeito.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Steakhouse</strong>
-                            <span>Atmosfera de casa de carne internacional, na sua sala.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Buffet</strong>
-                            <span>Experiência completa, da preparação ao último brinde.</span>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+<aside class="hero-media">
+    <div class="hero-media-inner" style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;       /* centraliza horizontalmente */
+        justify-content:flex-start;
+        text-align:center;
+        padding:32px 24px;
+    ">
+        
+        <!-- LOGO CENTRALIZADA -->
+        <img src="portesdias_logo.png" 
+             alt="Portes Dias Buffet Logo"
+             style="height:300px; width:auto; display:block; margin:0 auto;" />
+
+        <h2 style="margin-top:16px;">Portes Dias Buffet</h2>
+
+        <p style="color:#b3b3b3; font-size:0.9rem; max-width:360px;">
+            A união entre técnica, fogo e hospitalidade. Uma curadoria de carnes e atendimento
+            pensada para quem leva a sério o prazer de receber bem.
+        </p>
+
+        <div class="hero-stats" style="
+            display:flex;
+            flex-direction:column;
+            gap:16px;
+            margin-top:20px;
+        ">
+            <div class="stat">
+                <strong>Parrilla</strong>
+                <span>Estilo hermanos, com cortes clássicos e ponto perfeito.</span>
+            </div>
+
+            <div class="stat">
+                <strong>Steakhouse</strong>
+                <span>Atmosfera de casa de carne internacional, na sua sala.</span>
+            </div>
+
+            <div class="stat">
+                <strong>Buffet</strong>
+                <span>Experiência completa, da preparação ao último brinde.</span>
+            </div>
         </div>
+
+    </div>
+</aside>
+          </div>
     </main>
 
     <!-- PRODUTOS / EXPERIÊNCIA -->
@@ -758,7 +794,18 @@
                     </ul>
                     <p style="margin-top: 10px;">
                         Se você busca algo além do churrasco tradicional, a Portes Dias Buffet foi pensada para
-                        você.
+                        você.					
+					<p style="margin-top: 10px;">
+						Podemos customizar o atendimento da forma como você quiser. Mas também disponibilizamos
+						cardápio pré montados:
+					<p style="margin-top: 10px;">
+						PREMIUM PORTES DIAS 
+					<p style="margin-top: 10px;">
+						QUASE PREMIUM
+					<p style="margin-top: 10px;">
+						PODIA SER QUASE PREMIUM
+					<p style="margin-top: 10px;">						
+						ENTRE EM CONTATO E IREMOS TIRAR TODAS AS SUAS DÚVIDAS.
                     </p>
                 </aside>
             </div>
