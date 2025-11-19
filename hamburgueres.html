@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hambúrgueres Artesanais – Portes Dias Buffet</title>
+  <meta name="description" content="Hambúrgueres artesanais de alto nível, rústicos e exclusivos do Portes Dias Buffet. New York Steak, Smash Steak e Mini Steak com molho supreme.">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-soft: #f0d58a;
+      --border-soft: rgba(212, 175, 55, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    /* NAVBAR IGUAL AO INDEX (ADAPTADO) */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      background: rgba(5, 5, 5, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .navbar-inner {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-container img {
+      height: 120px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text span:first-child {
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .brand-text span:last-child {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #b3b3b3;
+      letter-spacing: 0.22em;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #b3b3b3;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-soft);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        height: 72px;
+      }
+
+      .logo-container img {
+        height: 44px;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .navbar-inner {
+        padding: 0 16px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+    }
+
+    /* CABEÇALHO DA PÁGINA (DEPOIS DA NAV) */
+    .page-header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      background: #0d0d0d;
+      border-bottom: 1px solid #333;
+      margin-top: 120px; /* espaço para a navbar fixa */
+    }
+
+    .page-header h1 {
+      font-size: 34px;
+      font-weight: 700;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .page-header p {
+      font-size: 17px;
+      margin-top: 10px;
+      color: #d0d0d0;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 30px auto 10px;
+      padding: 0 20px 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-text h2 {
+      font-size: 26px;
+      margin: 0 0 10px;
+      color: #f2b15c;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-text p {
+      margin: 6px 0;
+      color: #e3e3e3;
+      font-size: 16px;
+    }
+
+.hero-highlight {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #000;
+    font-weight: 700;
+}
+
+    }
+
+    .hero-price {
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffd18a;
+    }
+
+    .hero-cta {
+      margin-top: 18px;
+    }
+
+    .btn-gold {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid #f0a94b;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #ffd889, var(--gold-soft));
+    }
+
+    .hero-note {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #b8b8b8;
+    }
+
+    .hero-image {
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #333;
+      object-fit: cover;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f0f0f0;
+    }
+
+    .burger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .burger-card {
+      background: #1f1f1f;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .burger-card.highlight {
+      border: 1px solid #f2b15c;
+      box-shadow: 0 0 16px rgba(242, 177, 92, 0.25);
+      background: #211a12;
+    }
+
+    .burger-image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .burger-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .burger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .burger-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #f2b15c;
+    }
+
+    .burger-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      background: #f2b15c;
+      color: #1a1a1a;
+      white-space: nowrap;
+    }
+
+    .burger-description {
+      font-size: 15px;
+      color: #e0e0e0;
+      margin: 6px 0 4px;
+    }
+
+    .burger-versions {
+      font-size: 13px;
+      color: #cccccc;
+      margin: 2px 0;
+    }
+
+    .burger-price {
+      margin-top: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffd18a;
+    }
+
+    .burger-cta {
+      margin-top: 12px;
+    }
+
+    .burger-cta a {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: none;
+      color: #25d366;
+    }
+
+    .cta-full {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .cta-full p {
+      font-size: 15px;
+      color: #d0d0d0;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      margin-top: 30px;
+      background: #0d0d0d;
+      font-size: 13px;
+      color: #888;
+      border-top: 1px solid #333;
+    }
+
+    /* Popup (modal) após 30 segundos */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .popup-content {
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 20px 22px;
+      max-width: 360px;
+      width: 90%;
+      border: 1px solid #f2b15c;
+      text-align: center;
+    }
+
+    .popup-content h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #f2b15c;
+    }
+
+    .popup-content p {
+      margin: 4px 0 14px;
+      font-size: 14px;
+      color: #e0e0e0;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .popup-btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .popup-btn-secondary {
+      background: #333;
+      color: #f5f5f5;
+    }
+
+    .popup-btn-primary {
+      background: #25d366;
+      color: #111;
+    }
+
+    .popup-btn-secondary:hover {
+      background: #444;
+    }
+
+    .popup-btn-primary:hover {
+      background: #1fb259;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .page-header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR IGUAL AO INDEX -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="logo-container">
+      <img src="portesdias_logo.png" alt="Portes Dias Buffet Logo">
+      <div class="brand-text">
+        <span>PORTES DIAS</span>
+        <span>Buffet · Parrilla · Steakhouse</span>
+      </div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cardapio.html">Cardápios</a></li>
+        <li><a href="portfolio.html">Portfólio</a></li>
+        <li><a href="index.html#produtos">Produtos</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <h1>Hambúrgueres Artesanais</h1>
+  <p>Uma seleção rústica, de alto nível, criada para surpreender seus convidados.</p>
+</section>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-highlight">Carro-chefe Portes Dias Buffet</span>
+    <h2>New York Steak – o protagonista da noite</h2>
+    <p>
+      Um hambúrguer feito com blend de carnes nobres, duas fatias de bacon,
+      molho supreme exclusivo, cebola caramelizada, couve crispy e queijo gruyère.
+    </p>
+    <p>
+      Disponível nas versões <strong>180g</strong> e <strong>120g</strong>,
+      pensado para eventos que exigem padrão elevado sem perder a identidade rústica.
+    </p>
+    <p class="hero-price">
+      New York Steak – R$ 49,50
+    </p>
+    <div class="hero-cta">
+      <a
+        class="btn-gold"
+        href="https://wa.me/5524999926545?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20hamb%C3%BArgueres%20artesanais%20do%20Portes%20Dias%20Buffet."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Falar com a Fabíola pelo WhatsApp
+      </a>
+      <div class="hero-note">
+        Atendimento direto com Fabíola Portes – (24) 99992-6545
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="new_york_steak.jpg" alt="Hambúrguer New York Steak – Portes Dias Buffet">
+  </div>
+</section>
+
+<section class="section">
+  <h3 class="section-title">Nossa linha de hambúrgueres artesanais</h3>
+
+  <div class="burger-grid">
+
+    <!-- New York Steak (destaque) -->
+    <article class="burger-card highlight">
+      <div class="burger-image">
+        <img src="new_york_steak.jpg" alt="Hambúrguer New York Steak">
+      </div>
+      <div class="burger-header">
+        <span class="burger-name">New York Steak</span>
+        <span class="burger-tag">Carro-chefe</span>
+      </div>
+      <p class="burger-description">
+        Blend de carnes nobres, duas fatias de bacon, molho supreme, cebola caramelizada,
+        couve crispy e queijo gruyère.
+      </p>
+      <p class="burger-versions">
+        Versões: <strong>180g</strong> e <strong>120g</strong>
+      </p>
+      <p class="burger-price">
+        R$ 49,50
+      </p>
+      <div class="burger-cta">
+        <a
+          href="https://wa.me/5524999926545?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20New%20York%20Steak%20do%20Portes%20Dias%20Buffet."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Quero esse hambúrguer no meu evento →
+        </a>
+      </div>
+    </article>
+
+    <!-- Smash Steak -->
+    <article class="burger-card">
+      <div class="burger-image">
+        <img src="smash_steak.jpg" alt="Hambúrguer Smash Steak">
+      </div>
+      <div class="burger-header">
+        <span class="burger-name">Smash Steak</span>
+      </div>
+      <p class="burger-description">
+        Blend de carnes, molho supreme, cheddar e bacon.
+      </p>
+      <p class="burger-versions">
+        Versão: <strong>120g</strong> (formato smash, ideal para serviço dinâmico).
+      </p>
+      <p class="burger-price">
+        R$ 32,60
+      </p>
+      <div class="burger-cta">
+        <a
+          href="https://wa.me/5524999926545?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Smash%20Steak%20do%20Portes%20Dias%20Buffet."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Incluir o Smash Steak no orçamento →
+        </a>
+      </div>
+    </article>
+
+    <!-- Mini Steak -->
+    <article class="burger-card">
+      <div class="burger-image">
+        <img src="mini_steak.jpg" alt="Hambúrguer Mini Steak">
+      </div>
+      <div class="burger-header">
+        <span class="burger-name">Mini Steak</span>
+      </div>
+      <p class="burger-description">
+        Blend de carnes, molho e queijo, em formato compacto,
+        ideal para coquetéis, eventos longos e degustações.
+      </p>
+      <p class="burger-versions">
+        Versão: <strong>Mini especial</strong>
+      </p>
+      <p class="burger-price">
+        R$ 22,50
+      </p>
+      <div class="burger-cta">
+        <a
+          href="https://wa.me/5524999926545?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Mini%20Steak%20do%20Portes%20Dias%20Buffet."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Perguntar sobre o Mini Steak →
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="cta-full">
+    <p>
+      Quer ver tudo o que o Portes Dias Buffet pode oferecer para o seu evento?
+    </p>
+    <a
+      class="btn-gold"
+      href="index.html"
+    >
+      Voltar para a página inicial
+    </a>
+  </div>
+</section>
+
+<footer>
+  Portes Dias Buffet — Hambúrgueres artesanais e gastronomia personalizada para o seu evento.
+</footer>
+
+<!-- Popup após 30 segundos -->
+<div class="popup-overlay" id="popup-whatsapp">
+  <div class="popup-content">
+    <h4>Quer falar agora pelo WhatsApp?</h4>
+    <p>
+      Posso te colocar em contato direto com a Fabíola Portes para tirar dúvidas
+      e montar o cardápio ideal para o seu evento.
+    </p>
+    <div class="popup-buttons">
+      <button class="popup-btn popup-btn-secondary" id="btn-continuar">
+        Continuar olhando o site
+      </button>
+      <button class="popup-btn popup-btn-primary" id="btn-falar-agora">
+        Falar agora
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mostrar popup após 30 segundos na página
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var popup = document.getElementById('popup-whatsapp');
+      if (popup) {
+        popup.style.display = 'flex';
+      }
+    }, 30000); // 30000 ms = 30 segundos
+  });
+
+  // Botão "Continuar olhando o site" – fecha o popup
+  var btnContinuar = document.getElementById('btn-continuar');
+  if (btnContinuar) {
+    btnContinuar.addEventListener('click', function () {
+      var popup = document.getElementById('popup-whatsapp');
+      if (popup) {
+        popup.style.display = 'none';
+      }
+    });
+  }
+
+  // Botão "Falar agora" – abre WhatsApp com mensagem
+  var btnFalarAgora = document.getElementById('btn-falar-agora');
+  if (btnFalarAgora) {
+    btnFalarAgora.addEventListener('click', function () {
+      var url = "https://wa.me/5524999926545?text=Ol%C3%A1%20Fab%C3%ADola%2C%20estava%20vendo%20os%20hamb%C3%BArgueres%20do%20Portes%20Dias%20Buffet%20e%20quero%20falar%20com%20voc%C3%AA%20agora.";
+      window.open(url, "_blank");
+    });
+  }
+</script>
+
+</body>
+</html>
