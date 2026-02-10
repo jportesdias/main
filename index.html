@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portes Dias Buffet - Private Steakhouse Experience</title>
 
-    <!-- Fontes Google (opcional) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-	
     <!-- SEO PORTES DIAS BUFFET -->
     <title>Portes Dias Buffet | Private Steakhouse Experience na sua casa · Parrilla & Churrasco Gourmet</title>
+
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
     <meta name="description" content="Uma steakhouse privada dentro da sua casa. Experiência premium de parrilla, cortes nobres e churrasco gourmet com técnica, elegância e hospitalidade. Portes Dias Buffet – eventos exclusivos e memoráveis.">
     <meta name="keywords" content="buffet churrasco, parrilla, churrasco gourmet, steakhouse em casa, buffet premium, evento particular, picanha, carnes nobres, chef churrasqueiro, Portes Dias Buffet, churrasco personalizado">
@@ -19,10 +18,10 @@
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
 
-    <!-- Canonical (EVITA conteúdo duplicado) -->
+    <!-- Canonical -->
     <link rel="canonical" href="https://www.buffetportesdias.com.br/">
 
-    <!-- OPEN GRAPH (WhatsApp, Instagram, Facebook) -->
+    <!-- OPEN GRAPH -->
     <meta property="og:title" content="Portes Dias Buffet · Private Steakhouse Experience">
     <meta property="og:description" content="Parrilla, cortes premium e atendimento sofisticado no conforto da sua casa. Uma verdadeira steakhouse sob medida para o seu evento.">
     <meta property="og:image" content="https://www.buffetportesdias.com.br/og-image.jpg">
@@ -39,10 +38,11 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
 
-    <!-- Pré-carregar fontes para velocidade -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <!-- Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- SCHEMA JSON-LD - Google Rich Results -->
+    <!-- SCHEMA JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -75,15 +75,8 @@
             --border-soft: rgba(212, 175, 55, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--bg-main);
@@ -93,12 +86,9 @@
         }
 
         /* NAVBAR */
-
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 120px;
             display: flex;
             align-items: center;
@@ -118,23 +108,10 @@
             justify-content: space-between;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-container img { height: 120px; width: auto; display: block; }
 
-        .logo-container img {
-            height: 120px;
-            width: auto;
-            display: block;
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
+        .brand-text { display: flex; flex-direction: column; }
         .brand-text span:first-child {
             font-family: "Playfair Display", serif;
             font-size: 1rem;
@@ -142,7 +119,6 @@
             text-transform: uppercase;
             color: var(--gold);
         }
-
         .brand-text span:last-child {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -150,12 +126,7 @@
             letter-spacing: 0.22em;
         }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 32px;
-        }
-
+        .nav-links { list-style: none; display: flex; gap: 32px; }
         .nav-links a {
             text-decoration: none;
             font-size: 0.9rem;
@@ -165,28 +136,18 @@
             position: relative;
             padding-bottom: 4px;
         }
-
         .nav-links a::after {
             content: "";
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
+            left: 0; bottom: 0;
+            width: 0; height: 2px;
             background: var(--gold);
             transition: width 0.25s ease;
         }
-
-        .nav-links a:hover {
-            color: var(--gold-soft);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--gold-soft); }
+        .nav-links a:hover::after { width: 100%; }
 
         /* HERO */
-
         .hero {
             min-height: 100vh;
             padding: 120px 24px 80px;
@@ -219,10 +180,7 @@
             line-height: 1.15;
             margin-bottom: 20px;
         }
-
-        .hero-title span {
-            color: var(--gold);
-        }
+        .hero-title span { color: var(--gold); }
 
         .hero-subtitle {
             font-size: 1.05rem;
@@ -231,13 +189,7 @@
             margin-bottom: 32px;
         }
 
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
+        .hero-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
         .badge {
             border: 1px solid var(--border-soft);
             border-radius: 999px;
@@ -246,21 +198,10 @@
             color: var(--text-muted);
         }
 
-        .hero-ctas {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 24px;
-        }
+        .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        .hero-ctas-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
-        .hero-ctas-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn-primary,
-        .btn-secondary {
+        .btn-primary, .btn-secondary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -272,6 +213,7 @@
             text-decoration: none;
             transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
             cursor: pointer;
+            border: none;
         }
 
         .btn-primary {
@@ -279,27 +221,16 @@
             color: #000;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); }
 
         .btn-secondary {
             border: 1px solid var(--border-soft);
             color: var(--text-main);
             background: transparent;
         }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.04); transform: translateY(-1px); }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.04);
-            transform: translateY(-1px);
-        }
-
-        .hero-note {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        .hero-note { font-size: 0.85rem; color: var(--text-muted); }
 
         .hero-media {
             border-radius: 26px;
@@ -322,143 +253,40 @@
             gap: 16px;
         }
 
-        .hero-media img {
-            display: block;
-            margin: 0 auto 24px;
-            height: 300px;
-            width: auto;
-        }
+        .hero-media img { display: block; margin: 0 auto 24px; height: 300px; width: auto; }
+        .hero-media h2 { font-family: "Playfair Display", serif; font-size: 1.3rem; text-align: center; margin-bottom: 12px; }
+        .hero-media p { font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-bottom: 18px; }
 
-        .hero-media h2 {
-            font-family: "Playfair Display", serif;
-            font-size: 1.3rem;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .hero-media p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 18px;
-        }
-
-        .hero-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 1.1rem;
-            color: var(--gold-soft);
-        }
-
-        .stat span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .hero-stats { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+        .stat { text-align: center; }
+        .stat strong { display: block; font-size: 1.1rem; color: var(--gold-soft); }
+        .stat span { font-size: 0.8rem; color: var(--text-muted); }
 
         /* SECTIONS */
+        section { scroll-margin-top: 96px; }
 
-        section {
-            scroll-margin-top: 96px;
-        }
-
-        .section {
-            padding: 80px 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .section-inner {
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        .section-title {
-            font-family: "Playfair Display", serif;
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .section-kicker {
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--gold-soft);
-            margin-bottom: 8px;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--text-muted);
-            max-width: 620px;
-            margin-bottom: 32px;
-        }
-
-        .section-dark {
-            background: var(--bg-section);
-        }
-
-        .section-alt {
-            background: var(--bg-section-alt);
-        }
+        .section { padding: 80px 24px; display: flex; justify-content: center; }
+        .section-inner { width: 100%; max-width: 1100px; }
+        .section-title { font-family: "Playfair Display", serif; font-size: 2rem; margin-bottom: 12px; }
+        .section-kicker { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
+        .section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 620px; margin-bottom: 32px; }
+        .section-dark { background: var(--bg-section); }
+        .section-alt { background: var(--bg-section-alt); }
 
         /* PRODUTOS / CORTES */
-
-        .cuts-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 24px;
-        }
-
+        .cuts-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
         .cut-card {
             border-radius: 18px;
             border: 1px solid var(--border-soft);
             padding: 18px 20px;
             background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.05), #050507);
         }
-
-        .cut-name {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .cut-tag {
-            font-size: 0.8rem;
-            color: var(--gold-soft);
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-bottom: 8px;
-        }
-
-        .cut-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
+        .cut-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .cut-tag { font-size: 0.8rem; color: var(--gold-soft); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 8px; }
+        .cut-desc { font-size: 0.9rem; color: var(--text-muted); }
 
         /* CONTATO */
-
-        .contact-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-            gap: 32px;
-        }
-
-        .contact-highlight {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
+        .contact-highlight { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; }
         .availability {
             border-radius: 18px;
             border: 1px solid var(--border-soft);
@@ -467,70 +295,9 @@
             color: var(--text-muted);
             margin-bottom: 24px;
         }
-
-        .availability strong {
-            color: var(--gold-soft);
-        }
-
-        form {
-            display: grid;
-            gap: 12px;
-        }
-
-        label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(8, 8, 10, 0.95);
-            color: var(--text-main);
-            font-size: 0.9rem;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--gold-soft);
-            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
-        }
-
-        .contact-side {
-            border-radius: 22px;
-            border: 1px solid var(--border-soft);
-            padding: 20px 22px;
-            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.08), #050507);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .contact-side h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .contact-side ul {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .contact-side li {
-            margin-bottom: 6px;
-        }
+        .availability strong { color: var(--gold-soft); }
 
         /* BANNER HAMBÚRGUERES */
-
         .cta-banner {
             border-radius: 22px;
             border: 1px solid var(--border-soft);
@@ -542,27 +309,11 @@
             gap: 18px;
             flex-wrap: wrap;
         }
+        .cta-banner-text { max-width: 640px; }
+        .cta-banner-title { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: 6px; }
+        .cta-banner-sub { font-size: 0.95rem; color: var(--text-muted); }
 
-        .cta-banner-text {
-            max-width: 640px;
-        }
-
-        .cta-banner-title {
-            font-family: "Playfair Display", serif;
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-        }
-
-        .cta-banner-sub {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        .cta-banner-actions {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .cta-banner-actions { display: flex; align-items: center; justify-content: center; }
 
         .btn-gold-banner {
             display: inline-flex;
@@ -580,14 +331,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
             cursor: pointer;
         }
-
-        .btn-gold-banner:hover {
-            background: linear-gradient(135deg, #ffe199, var(--gold-soft));
-            transform: translateY(-1px);
-        }
+        .btn-gold-banner:hover { background: linear-gradient(135deg, #ffe199, var(--gold-soft)); transform: translateY(-1px); }
 
         /* FOOTER */
-
         footer {
             padding: 32px 24px;
             text-align: center;
@@ -596,71 +342,30 @@
             background: #050505;
             border-top: 1px solid var(--border-soft);
         }
-
-        footer span {
-            color: var(--gold-soft);
-        }
+        footer span { color: var(--gold-soft); }
 
         /* RESPONSIVO */
-
         @media (max-width: 900px) {
-            .hero-inner,
-            .contact-layout {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .hero-media {
-                order: -1;
-            }
-
-            .cuts-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .navbar-inner {
-                padding: 0 16px;
-            }
-
-            .nav-links {
-                gap: 16px;
-            }
-
-            .cta-banner {
-                align-items: flex-start;
-            }
-
-            .cta-banner-actions {
-                justify-content: flex-start;
-            }
+            .hero-inner { grid-template-columns: minmax(0, 1fr); }
+            .hero-media { order: -1; }
+            .cuts-grid { grid-template-columns: minmax(0, 1fr); }
+            .navbar-inner { padding: 0 16px; }
+            .nav-links { gap: 16px; }
+            .cta-banner { align-items: flex-start; }
+            .cta-banner-actions { justify-content: flex-start; }
         }
 
         @media (max-width: 640px) {
-            .hero {
-                padding-top: 110px;
-            }
-
-            .hero-title {
-                font-size: 2.1rem;
-            }
-
-            .hero-media img {
-                height: 80px;
-            }
-
-            .navbar {
-                height: 72px;
-            }
-
-            .logo-container img {
-                height: 44px;
-            }
-
-            .brand-text {
-                display: none;
-            }
+            .hero { padding-top: 110px; }
+            .hero-title { font-size: 2.1rem; }
+            .hero-media img { height: 80px; }
+            .navbar { height: 72px; }
+            .logo-container img { height: 44px; }
+            .brand-text { display: none; }
         }
     </style>
 </head>
+
 <body>
     <!-- NAVBAR -->
     <header class="navbar">
@@ -690,9 +395,8 @@
         <div class="hero-inner">
             <div>
                 <div class="hero-kicker">Private Steakhouse Experience</div>
-                <h1 class="hero-title">
-                    A steakhouse <span>PREMIUM</span>, cuidadosamente montada dentro da sua casa.
-                </h1>
+                <h1 class="hero-title">A steakhouse <span>PREMIUM</span>, cuidadosamente montada dentro da sua casa.</h1>
+
                 <p class="hero-subtitle">
                     A arte da parrilla, cortes nobres como Ribeye, Tomahawk e Bife Ancho, execução impecável
                     e atmosfera de restaurante internacional — sem você precisar sair de casa.
@@ -706,22 +410,18 @@
 
                 <div class="hero-ctas">
                     <div class="hero-ctas-row">
-                        <a href="cardapios.html" class="btn-primary">Ver Cardápios</a>
+                        <a href="cardapio.html" class="btn-primary">Ver Cardápios</a>
                         <a href="#produtos" class="btn-secondary">Cortes & Experiência</a>
                         <a href="#contato" class="btn-secondary">Reservar</a>
                     </div>
-                    <a
-						href="hamburgueres.html"
-						class="btn-secondary"
-						style="border: 1px solid var(--border-soft); background: transparent; color: var(--text-main); font-weight: 600;"
-                    >
+
+                    <a href="hamburgueres.html" class="btn-secondary" style="border: 1px solid var(--border-soft); background: transparent; color: var(--text-main); font-weight: 600;">
                         Conheça nosso Delivery de Hambúrgueres Artesanais
                     </a>
                 </div>
 
                 <p class="hero-note">
-                    Atendemos poucas datas por período para manter a experiência sempre em padrão de steakhouse
-                    premium.
+                    Atendemos poucas datas por período para manter a experiência sempre em padrão de steakhouse premium.
                 </p>
             </div>
 
@@ -733,6 +433,7 @@
                         A união entre técnica, fogo e hospitalidade. Uma curadoria de carnes e atendimento
                         pensada para quem leva a sério o prazer de receber bem.
                     </p>
+
                     <div class="hero-stats">
                         <div class="stat">
                             <strong>Parrilla</strong>
@@ -759,81 +460,56 @@
             <h2 class="section-title">A experiência Portes Dias</h2>
             <p class="section-subtitle">
                 Mais do que um churrasco em casa, você recebe um serviço pensado para reproduzir a atmosfera de uma
-                steakhouse sofisticada: mise en place, cortes de alta qualidade, parrilla no ponto e apresentação
-                elegante à mesa.
+                steakhouse sofisticada: mise en place, cortes de alta qualidade, parrilla no ponto e apresentação elegante à mesa.
             </p>
 
             <div class="cuts-grid">
                 <article class="cut-card">
                     <div class="cut-name">Ribeye (Bife Ancho)</div>
                     <div class="cut-tag">Assinatura da Casa</div>
-                    <p class="cut-desc">
-                        Corte com marmoreio intenso, maciez excepcional e sabor profundo. Selado na parrilla para
-                        criar crosta perfeita e interior suculento.
-                    </p>
+                    <p class="cut-desc">Corte com marmoreio intenso, maciez excepcional e sabor profundo. Selado na parrilla para criar crosta perfeita e interior suculento.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Striploin (Bife de Chorizo)</div>
                     <div class="cut-tag">Clássico Argentino</div>
-                    <p class="cut-desc">
-                        Combinação ideal entre textura firme e suculência, com sabor equilibrado e apresentação
-                        elegante em fatias bem definidas.
-                    </p>
+                    <p class="cut-desc">Combinação ideal entre textura firme e suculência, com sabor equilibrado e apresentação elegante em fatias bem definidas.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Tomahawk</div>
                     <div class="cut-tag">Presença de Palco</div>
-                    <p class="cut-desc">
-                        Corte imponente, servido com osso longo, pensado para impressionar convidados e criar
-                        momentos memoráveis na mesa.
-                    </p>
+                    <p class="cut-desc">Corte imponente, servido com osso longo, pensado para impressionar convidados e criar momentos memoráveis na mesa.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Short Ribs / Asado de Tira</div>
                     <div class="cut-tag">Sabor Profundo</div>
-                    <p class="cut-desc">
-                        Preparado com cozimento controlado na brasa, entrega textura macia e sabor marcante, típico
-                        das melhores parrillas portenhas.
-                    </p>
+                    <p class="cut-desc">Preparado com cozimento controlado na brasa, entrega textura macia e sabor marcante, típico das melhores parrillas portenhas.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Vacío & Picanha Premium</div>
                     <div class="cut-tag">Favoritos do Público</div>
-                    <p class="cut-desc">
-                        Clássicos que nunca saem do centro da mesa. Suculência, ponto preciso e fatias pensadas para
-                        compartilhar com quem você mais gosta.
-                    </p>
+                    <p class="cut-desc">Clássicos que nunca saem do centro da mesa. Suculência, ponto preciso e fatias pensadas para compartilhar com quem você mais gosta.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Wagyu & Angus Prime (sob encomenda)</div>
                     <div class="cut-tag">Experiência Máxima</div>
-                    <p class="cut-desc">
-                        Para quem busca o auge da gastronomia em carne. Cortes especiais sob reserva, com
-                        apresentação digna de restaurante internacional.
-                    </p>
+                    <p class="cut-desc">Para quem busca o auge da gastronomia em carne. Cortes especiais sob reserva, com apresentação digna de restaurante internacional.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Acompanhamentos Gourmet</div>
                     <div class="cut-tag">Harmonização</div>
-                    <p class="cut-desc">
-                        Chimichurri artesanal, provoleta na brasa, legumes grelhados, farofa premium e molhos
-                        autorais que valorizam cada corte servido.
-                    </p>
+                    <p class="cut-desc">Chimichurri artesanal, provoleta na brasa, legumes grelhados, farofa premium e molhos autorais que valorizam cada corte servido.</p>
                 </article>
 
                 <article class="cut-card">
                     <div class="cut-name">Serviço & Atmosfera</div>
                     <div class="cut-tag">Steakhouse em Casa</div>
-                    <p class="cut-desc">
-                        Montamos toda a estrutura, cuidamos do fluxo de serviço e entregamos um ambiente
-                        sofisticado, sem perder o conforto do seu lar.
-                    </p>
+                    <p class="cut-desc">Montamos toda a estrutura, cuidamos do fluxo de serviço e entregamos um ambiente sofisticado, sem perder o conforto do seu lar.</p>
                 </article>
             </div>
         </div>
@@ -845,54 +521,32 @@
             <div class="section-kicker">Contato · Reserva</div>
             <h2 class="section-title">Reserve sua data</h2>
             <p class="section-subtitle">
-                Por ser uma experiência personalizada e de alto padrão, as datas são limitadas. Preencha os dados
-                abaixo para solicitar disponibilidade e iniciar o planejamento do seu evento.
+                Por ser uma experiência personalizada e de alto padrão, as datas são limitadas. Preencha os dados abaixo
+                para solicitar disponibilidade e iniciar o planejamento do seu evento.
             </p>
 
-            <div style="
-                display: flex;
-                gap: 32px;
-                align-items: stretch;
-                justify-content: space-between;
-                margin-top: 40px;
-            ">
-
-                <!-- COLUNA ESQUERDA — QUADRO SOFISTICADO -->
-                <div style="flex: 1; min-width: 360px; display:flex;">
-
+            <div style="display:flex; gap:32px; align-items:stretch; justify-content:space-between; margin-top:40px; flex-wrap:wrap;">
+                <!-- COLUNA ESQUERDA -->
+                <div style="flex:1; min-width:360px; display:flex;">
                     <div style="width:100%; height:100%;
                         background: radial-gradient(circle at top left, rgba(212,175,55,0.10), rgba(10,10,10,0.55));
                         border: 1px solid rgba(212,175,55,0.22);
                         border-radius: 26px;
                         padding: 42px 48px;
                         backdrop-filter: blur(4px);
-                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);
-                    ">
+                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);">
 
-                        <h2 style="
-                            font-family:'Playfair Display', serif;
-                            font-size: 1.8rem;
-                            color: #f0d58a;
-                            margin-bottom: 16px;
-                            letter-spacing: 0.02em;
-                        ">
+                        <h2 style="font-family:'Playfair Display', serif; font-size:1.8rem; color:#f0d58a; margin-bottom:16px; letter-spacing:0.02em;">
                             Uma steakhouse na sua casa. Uma experiência. Uma memória.
                         </h2>
 
-                        <p style="
-                            color: #dcdcdc;
-                            font-size: 1.05rem;
-                            margin-bottom: 24px;
-                            line-height: 1.6;
-                        ">
-                            Cada evento é tratado como uma ocasião singular. Trabalhamos com técnica, cuidado e propósito — 
+                        <p style="color:#dcdcdc; font-size:1.05rem; margin-bottom:24px; line-height:1.6;">
+                            Cada evento é tratado como uma ocasião singular. Trabalhamos com técnica, cuidado e propósito —
                             oferecendo não apenas carne de alta qualidade, mas uma experiência completa de hospitalidade.
                         </p>
 
-                        <div style="margin-bottom: 26px;">
-                            <p style="color:#f0d58a; font-weight:600; margin-bottom:6px; font-size:1.05rem;">
-                                Nossos três pilares:
-                            </p>
+                        <div style="margin-bottom:26px;">
+                            <p style="color:#f0d58a; font-weight:600; margin-bottom:6px; font-size:1.05rem;">Nossos três pilares:</p>
                             <ul style="color:#e9e9e9; font-size:1rem; line-height:1.55; margin-left:18px;">
                                 <li><strong style="color:#f0d58a;">Carne de alta procedência</strong> — seleção criteriosa e curadoria real de cortes.</li>
                                 <li><strong style="color:#f0d58a;">Técnica apurada</strong> — parrilla, ponto perfeito, fogo e execução digna de steakhouse internacional.</li>
@@ -900,117 +554,71 @@
                             </ul>
                         </div>
 
-                        <p style="
-                            color: #dcdcdc;
-                            font-size: 1.05rem;
-                            margin-bottom: 22px;
-                            line-height: 1.6;
-                        ">
+                        <p style="color:#dcdcdc; font-size:1.05rem; margin-bottom:22px; line-height:1.6;">
                             Se você busca algo além do churrasco tradicional, algo com assinatura, presença e cuidado,
                             a Portes Dias Buffet foi criada especialmente para esse tipo de ocasião.
                         </p>
 
-                        <div style="
-                            background: rgba(212,175,55,0.10);
-                            border: 1px solid rgba(212,175,55,0.20);
-                            border-radius: 14px;
-                            padding: 20px 24px;
-                            margin-bottom: 26px;
-                        ">
-                            <p style="
-                                color:#f0d58a;
-                                font-size:1rem;
-                                line-height:1.55;
-                                text-align:center;
-                            ">
+                        <div style="background: rgba(212,175,55,0.10); border: 1px solid rgba(212,175,55,0.20); border-radius: 14px; padding: 20px 24px; margin-bottom: 26px;">
+                            <p style="color:#f0d58a; font-size:1rem; line-height:1.55; text-align:center;">
                                 Podemos personalizar a experiência conforme o estilo do seu evento:
                                 cortes, sequência de serviço, dinâmica da parrilla e nível de exclusividade.
                             </p>
                         </div>
 
                         <div style="margin-bottom: 28px; text-align:center;">
-                            <p style="color:#e9e9e9; font-size:1rem; margin-bottom:10px;">
-                                Também oferecemos cardápios pré-montados:
-                            </p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">
-                                Premium Portes Dias
-                            </p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">
-                                Quase Premium
-                            </p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem;">
-                                Podia Ser Quase Premium
-                            </p>
+                            <p style="color:#e9e9e9; font-size:1rem; margin-bottom:10px;">Também oferecemos cardápios pré-montados:</p>
+                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">Premium Portes Dias</p>
+                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">Quase Premium</p>
+                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem;">Podia Ser Quase Premium</p>
                         </div>
 
-                        <p style="
-                            color:#dcdcdc;
-                            font-size:1.05rem;
-                            line-height:1.6;
-                            text-align:center;
-                        ">
+                        <p style="color:#dcdcdc; font-size:1.05rem; line-height:1.6; text-align:center;">
                             Entre em contato e vamos planejar juntos a experiência ideal para o seu momento.
                         </p>
-
+                    </div>
                 </div>
 
-                </div>
-
-                <!-- COLUNA DIREITA — FORMULÁRIO -->
-                <div style="flex: 1; min-width: 360px; display:flex;">
-
+                <!-- COLUNA DIREITA -->
+                <div style="flex:1; min-width:360px; display:flex;">
                     <div style="width:100%; height:100%;
                         background: radial-gradient(circle at top left, rgba(212,175,55,0.10), rgba(10,10,10,0.55));
                         border: 1px solid rgba(212,175,55,0.22);
                         border-radius: 26px;
                         padding: 32px 32px;
                         backdrop-filter: blur(4px);
-                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);
-                    ">
+                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);">
 
+                        <p class="contact-highlight">
+                            Indicado para jantares intimistas, aniversários, celebrações em família e encontros corporativos
+                            que pedem algo além do óbvio.
+                        </p>
 
-                    <p class="contact-highlight">
-                        Indicado para jantares intimistas, aniversários, celebrações em família e encontros
-                        corporativos que pedem algo além do óbvio.
-                    </p>
-
-                    <div class="availability">
-                        <strong>Agenda exclusiva:</strong> priorizamos poucos eventos por período para manter o
-                        nível de atenção em cada detalhe — da brasa ao último prato servido.
-                    </div>
-
-                    <form onsubmit="enviarWhatsApp(event)">
-                        <div>
-                            <label for="nome">Nome completo</label>
-                            <input type="text" id="nome" name="nome" placeholder="Como devemos te chamar?" />
-                        </div>
-                        <div>
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" placeholder="Para enviarmos os detalhes" />
-                        </div>
-                        <div>
-                            <label for="telefone">Telefone / WhatsApp</label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="(DDD) 00000-0000" />
-                        </div>
-                        <div>
-                            <label for="data">Data desejada do evento</label>
-                            <input type="date" id="data" name="data" />
-                        </div>
-                        <div>
-                            <label for="mensagem">Tipo de evento e número de convidados</label>
-                            <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o que você está planejando."></textarea>
+                        <div class="availability">
+                            <strong>Agenda exclusiva:</strong> priorizamos poucos eventos por período para manter o nível
+                            de atenção em cada detalhe — da brasa ao último prato servido.
                         </div>
 
-                        <button type="submit" class="btn-primary" style="margin-top: 8px;">
-                            Enviar pedido de reserva
-                        </button>
-                    </form>
+                        <!-- GOOGLE FORM EMBED -->
+                        <iframe
+                          src="https://docs.google.com/forms/d/e/1FAIpQLScfFi6eBuSjpVfvNGqX6mgc_viz0xuDBD--KaaNqsm9MX2Dsw/viewform?embedded=true"
+                          width="100%"
+                          height="1200"
+                          frameborder="0"
+                          marginheight="0"
+                          marginwidth="0"
+                          style="
+                            border-radius: 16px;
+                            border: 1px solid rgba(212,175,55,0.22);
+                            background: rgba(8,8,10,0.95);
+                          ">
+                          Carregando…
+                        </iframe>
 
-                
                         <div style="text-align:center; margin-top: 24px;">
-                            <img 
-                                src="portesdias_logo_parrilla2.png" 
-                                alt="Portes Dias Parrilla – Portfolio" 
+                            <img
+                                src="portesdias_logo_parrilla2.png"
+                                alt="Portes Dias Parrilla – Portfolio"
                                 style="
                                     width: 100%;
                                     max-width: 420px;
@@ -1020,10 +628,8 @@
                                 "
                             />
                         </div>
-
                     </div>
-</div>
-
+                </div>
             </div>
         </div>
     </section>
@@ -1052,31 +658,5 @@
     <footer>
         © <span>Portes Dias Buffet</span> — Private Steakhouse Experience em sua casa.
     </footer>
-
-    <script>
-      function enviarWhatsApp(event) {
-        event.preventDefault();
-
-        const nome      = document.getElementById('nome').value || '';
-        const email     = document.getElementById('email').value || '';
-        const telefone  = document.getElementById('telefone').value || '';
-        const data      = document.getElementById('data').value || '';
-        const mensagem  = document.getElementById('mensagem').value || '';
-
-        let texto = 
-          "Olá, meu nome é " + nome + "%0A%0A" +
-          "Gostaria de solicitar uma reserva com a Portes Dias Buffet.%0A%0A" +
-          "Dados do evento:%0A" +
-          "- Data desejada: " + data + "%0A" +
-          "- Número de convidados / tipo de evento: " + mensagem + "%0A%0A" +
-          "Meus contatos:%0A" +
-          "- Telefone/WhatsApp: " + telefone + "%0A" +
-          "- E-mail: " + email;
-
-        const url = "https://api.whatsapp.com/send?phone=5521983710895&text=" + texto;
-        window.location.href = url;
-      }
-    </script>
-
 </body>
 </html>
