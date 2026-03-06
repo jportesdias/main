@@ -1,632 +1,1258 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO PORTES DIAS BUFFET -->
-    <title>Portes Dias Buffet | Private Steakhouse Experience na sua casa · Parrilla & Churrasco Gourmet</title>
-
-    <!-- Fontes Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-    <meta name="description" content="Uma steakhouse privada dentro da sua casa. Experiência premium de parrilla, cortes nobres e churrasco gourmet com técnica, elegância e hospitalidade. Portes Dias Buffet – eventos exclusivos e memoráveis.">
-    <meta name="keywords" content="buffet churrasco, parrilla, churrasco gourmet, steakhouse em casa, buffet premium, evento particular, picanha, carnes nobres, chef churrasqueiro, Portes Dias Buffet, churrasco personalizado">
-    <meta name="author" content="Portes Dias Buffet">
-
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="bingbot" content="index, follow">
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://www.buffetportesdias.com.br/">
-
-    <!-- OPEN GRAPH -->
-    <meta property="og:title" content="Portes Dias Buffet · Private Steakhouse Experience">
-    <meta property="og:description" content="Parrilla, cortes premium e atendimento sofisticado no conforto da sua casa. Uma verdadeira steakhouse sob medida para o seu evento.">
-    <meta property="og:image" content="https://www.buffetportesdias.com.br/og-image.jpg">
-    <meta property="og:url" content="https://www.buffetportesdias.com.br/">
-    <meta property="og:type" content="website">
-
-    <!-- TWITTER CARD -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Portes Dias Buffet · Private Steakhouse Experience">
-    <meta name="twitter:description" content="Steakhouse premium dentro da sua casa. Cortes nobres, parrilla e atendimento impecável.">
-    <meta name="twitter:image" content="https://www.buffetportesdias.com.br/og-image.jpg">
-
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-
-    <!-- Performance -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portes Dias Buffet | Excelência em Parrilla</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- SCHEMA JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FoodEstablishment",
-      "name": "Portes Dias Buffet",
-      "image": "https://www.buffetportesdias.com.br/og-image.jpg",
-      "description": "Private Steakhouse Experience – parrilla, cortes nobres e churrasco gourmet no conforto da sua casa.",
-      "servesCuisine": "Steakhouse, Parrilla, Churrasco Gourmet",
-      "url": "https://www.buffetportesdias.com.br/",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Rio de Janeiro",
-        "addressRegion": "RJ",
-        "addressCountry": "BR"
-      },
-      "telephone": "+55-21-98371-0895",
-      "priceRange": "$$$"
-    }
-    </script>
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <style>
+        /* ====================
+           CORE VARIABLES
+        ==================== */
         :root {
-            --bg-main: #050505;
-            --bg-section: #0b0b0d;
-            --bg-section-alt: #101017;
+            --bg-color: #030303;
+            --bg-surface: #0a0a0a;
+            --text-primary: #f2f2f2;
+            --text-secondary: #999999;
             --gold: #d4af37;
-            --gold-soft: #f0d58a;
-            --text-main: #f5f5f5;
-            --text-muted: #b3b3b3;
-            --border-soft: rgba(212, 175, 55, 0.2);
+            --gold-dim: rgba(212, 175, 55, 0.3);
+            --accent: #5c1818;
+            /* Deep red from logo */
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        /* ====================
+           RESET & SETUP
+        ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            /* Custom Cursor */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            background: var(--bg-main);
-            color: var(--text-main);
-            font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #111 0%, #030303 70%);
+            overscroll-behavior: none;
         }
 
-        /* NAVBAR */
-        .navbar {
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        /* ====================
+           CUSTOM CURSOR
+        ==================== */
+        .cursor-dot,
+        .cursor-outline {
             position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 120px;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--gold);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold-dim);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        .hover-target:hover~.cursor-outline,
+        a:hover~.cursor-outline,
+        button:hover~.cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+        }
+
+        /* ====================
+           PRELOADER
+        ==================== */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 10000;
             display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 1000;
-            background: rgba(5, 5, 5, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-soft);
-        }
-
-        .navbar-inner {
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 32px;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
+            transition: transform 1s var(--ease-in-out), opacity 1s;
         }
 
-        .logo-container { display: flex; align-items: center; gap: 12px; }
-        .logo-container img { height: 120px; width: auto; display: block; }
+        .loader.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
 
-        .brand-text { display: flex; flex-direction: column; }
-        .brand-text span:first-child {
-            font-family: "Playfair Display", serif;
-            font-size: 1rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
+        .loader-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 0.2em;
             color: var(--gold);
-        }
-        .brand-text span:last-child {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.22em;
+            animation: pulse 2s infinite;
         }
 
-        .nav-links { list-style: none; display: flex; gap: 32px; }
-        .nav-links a {
-            text-decoration: none;
-            font-size: 0.9rem;
+        .loader-line {
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            margin-top: 20px;
+            animation: loadLine 1.5s forwards var(--ease-out);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes loadLine {
+            to {
+                width: 150px;
+            }
+        }
+
+        /* ====================
+           TYPOGRAPHY & UTILS
+        ==================== */
+        .display-text {
+            font-family: var(--font-display);
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--text-muted);
+        }
+
+        .mask-text {
+            overflow: hidden;
+            display: inline-block;
+            padding: 0.1em 0.1em 0.2em 0.1em;
+            margin: -0.1em -0.1em -0.2em -0.1em;
+        }
+
+        .mask-text span {
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform 1s var(--ease-out);
+        }
+
+        .is-visible .mask-text span {
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: rgba(255, 255, 255, 0.05);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
             position: relative;
+            margin-bottom: -2rem;
+            z-index: 0;
+            text-align: center;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ====================
+           NAVIGATION
+        ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+        }
+
+        .brand-sub {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .menu-links a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
             padding-bottom: 4px;
         }
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0; bottom: 0;
-            width: 0; height: 2px;
-            background: var(--gold);
-            transition: width 0.25s ease;
-        }
-        .nav-links a:hover { color: var(--gold-soft); }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* HERO */
+        .menu-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            transform: translateX(-101%);
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        .menu-links a:hover::after {
+            transform: translateX(0);
+        }
+
+        .menu-links a.cta-btn {
+            color: var(--gold);
+        }
+
+        .menu-links a.cta-btn::after {
+            background: var(--accent);
+        }
+
+        /* ====================
+           HERO SECTION
+        ==================== */
         .hero {
-            min-height: 100vh;
-            padding: 120px 24px 80px;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at top, #252525 0, #050505 48%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-inner {
-            width: 100%;
-            max-width: 1200px;
-            display: grid;
-            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-            gap: 56px;
-            align-items: center;
+        .hero-bg {
+            position: absolute;
+            inset: -10%;
+            background: url('/assets/hero-placeholder.jpg') center/cover;
+            filter: brightness(0.4) contrast(1.2);
+            z-index: -1;
+            /* Parallax logic applied via JS */
+            transform: scale(1.05);
+            transition: transform 0.1s linear;
         }
 
-        .hero-kicker {
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--gold-soft);
-            margin-bottom: 16px;
-        }
-
-        .hero-title {
-            font-family: "Playfair Display", serif;
-            font-size: 2.8rem;
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-        .hero-title span { color: var(--gold); }
-
-        .hero-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 520px;
-            margin-bottom: 32px;
-        }
-
-        .hero-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
-        .badge {
-            border: 1px solid var(--border-soft);
-            border-radius: 999px;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-        .hero-ctas-row { display: flex; flex-wrap: wrap; gap: 12px; }
-
-        .btn-primary, .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            border-radius: 999px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            text-decoration: none;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); }
-
-        .btn-secondary {
-            border: 1px solid var(--border-soft);
-            color: var(--text-main);
-            background: transparent;
-        }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.04); transform: translateY(-1px); }
-
-        .hero-note { font-size: 0.85rem; color: var(--text-muted); }
-
-        .hero-media {
-            border-radius: 26px;
-            border: 1px solid var(--border-soft);
-            padding: 22px;
-            background: linear-gradient(145deg, #111118, #050506);
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero-media-inner {
-            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 60%);
-            border-radius: 20px;
-            padding: 32px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+        .hero-content {
+            text-align: center;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 16px;
         }
 
-        .hero-media img { display: block; margin: 0 auto 24px; height: 300px; width: auto; }
-        .hero-media h2 { font-family: "Playfair Display", serif; font-size: 1.3rem; text-align: center; margin-bottom: 12px; }
-        .hero-media p { font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-bottom: 18px; }
-
-        .hero-stats { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
-        .stat { text-align: center; }
-        .stat strong { display: block; font-size: 1.1rem; color: var(--gold-soft); }
-        .stat span { font-size: 0.8rem; color: var(--text-muted); }
-
-        /* SECTIONS */
-        section { scroll-margin-top: 96px; }
-
-        .section { padding: 80px 24px; display: flex; justify-content: center; }
-        .section-inner { width: 100%; max-width: 1100px; }
-        .section-title { font-family: "Playfair Display", serif; font-size: 2rem; margin-bottom: 12px; }
-        .section-kicker { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
-        .section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 620px; margin-bottom: 32px; }
-        .section-dark { background: var(--bg-section); }
-        .section-alt { background: var(--bg-section-alt); }
-
-        /* PRODUTOS / CORTES */
-        .cuts-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-        .cut-card {
-            border-radius: 18px;
-            border: 1px solid var(--border-soft);
-            padding: 18px 20px;
-            background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.05), #050507);
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.05em;
         }
-        .cut-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-        .cut-tag { font-size: 0.8rem; color: var(--gold-soft); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 8px; }
-        .cut-desc { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* CONTATO */
-        .contact-highlight { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; }
-        .availability {
-            border-radius: 18px;
-            border: 1px solid var(--border-soft);
-            padding: 16px 18px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
+        .hero-title .gold-text {
+            color: var(--gold);
+            font-style: italic;
+            font-weight: 500;
+            padding-right: 0.1em;
         }
-        .availability strong { color: var(--gold-soft); }
 
-        /* BANNER HAMBÚRGUERES */
-        .cta-banner {
-            border-radius: 22px;
-            border: 1px solid var(--border-soft);
-            padding: 24px 26px;
-            background: radial-gradient(circle at left, rgba(212,175,55,0.10), #050507);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            flex-wrap: wrap;
+        .hero-eyebrow {
+            font-size: 0.3em;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 20px;
+            font-family: var(--font-body);
+            font-weight: 300;
         }
-        .cta-banner-text { max-width: 640px; }
-        .cta-banner-title { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: 6px; }
-        .cta-banner-sub { font-size: 0.95rem; color: var(--text-muted); }
 
-        .cta-banner-actions { display: flex; align-items: center; justify-content: center; }
+        .hero-desc {
+            max-width: 600px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
 
-        .btn-gold-banner {
+        .btn-creative {
+            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+            padding: 1rem 3rem;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
             color: #000;
+            background: var(--gold);
+            border-radius: 50px;
+            overflow: hidden;
+            transition: color 0.4s;
+            border: 1px solid var(--gold);
+        }
+
+        .btn-creative::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s var(--ease-out);
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .btn-creative:hover {
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .btn-creative:hover::before {
+            transform: scaleY(1);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            animation: dropDown 2s infinite;
+        }
+
+        @keyframes dropDown {
+            100% {
+                top: 100%;
+            }
+        }
+
+        /* ====================
+           EXPERIENCE (Sticky Stacking Cards)
+        ==================== */
+        .experience {
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .cards-wrapper {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .card-sticky {
+            position: sticky;
+            top: 20vh;
+            height: 60vh;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform-origin: top center;
+            transition: transform 0.4s;
+            overflow: hidden;
+        }
+
+        .card-sticky::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+        }
+
+        .card-content {
+            flex: 1;
+            padding-right: 4rem;
+        }
+
+        .card-num {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--gold-dim);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .card-content h3 {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 400px;
+            line-height: 1.8;
+        }
+
+        .card-visual {
+            flex: 1;
+            height: 100%;
+            border-radius: 10px;
+            background: #111;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: transform 1s;
+        }
+
+        .card-sticky:hover .card-visual img {
+            transform: scale(1.05);
+        }
+
+        /* ====================
+           MENU (Interactive Hover)
+        ==================== */
+        .menu-showcase {
+            padding: 100px 0;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-bg-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+            filter: brightness(0.3);
+            pointer-events: none;
+            transform: scale(1.1);
+        }
+
+        .menu-bg-img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .menu-list {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            transition: padding-left 0.4s var(--ease-out);
+        }
+
+        .menu-item:hover {
+            padding-left: 2rem;
+            border-color: var(--gold);
+        }
+
+        .menu-item h3 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.4s;
+        }
+
+        .menu-item:hover h3 {
+            color: var(--gold);
+        }
+
+        .menu-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 300px;
+            text-align: right;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s;
+        }
+
+        .menu-item:hover .menu-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ====================
+           EVENTS (Accordion)
+        ==================== */
+        .events {
+            padding: 150px 0;
+        }
+
+        .accordion-container {
+            display: flex;
+            height: 60vh;
+            min-height: 500px;
+            gap: 10px;
+        }
+
+        .accordion-panel {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: flex 0.6s var(--ease-out);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .accordion-panel:hover {
+            flex: 4;
+            border-color: var(--gold-dim);
+        }
+
+        .panel-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(1) brightness(0.4);
+            transition: filter 0.6s, transform 0.6s;
+        }
+
+        .accordion-panel:hover .panel-bg {
+            filter: grayscale(0) brightness(0.6);
+            transform: scale(1.05);
+        }
+
+        .panel-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, #000 0%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            margin-bottom: auto;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transition: opacity 0.3s;
+        }
+
+        .accordion-panel:hover h3 {
+            opacity: 0;
+        }
+
+        .panel-details {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s 0.2s;
+        }
+
+        .accordion-panel:hover .panel-details {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .panel-details h4 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .panel-details p {
+            color: #ddd;
+            font-weight: 300;
+        }
+
+        /* ====================
+           TESTIMONIALS (Marquee & Elegant Cards)
+        ==================== */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--bg-surface);
+            overflow: hidden;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            display: flex;
+            gap: 2rem;
+            animation: marquee 30s linear infinite;
+        }
+
+        .testi-card {
+            display: inline-block;
+            width: 450px;
+            padding: 3rem;
+            background: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            white-space: normal;
+            border-radius: 5px;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        .testi-text {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .testi-author {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Requires duplicate content for seamless loop */
+        }
+
+        /* ====================
+           GALLERY (Masonry Parallax)
+        ==================== */
+        .gallery {
+            padding: 150px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            background: #111;
+        }
+
+        .gallery-item:nth-child(2) {
+            transform: translateY(50px);
+        }
+
+        .gallery-item:nth-child(5) {
+            transform: translateY(50px);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            object-fit: cover;
+            opacity: 0.5;
+            transition: opacity 0.5s, transform 0.8s;
+        }
+
+        .gallery-item:hover .gallery-img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* ====================
+           CONTACT / BUDGET
+        ==================== */
+        .budget {
+            position: relative;
+            padding: 150px 0;
+            background: #050505;
+        }
+
+        /* Decor */
+        .budget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .form-envelope {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 4rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-envelope::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--gold);
+            filter: blur(100px);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            color: var(--text-secondary);
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            text-decoration: none;
-            border: 1px solid rgba(240, 213, 138, 0.6);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-            cursor: pointer;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            pointer-events: none;
         }
-        .btn-gold-banner:hover { background: linear-gradient(135deg, #ffe199, var(--gold-soft)); transform: translateY(-1px); }
 
-        /* FOOTER */
+        .form-input:focus~.form-label,
+        .form-input:valid~.form-label,
+        .form-input:not(:placeholder-shown)~.form-label {
+            top: -10px;
+            font-size: 0.7rem;
+            color: var(--gold);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-out);
+            z-index: -1;
+        }
+
+        .submit-btn:hover {
+            color: #000;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* ====================
+           FOOTER
+        ==================== */
         footer {
-            padding: 32px 24px;
+            padding: 5rem 0 2rem;
             text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .footer-social {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-social a {
+            color: var(--text-secondary);
+            text-transform: uppercase;
             font-size: 0.8rem;
-            color: var(--text-muted);
-            background: #050505;
-            border-top: 1px solid var(--border-soft);
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
         }
-        footer span { color: var(--gold-soft); }
 
-        /* RESPONSIVO */
+        .footer-social a:hover {
+            color: var(--gold);
+        }
+
+        .copy {
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* Floating WA */
+        .wa-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .wa-float svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        /* ====================
+           RESPONSIVE
+        ==================== */
         @media (max-width: 900px) {
-            .hero-inner { grid-template-columns: minmax(0, 1fr); }
-            .hero-media { order: -1; }
-            .cuts-grid { grid-template-columns: minmax(0, 1fr); }
-            .navbar-inner { padding: 0 16px; }
-            .nav-links { gap: 16px; }
-            .cta-banner { align-items: flex-start; }
-            .cta-banner-actions { justify-content: flex-start; }
+            .menu-links {
+                display: none;
+            }
+
+            /* Could add a fullscreen overlay menu here */
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .card-sticky {
+                flex-direction: column;
+                height: auto;
+                padding: 2rem;
+            }
+
+            .card-visual {
+                height: 300px;
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            .card-content {
+                padding-right: 0;
+            }
+
+            .accordion-container {
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            .panel-content h3 {
+                writing-mode: horizontal-tb;
+                transform: none;
+                top: auto;
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(n) {
+                transform: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-envelope {
+                padding: 2rem;
+            }
         }
 
-        @media (max-width: 640px) {
-            .hero { padding-top: 110px; }
-            .hero-title { font-size: 2.1rem; }
-            .hero-media img { height: 80px; }
-            .navbar { height: 72px; }
-            .logo-container img { height: 44px; }
-            .brand-text { display: none; }
+        /* Utils for animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s var(--ease-out);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="navbar-inner">
-            <div class="logo-container">
-                <img src="portesdias_logo.png" alt="Portes Dias Buffet Logo" />
-                <div class="brand-text">
-                    <span>PORTES DIAS</span>
-                    <span>Buffet · Parrilla · Steakhouse</span>
-                </div>
-            </div>
 
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="cardapio.html">Cardápios</a></li>
-                    <li><a href="portfolio.html">Portfólio</a></li>
-                    <li><a href="#produtos">Produtos</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- PRELOADER -->
+    <div class="loader" id="loader">
+        <div class="loader-text">PORTES DIAS</div>
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#" class="brand hover-target">
+            <!-- Navbar brand empty intentionally -->
+        </a>
+        <div class="menu-links">
+            <a href="#experiencia" class="hover-target">A Experiência</a>
+            <a href="#cardapio" class="hover-target">Menu</a>
+            <a href="#eventos" class="hover-target">Eventos</a>
+            <a href="#orcamento" class="cta-btn hover-target">Privilégio</a>
         </div>
-    </header>
+    </nav>
 
     <!-- HERO -->
-    <main id="inicio" class="hero">
-        <div class="hero-inner">
-            <div>
-                <div class="hero-kicker">Private Steakhouse Experience</div>
-                <h1 class="hero-title">A steakhouse <span>PREMIUM</span>, cuidadosamente montada dentro da sua casa.</h1>
-
-                <p class="hero-subtitle">
-                    A arte da parrilla, cortes nobres como Ribeye, Tomahawk e Bife Ancho, execução impecável
-                    e atmosfera de restaurante internacional — sem você precisar sair de casa.
-                </p>
-
-                <div class="hero-badges">
-                    <div class="badge">Parrilla & Churrasco Gourmet</div>
-                    <div class="badge">Cortes selecionados Angus & Wagyu</div>
-                    <div class="badge">Experiência privada para eventos exclusivos</div>
-                </div>
-
-                <div class="hero-ctas">
-                    <div class="hero-ctas-row">
-                        <a href="cardapio.html" class="btn-primary">Ver Cardápios</a>
-                        <a href="#produtos" class="btn-secondary">Cortes & Experiência</a>
-                        <a href="#contato" class="btn-secondary">Reservar</a>
-                    </div>
-
-                    <a href="hamburgueres.html" class="btn-secondary" style="border: 1px solid var(--border-soft); background: transparent; color: var(--text-main); font-weight: 600;">
-                        Conheça nosso Delivery de Hambúrgueres Artesanais
-                    </a>
-                </div>
-
-                <p class="hero-note">
-                    Atendemos poucas datas por período para manter a experiência sempre em padrão de steakhouse premium.
-                </p>
-            </div>
-
-            <aside class="hero-media">
-                <div class="hero-media-inner">
-                    <img src="portesdias_logo.png" alt="Portes Dias Buffet Logo" />
-                    <h2>Portes Dias Buffet</h2>
-                    <p>
-                        A união entre técnica, fogo e hospitalidade. Uma curadoria de carnes e atendimento
-                        pensada para quem leva a sério o prazer de receber bem.
-                    </p>
-
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <strong>Parrilla</strong>
-                            <span>Estilo hermanos, com cortes clássicos e ponto perfeito.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Steakhouse</strong>
-                            <span>Atmosfera de casa de carne internacional, na sua sala.</span>
-                        </div>
-                        <div class="stat">
-                            <strong>Buffet</strong>
-                            <span>Experiência completa, da preparação ao último brinde.</span>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-    </main>
-
-    <!-- PRODUTOS / EXPERIÊNCIA -->
-    <section id="produtos" class="section section-dark">
-        <div class="section-inner">
-            <div class="section-kicker">Produtos · Cortes · Experiência</div>
-            <h2 class="section-title">A experiência Portes Dias</h2>
-            <p class="section-subtitle">
-                Mais do que um churrasco em casa, você recebe um serviço pensado para reproduzir a atmosfera de uma
-                steakhouse sofisticada: mise en place, cortes de alta qualidade, parrilla no ponto e apresentação elegante à mesa.
+    <section class="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="container hero-content">
+            <img src="portesdias_logo.png" alt="Portes Dias Buffet" class="reveal"
+                style="height: 500px; object-fit: contain; mix-blend-mode: screen; margin-bottom: -4rem;">
+            <h1 class="hero-title display-text">
+                <div class="mask-text"><span class="hero-eyebrow">A VERDADEIRA</span></div><br>
+                <div class="mask-text"><span>ARTE DO </span></div>
+                <div class="mask-text"><span class="gold-text">FOGO</span></div>
+            </h1>
+            <p class="hero-desc reveal">
+                Elevamos a tradição da parrilla a um espetáculo cinematográfico.
+                Sabor intenso, estética impecável e um serviço que transforma seu evento
+                em uma experiência inesquecível.
             </p>
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <a href="#orcamento" class="btn-creative hover-target">Reservar Data</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-            <div class="cuts-grid">
-                <article class="cut-card">
-                    <div class="cut-name">Ribeye (Bife Ancho)</div>
-                    <div class="cut-tag">Assinatura da Casa</div>
-                    <p class="cut-desc">Corte com marmoreio intenso, maciez excepcional e sabor profundo. Selado na parrilla para criar crosta perfeita e interior suculento.</p>
-                </article>
+    <!-- EXPERIENCE -->
+    <section id="experiencia" class="experience">
+        <div class="container">
+            <div class="display-text section-title reveal">O Diferencial</div>
+            <h2 class="display-text section-subtitle reveal">Nossa Essência</h2>
 
-                <article class="cut-card">
-                    <div class="cut-name">Striploin (Bife de Chorizo)</div>
-                    <div class="cut-tag">Clássico Argentino</div>
-                    <p class="cut-desc">Combinação ideal entre textura firme e suculência, com sabor equilibrado e apresentação elegante em fatias bem definidas.</p>
-                </article>
+            <div class="cards-wrapper">
+                <!-- Card 1 -->
+                <div class="card-sticky hover-target" style="top: 15vh; z-index: 1;">
+                    <div class="card-content">
+                        <div class="card-num">01</div>
+                        <h3>Parrilla Ao Vivo</h3>
+                        <p>O som do fogo estalando, o aroma defumado e a precisão do corte. Mais do que cozinhar,
+                            criamos um palco gastronômico onde a carne é a atração principal.</p>
+                    </div>
+                    <div class="card-visual">
+                        <video autoplay loop muted playsinline
+                            style="width: 100%; height: 100%; object-fit: contain; background: #000; border-radius: 10px;">
+                            <source src="parrillaaovivo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
 
-                <article class="cut-card">
-                    <div class="cut-name">Tomahawk</div>
-                    <div class="cut-tag">Presença de Palco</div>
-                    <p class="cut-desc">Corte imponente, servido com osso longo, pensado para impressionar convidados e criar momentos memoráveis na mesa.</p>
-                </article>
+                <!-- Card 2 -->
+                <div class="card-sticky hover-target" style="top: 20vh; z-index: 2;">
+                    <div class="card-content">
+                        <div class="card-num">02</div>
+                        <h3>Serviço Impecável</h3>
+                        <p>Do primeiro brinde à última mordida. Nossa equipe é treinada para antecipar desejos e servir
+                            com a elegância que um evento de alto padrão exige.</p>
+                    </div>
+                    <div class="card-visual">
+                        <div style="background:linear-gradient(45deg, #222, #000); width:100%; height:100%;"></div>
+                        <!-- <img src="/assets/exp-2.jpg" alt="Serviço"> -->
+                    </div>
+                </div>
 
-                <article class="cut-card">
-                    <div class="cut-name">Short Ribs / Asado de Tira</div>
-                    <div class="cut-tag">Sabor Profundo</div>
-                    <p class="cut-desc">Preparado com cozimento controlado na brasa, entrega textura macia e sabor marcante, típico das melhores parrillas portenhas.</p>
-                </article>
-
-                <article class="cut-card">
-                    <div class="cut-name">Vacío & Picanha Premium</div>
-                    <div class="cut-tag">Favoritos do Público</div>
-                    <p class="cut-desc">Clássicos que nunca saem do centro da mesa. Suculência, ponto preciso e fatias pensadas para compartilhar com quem você mais gosta.</p>
-                </article>
-
-                <article class="cut-card">
-                    <div class="cut-name">Wagyu & Angus Prime (sob encomenda)</div>
-                    <div class="cut-tag">Experiência Máxima</div>
-                    <p class="cut-desc">Para quem busca o auge da gastronomia em carne. Cortes especiais sob reserva, com apresentação digna de restaurante internacional.</p>
-                </article>
-
-                <article class="cut-card">
-                    <div class="cut-name">Acompanhamentos Gourmet</div>
-                    <div class="cut-tag">Harmonização</div>
-                    <p class="cut-desc">Chimichurri artesanal, provoleta na brasa, legumes grelhados, farofa premium e molhos autorais que valorizam cada corte servido.</p>
-                </article>
-
-                <article class="cut-card">
-                    <div class="cut-name">Serviço & Atmosfera</div>
-                    <div class="cut-tag">Steakhouse em Casa</div>
-                    <p class="cut-desc">Montamos toda a estrutura, cuidamos do fluxo de serviço e entregamos um ambiente sofisticado, sem perder o conforto do seu lar.</p>
-                </article>
+                <!-- Card 3 -->
+                <div class="card-sticky hover-target" style="top: 25vh; z-index: 3;">
+                    <div class="card-content">
+                        <div class="card-num">03</div>
+                        <h3>Gastronomia Premium</h3>
+                        <p>Guarnições que surpreendem pela textura e cortes com marmoreio superior. Cada elemento no
+                            prato possui um propósito e uma história de sabor.</p>
+                    </div>
+                    <div class="card-visual">
+                        <div style="background:linear-gradient(45deg, #331111, #111); width:100%; height:100%;"></div>
+                        <!-- <img src="/assets/exp-3.jpg" alt="Premium"> -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTATO -->
-    <section id="contato" class="section section-alt">
-        <div class="section-inner">
-            <div class="section-kicker">Contato · Reserva</div>
-            <h2 class="section-title">Reserve sua data</h2>
-            <p class="section-subtitle">
-                Por ser uma experiência personalizada e de alto padrão, as datas são limitadas. Preencha os dados abaixo
-                para solicitar disponibilidade e iniciar o planejamento do seu evento.
-            </p>
+    <!-- MENU (Interactive) -->
+    <section id="cardapio" class="menu-showcase">
+        <!-- Backgrounds that change on hover -->
+        <div class="menu-bg-img" id="bg-cortes"
+            style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'); background-color: #2a1111;">
+        </div>
+        <div class="menu-bg-img" id="bg-acompanhamentos"
+            style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'); background-color: #111;">
+        </div>
+        <div class="menu-bg-img" id="bg-sobremesas"
+            style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'); background-color: #1a1a1a;">
+        </div>
 
-            <div style="display:flex; gap:32px; align-items:stretch; justify-content:space-between; margin-top:40px; flex-wrap:wrap;">
-                <!-- COLUNA ESQUERDA -->
-                <div style="flex:1; min-width:360px; display:flex;">
-                    <div style="width:100%; height:100%;
-                        background: radial-gradient(circle at top left, rgba(212,175,55,0.10), rgba(10,10,10,0.55));
-                        border: 1px solid rgba(212,175,55,0.22);
-                        border-radius: 26px;
-                        padding: 42px 48px;
-                        backdrop-filter: blur(4px);
-                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);">
+        <div class="container reveal">
+            <div class="display-text section-title" style="text-align: left;">Sinfonia</div>
+            <h2 class="display-text section-subtitle" style="text-align: left; margin-bottom: 2rem;">Do Sabor</h2>
 
-                        <h2 style="font-family:'Playfair Display', serif; font-size:1.8rem; color:#f0d58a; margin-bottom:16px; letter-spacing:0.02em;">
-                            Uma steakhouse na sua casa. Uma experiência. Uma memória.
-                        </h2>
+            <div class="menu-list">
+                <div class="menu-item hover-target" data-bg="bg-cortes">
+                    <h3>Cortes Nobres</h3>
+                    <p class="menu-desc">Marmoreio superior, assados na temperatura exata da brasa.</p>
+                </div>
+                <div class="menu-item hover-target" data-bg="bg-acompanhamentos">
+                    <h3>Acompanhamentos Rústicos</h3>
+                    <p class="menu-desc">Texturas crocantes e sabores defumados que equilibram a experiência.</p>
+                </div>
+                <div class="menu-item hover-target" data-bg="bg-sobremesas">
+                    <h3>Sobremesas Autoriais</h3>
+                    <p class="menu-desc">A doçura no ponto certo para encerrar o espetáculo.</p>
+                </div>
+                <div class="menu-item hover-target">
+                    <h3>Adega & Bebidas</h3>
+                    <p class="menu-desc">Harmonização precisa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <p style="color:#dcdcdc; font-size:1.05rem; margin-bottom:24px; line-height:1.6;">
-                            Cada evento é tratado como uma ocasião singular. Trabalhamos com técnica, cuidado e propósito —
-                            oferecendo não apenas carne de alta qualidade, mas uma experiência completa de hospitalidade.
-                        </p>
+    <!-- EVENTS (Accordion) -->
+    <section id="eventos" class="events">
+        <div class="container reveal">
+            <h2 class="display-text section-subtitle" style="text-align: left;">Celebrações</h2>
 
-                        <div style="margin-bottom:26px;">
-                            <p style="color:#f0d58a; font-weight:600; margin-bottom:6px; font-size:1.05rem;">Nossos três pilares:</p>
-                            <ul style="color:#e9e9e9; font-size:1rem; line-height:1.55; margin-left:18px;">
-                                <li><strong style="color:#f0d58a;">Carne de alta procedência</strong> — seleção criteriosa e curadoria real de cortes.</li>
-                                <li><strong style="color:#f0d58a;">Técnica apurada</strong> — parrilla, ponto perfeito, fogo e execução digna de steakhouse internacional.</li>
-                                <li><strong style="color:#f0d58a;">Atendimento elegante</strong> — presença discreta, postura profissional e respeito absoluto ao seu espaço.</li>
-                            </ul>
+            <div class="accordion-container">
+                <div class="accordion-panel hover-target">
+                    <div class="panel-bg"
+                        style="background-color:#222; background-image: url('wedding_reception.png');"></div>
+                    <!-- bg image here -->
+                    <div class="panel-content">
+                        <h3>Casamentos</h3>
+                        <div class="panel-details">
+                            <h4>Casamentos</h4>
+                            <p>Elegância inesquecível para o seu grande dia.</p>
                         </div>
-
-                        <p style="color:#dcdcdc; font-size:1.05rem; margin-bottom:22px; line-height:1.6;">
-                            Se você busca algo além do churrasco tradicional, algo com assinatura, presença e cuidado,
-                            a Portes Dias Buffet foi criada especialmente para esse tipo de ocasião.
-                        </p>
-
-                        <div style="background: rgba(212,175,55,0.10); border: 1px solid rgba(212,175,55,0.20); border-radius: 14px; padding: 20px 24px; margin-bottom: 26px;">
-                            <p style="color:#f0d58a; font-size:1rem; line-height:1.55; text-align:center;">
-                                Podemos personalizar a experiência conforme o estilo do seu evento:
-                                cortes, sequência de serviço, dinâmica da parrilla e nível de exclusividade.
-                            </p>
-                        </div>
-
-                        <div style="margin-bottom: 28px; text-align:center;">
-                            <p style="color:#e9e9e9; font-size:1rem; margin-bottom:10px;">Também oferecemos cardápios pré-montados:</p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">Premium Portes Dias</p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem; margin-bottom:4px;">Quase Premium</p>
-                            <p style="color:#f0d58a; font-weight:600; font-size:1.05rem;">Podia Ser Quase Premium</p>
-                        </div>
-
-                        <p style="color:#dcdcdc; font-size:1.05rem; line-height:1.6; text-align:center;">
-                            Entre em contato e vamos planejar juntos a experiência ideal para o seu momento.
-                        </p>
                     </div>
                 </div>
-
-                <!-- COLUNA DIREITA -->
-                <div style="flex:1; min-width:360px; display:flex;">
-                    <div style="width:100%; height:100%;
-                        background: radial-gradient(circle at top left, rgba(212,175,55,0.10), rgba(10,10,10,0.55));
-                        border: 1px solid rgba(212,175,55,0.22);
-                        border-radius: 26px;
-                        padding: 32px 32px;
-                        backdrop-filter: blur(4px);
-                        box-shadow: 0 18px 60px rgba(0,0,0,0.45);">
-
-                        <p class="contact-highlight">
-                            Indicado para jantares intimistas, aniversários, celebrações em família e encontros corporativos
-                            que pedem algo além do óbvio.
-                        </p>
-
-                        <div class="availability">
-                            <strong>Agenda exclusiva:</strong> priorizamos poucos eventos por período para manter o nível
-                            de atenção em cada detalhe — da brasa ao último prato servido.
+                <div class="accordion-panel hover-target">
+                    <div class="panel-bg" style="background-color:#1a1a1a;"></div> <!-- bg image here -->
+                    <div class="panel-content">
+                        <h3>Corporativo</h3>
+                        <div class="panel-details">
+                            <h4>Corporativo</h4>
+                            <p>Impressione sócios e parceiros com alto padrão.</p>
                         </div>
-
-                        <!-- GOOGLE FORM EMBED -->
-                        <iframe
-                          src="https://docs.google.com/forms/d/e/1FAIpQLScfFi6eBuSjpVfvNGqX6mgc_viz0xuDBD--KaaNqsm9MX2Dsw/viewform?embedded=true"
-                          width="100%"
-                          height="1200"
-                          frameborder="0"
-                          marginheight="0"
-                          marginwidth="0"
-                          style="
-                            border-radius: 16px;
-                            border: 1px solid rgba(212,175,55,0.22);
-                            background: rgba(8,8,10,0.95);
-                          ">
-                          Carregando…
-                        </iframe>
-
-                        <div style="text-align:center; margin-top: 24px;">
-                            <img
-                                src="portesdias_logo_parrilla2.png"
-                                alt="Portes Dias Parrilla – Portfolio"
-                                style="
-                                    width: 100%;
-                                    max-width: 420px;
-                                    border-radius: 18px;
-                                    border: 1px solid rgba(212,175,55,0.25);
-                                    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
-                                "
-                            />
+                    </div>
+                </div>
+                <div class="accordion-panel hover-target">
+                    <div class="panel-bg" style="background-color:#333;"></div> <!-- bg image here -->
+                    <div class="panel-content">
+                        <h3>Bodas & Aniversários</h3>
+                        <div class="panel-details">
+                            <h4>Sociais</h4>
+                            <p>Uma festa que será comentada por anos.</p>
                         </div>
                     </div>
                 </div>
@@ -634,29 +1260,276 @@
         </div>
     </section>
 
-    <!-- BANNER HORIZONTAL HAMBÚRGUERES -->
-    <section class="section section-dark">
-        <div class="section-inner">
-            <div class="cta-banner">
-                <div class="cta-banner-text">
-                    <h3 class="cta-banner-title">Hambúrgueres artesanais com a mesma assinatura da parrilla.</h3>
-                    <p class="cta-banner-sub">
-                        Para eventos menores, encontros informais ou experiências mais descontraídas,
-                        você também pode contar com nosso cardápio de hambúrgueres artesanais.
-                    </p>
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container relative reveal">
+            <h2 class="display-text section-subtitle">Aclamação</h2>
+        </div>
+        <div class="marquee">
+            <!-- Double the content for smooth infinite scrolling -->
+            <div style="display: flex; gap: 2rem;">
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Cenário cinematográfico. A forma como o fogo ilumina o ambiente e o sabor
+                        indescritível da carne... Foi o ponto alto do meu casamento."</p>
+                    <p class="testi-author">— Juliana F. / Noiva</p>
                 </div>
-                <div class="cta-banner-actions">
-                    <a href="hamburgueres.html" class="btn-gold-banner">
-                        Clique e conheça nossos hambúrgueres artesanais
-                    </a>
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Não é só comida, é entretenimento. Os convidados ficaram hipnotizados pela
+                        maestria dos parilleros."</p>
+                    <p class="testi-author">— Roberto C. / Evento Corporativo</p>
                 </div>
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Serviço impecável. Garçons extremamente educados, pratos que chegam na
+                        temperatura perfeita. Uma aula de buffet premium."</p>
+                    <p class="testi-author">— Marcos A. / Aniversário 50 anos</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 2rem;">
+                <!-- Duplicated for Loop -->
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Cenário cinematográfico. A forma como o fogo ilumina o ambiente e o sabor
+                        indescritível da carne... Foi o ponto alto do meu casamento."</p>
+                    <p class="testi-author">— Juliana F. / Noiva</p>
+                </div>
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Não é só comida, é entretenimento. Os convidados ficaram hipnotizados pela
+                        maestria dos parilleros."</p>
+                    <p class="testi-author">— Roberto C. / Evento Corporativo</p>
+                </div>
+                <div class="testi-card hover-target">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Serviço impecável. Garçons extremamente educados, pratos que chegam na
+                        temperatura perfeita. Uma aula de buffet premium."</p>
+                    <p class="testi-author">— Marcos A. / Aniversário 50 anos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY (Masonry) -->
+    <section class="gallery">
+        <div class="container reveal">
+            <div class="display-text section-title" style="text-align: right;">Visual</div>
+            <h2 class="display-text section-subtitle" style="text-align: right;">Detalhes</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-item hover-target"><img class="gallery-img" src="portfolio_ambiente_evento.jpg"
+                        alt="Ambiente do evento"></div>
+                <div class="gallery-item hover-target"><img class="gallery-img" src="portfolio_corte_fogo_vivo.jpg"
+                        alt="Corte na brasa viva"></div>
+                <div class="gallery-item hover-target"><img class="gallery-img" src="portfolio_corte_parrilla.jpg"
+                        alt="Cortes nobres na parrilla"></div>
+                <div class="gallery-item hover-target"><img class="gallery-img" src="portfolio_detalhe_brasa.jpg"
+                        alt="Detalhe do fogo"></div>
+                <div class="gallery-item hover-target"><img class="gallery-img"
+                        src="portfolio_mesa_sequencia_carnes.jpg" alt="Mesa com sequência de carnes"></div>
+                <div class="gallery-item hover-target"><img class="gallery-img" src="portfolio_servico_tabua.jpg"
+                        alt="Serviço na tábua"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT DYNAMIC FORM -->
+    <section id="orcamento" class="budget">
+        <div class="container reveal">
+            <h2 class="display-text section-subtitle">Solicite seu Orçamento</h2>
+
+            <div class="form-envelope">
+                <form id="wa-form" onsubmit="sendWA(event)">
+                    <div class="form-row">
+                        <div class="form-group hover-target">
+                            <input type="text" id="wa-name" class="form-input" placeholder=" " required>
+                            <label class="form-label">Nome Completo</label>
+                        </div>
+                        <div class="form-group hover-target">
+                            <input type="text" id="wa-phone" class="form-input" placeholder=" " required>
+                            <label class="form-label">Seu WhatsApp</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group hover-target">
+                            <input type="date" id="wa-date" class="form-input" placeholder=" " required>
+                            <label class="form-label" style="top:-10px; font-size:0.7rem; color:var(--gold);">Data do
+                                Evento</label>
+                        </div>
+                        <div class="form-group hover-target">
+                            <input type="number" id="wa-guests" class="form-input" placeholder=" " required min="10">
+                            <label class="form-label">Número de Convidados</label>
+                        </div>
+                    </div>
+                    <div class="form-group hover-target">
+                        <input type="text" id="wa-city" class="form-input" placeholder=" " required>
+                        <label class="form-label">Cidade / Local</label>
+                    </div>
+                    <div class="form-group hover-target">
+                        <input type="text" id="wa-msg" class="form-input" placeholder=" ">
+                        <label class="form-label">Detalhes Especiais (Opcional)</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn hover-target">
+                        <span>Iniciar Experiência no WhatsApp</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: var(--text-secondary);">
+                        Responderemos prontamente para curadoria do seu evento.</p>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        © <span>Portes Dias Buffet</span> — Private Steakhouse Experience em sua casa.
+        <div class="container reveal">
+            <div class="footer-brand"><img src="portesdias_logo.png" alt="Portes Dias Buffet"
+                    style="height: 60px; object-fit: contain; mix-blend-mode: screen;"></div>
+            <div
+                style="color:var(--gold); font-size:0.7rem; letter-spacing:0.3em; margin-bottom: 2rem; margin-top: 10px;">
+                BUFFET PREMIUM
+            </div>
+
+            <div class="footer-social">
+                <a href="#" class="hover-target">Instagram</a>
+                <a href="#" class="hover-target">WhatsApp</a>
+                <a href="#" class="hover-target">Onde Atendemos</a>
+            </div>
+
+            <div class="copy">
+                &copy; <span id="year"></span> Portes Dias Buffet. Experiência Elevada.
+            </div>
+        </div>
     </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/5521983710895" target="_blank" class="wa-float hover-target">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        // Hide cursor on touch devices
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                // Add slight delay to outline
+                setTimeout(() => {
+                    cursorOutline.style.left = `${posX}px`;
+                    cursorOutline.style.top = `${posY}px`;
+                }, 50);
+            });
+        } else {
+            cursorDot.style.display = 'none';
+            cursorOutline.style.display = 'none';
+            document.body.style.cursor = 'auto'; // restore default
+        }
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                document.querySelector('.hero').classList.add('is-visible');
+            }, 1000); // Wait 1 sec for drama
+        });
+
+        // Navbar Hide/Show on Scroll
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100 && currentScroll > lastScroll) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+
+            // Hero Parallax
+            const heroBg = document.getElementById('heroBg');
+            if (currentScroll < window.innerHeight) {
+                heroBg.style.transform = `scale(1.05) translateY(${currentScroll * 0.4}px)`;
+            }
+        });
+
+        // Interactive Menu Backgrounds
+        const menuItems = document.querySelectorAll('.menu-item');
+        const backgrounds = document.querySelectorAll('.menu-bg-img');
+
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const bgId = item.getAttribute('data-bg');
+                if (!bgId) return;
+                backgrounds.forEach(bg => bg.classList.remove('active'));
+                const activeBg = document.getElementById(bgId);
+                if (activeBg) activeBg.classList.add('active');
+            });
+            item.addEventListener('mouseleave', () => {
+                backgrounds.forEach(bg => bg.classList.remove('active'));
+            });
+        });
+
+        // Scroll Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('hero')) {
+                        entry.target.classList.add('is-visible');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // WhatsApp Form Logic
+        function sendWA(e) {
+            e.preventDefault();
+            const name = document.getElementById('wa-name').value;
+            const phoneC = document.getElementById('wa-phone').value;
+            const date = document.getElementById('wa-date').value;
+            const city = document.getElementById('wa-city').value;
+            const guests = document.getElementById('wa-guests').value;
+            const msg = document.getElementById('wa-msg').value;
+
+            const text = `*Orçamento Exclusivo - Portes Dias Buffet*%0A%0A`
+                + `*Nome:* ${name}%0A`
+                + `*Contato do Cliente:* ${phoneC}%0A`
+                + `*Data:* ${date}%0A`
+                + `*Local:* ${city}%0A`
+                + `*Convidados:* ${guests}`
+                + (msg ? `%0A*Detalhes:* ${msg}` : ``);
+
+            const phone = "5521983710895";
+            const url = `https://wa.me/${phone}?text=${text}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
+
 </html>
