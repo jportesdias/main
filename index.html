@@ -648,13 +648,12 @@
 
         .panel-content {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            inset: 0;
             padding: 2rem;
-            background: linear-gradient(to top, #000 0%, transparent 100%);
+            background: linear-gradient(to top, #000 0%, transparent 50%);
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
         }
 
         .panel-content h3 {
@@ -663,11 +662,11 @@
             color: var(--gold);
             writing-mode: vertical-rl;
             transform: rotate(180deg);
-            margin-bottom: auto;
             position: absolute;
-            top: 20px;
+            bottom: 30px;
             left: 20px;
             transition: opacity 0.3s;
+            white-space: nowrap;
         }
 
         .accordion-panel:hover h3 {
@@ -1158,8 +1157,8 @@
                             com a elegância que um evento de alto padrão exige.</p>
                     </div>
                     <div class="card-visual">
-                        <div style="background:linear-gradient(45deg, #222, #000); width:100%; height:100%;"></div>
-                        <!-- <img src="/assets/exp-2.jpg" alt="Serviço"> -->
+                        <img src="servico.png" alt="Serviço Impecável"
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                     </div>
                 </div>
 
@@ -1172,8 +1171,8 @@
                             prato possui um propósito e uma história de sabor.</p>
                     </div>
                     <div class="card-visual">
-                        <div style="background:linear-gradient(45deg, #331111, #111); width:100%; height:100%;"></div>
-                        <!-- <img src="/assets/exp-3.jpg" alt="Premium"> -->
+                        <img src="marmoreio.png" alt="Gastronomia Premium"
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                     </div>
                 </div>
             </div>
@@ -1237,7 +1236,8 @@
                     </div>
                 </div>
                 <div class="accordion-panel hover-target">
-                    <div class="panel-bg" style="background-color:#1a1a1a;"></div> <!-- bg image here -->
+                    <div class="panel-bg" style="background-color:#1a1a1a; background-image: url('corporativo.png');">
+                    </div> <!-- bg image here -->
                     <div class="panel-content">
                         <h3>Corporativo</h3>
                         <div class="panel-details">
@@ -1247,7 +1247,8 @@
                     </div>
                 </div>
                 <div class="accordion-panel hover-target">
-                    <div class="panel-bg" style="background-color:#333;"></div> <!-- bg image here -->
+                    <div class="panel-bg" style="background-color:#333; background-image: url('social.png');"></div>
+                    <!-- bg image here -->
                     <div class="panel-content">
                         <h3>Bodas & Aniversários</h3>
                         <div class="panel-details">
@@ -1390,15 +1391,15 @@
     <footer>
         <div class="container reveal">
             <div class="footer-brand"><img src="portesdias_logo.png" alt="Portes Dias Buffet"
-                    style="height: 60px; object-fit: contain; mix-blend-mode: screen;"></div>
+                    style="height: 220px; object-fit: contain; mix-blend-mode: screen;"></div>
             <div
                 style="color:var(--gold); font-size:0.7rem; letter-spacing:0.3em; margin-bottom: 2rem; margin-top: 10px;">
                 BUFFET PREMIUM
             </div>
 
             <div class="footer-social">
-                <a href="#" class="hover-target">Instagram</a>
-                <a href="#" class="hover-target">WhatsApp</a>
+                <a href="https://instagram.com/portesdia.buffet" target="_blank" class="hover-target">Instagram</a>
+                <a href="https://tiktok.com/@portesdias_buffet" target="_blank" class="hover-target">TikTok</a>
                 <a href="#" class="hover-target">Onde Atendemos</a>
             </div>
 
