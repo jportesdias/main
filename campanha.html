@@ -239,11 +239,7 @@
             line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            .diff-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+
 
         /* ====================
            FAST CONVERSION (Form)
@@ -366,6 +362,86 @@
         }
 
         /* Oculta caixa feia de ano caso apareça */
+
+        /* ====================
+           MOBILE RESPONSIVENESS
+        ==================== */
+        @media (max-width: 768px) {
+
+            /* Hero adjustments */
+            .campaign-header img {
+                height: 200px !important;
+                /* Logo much smaller on mobile */
+            }
+
+            .camp-hero {
+                min-height: 80vh;
+            }
+
+            .camp-title {
+                margin-top: 220px !important;
+                /* Reduce massive gap from desktop */
+                font-size: 2rem;
+            }
+
+            .camp-desc {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            .btn-pulse {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 90%;
+                /* full width button on mobile */
+                max-width: 350px;
+            }
+
+            /* Section Padding */
+            .space-showcase {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Differentials Grid */
+            .differentials {
+                padding: 60px 0;
+            }
+
+            .diff-grid {
+                grid-template-columns: 1fr;
+                /* Stack differentials vertically */
+                gap: 2rem;
+            }
+
+            /* Form / CTA */
+            .fast-conversion {
+                padding: 60px 0;
+            }
+
+            .fast-conversion h2 {
+                font-size: 1.8rem !important;
+            }
+
+            .camp-btn {
+                font-size: 1rem;
+                padding: 15px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 20px !important;
+            }
+
+            footer img {
+                height: 120px !important;
+                /* Scale down giant footer logo */
+            }
+        }
     </style>
 </head>
 
@@ -430,7 +506,8 @@
                 </div>
                 <div class="diff-item">
                     <h3 class="display-text">Finger Food</h3>
-                    <p>Nosso serviço é finger food, todas as carnes são filetadas e colocadas nas tábuas. Se necessário, temos mão de obra treinada para circular servindo, entregando uma experiência
+                    <p>Nosso serviço é finger food, todas as carnes são filetadas e colocadas nas tábuas. Se necessário,
+                        temos mão de obra treinada para circular servindo, entregando uma experiência
                         dinâmica e sofisticada a cada convidado.</p>
                 </div>
             </div>
