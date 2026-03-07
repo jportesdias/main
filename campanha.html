@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portes Dias Buffet | Eventos de Alto Padrão</title>
+    <!-- Same premium fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Calendário -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    <style>
+        /* ====================
+           CORE VARIABLES & RESET
+        ==================== */
+        :root {
+            --bg-color: #050505;
+            --bg-surface: #0a0a0a;
+            --gold: #D4AF37;
+            --gold-dim: #AA8C2C;
+            --text-primary: #F0F0F0;
+            --text-secondary: #AAAAAA;
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .gold-text {
+            color: var(--gold);
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+        }
+
+        /* ====================
+           CAMPAIGN HEADER (Minimal)
+        ==================== */
+        .campaign-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .campaign-header img {
+            height: 500px;
+            object-fit: contain;
+            mix-blend-mode: screen;
+        }
+
+        /* ====================
+           HERO SECTION (High Impact)
+        ==================== */
+        .camp-hero {
+            height: 100vh;
+            min-height: 1000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+        }
+
+        .camp-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.4) 50%, rgba(5, 5, 5, 1) 100%),
+                url('wedding_reception_1.png') center/cover no-repeat;
+            z-index: -1;
+            filter: brightness(0.6);
+        }
+
+        .camp-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-top: 400px;
+            margin-bottom: 2rem;
+            text-wrap: balance;
+        }
+
+        .camp-desc {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Pulsuating CTA Button */
+        .btn-pulse {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1.2rem 3rem;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+        }
+
+        .btn-pulse:hover {
+            background: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        /* ====================
+           THE SPACE (Visual Showcase)
+        ==================== */
+        .space-showcase {
+            padding: 100px 0;
+            background: var(--bg-surface);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .space-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .space-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4/5;
+        }
+
+        .space-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+            filter: grayscale(30%);
+        }
+
+        .space-img-wrapper:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .space-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        /* ====================
+           DIFFERENTIALS (Quick Info)
+        ==================== */
+        .differentials {
+            padding: 100px 0;
+            background: var(--bg-color);
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .diff-item h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .diff-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .diff-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ====================
+           FAST CONVERSION (Form)
+        ==================== */
+        .fast-conversion {
+            padding: 120px 0;
+            background: #080808;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+        }
+
+        .fast-form {
+            max-width: 500px;
+            margin: 3rem auto 0;
+        }
+
+        .camp-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            margin-bottom: 2rem;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+        }
+
+        .camp-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .camp-btn {
+            width: 100%;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 20px;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* ====================
+           ANIMATIONS UTIL
+        ==================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s var(--ease-out);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tema Dourado do Calendário */
+        .flatpickr-calendar {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
+            border: 1px solid rgba(212, 175, 55, 0.4) !important;
+            font-family: var(--font-body);
+            margin-bottom: 2rem !important;
+            background: transparent !important;
+        }
+
+        .flatpickr-calendar.arrowTop:before,
+        .flatpickr-calendar.arrowBottom:before,
+        .flatpickr-calendar.arrowTop:after,
+        .flatpickr-calendar.arrowBottom:after {
+            display: none !important;
+            /* Remove as 'setinhas' de balão brancas */
+        }
+
+        .flatpickr-innerContainer,
+        .flatpickr-months,
+        .flatpickr-weekdays,
+        .flatpickr-days {
+            background: transparent !important;
+        }
+
+        .flatpickr-current-month .flatpickr-monthDropdown-months,
+        .flatpickr-current-month .numInputWrapper {
+            color: var(--gold) !important;
+        }
+
+        .flatpickr-day {
+            color: #ccc !important;
+        }
+
+        /* Círculo dourado vazado para dias disponíveis */
+        .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
+            border: 1px solid var(--gold) !important;
+            border-radius: 50% !important;
+            color: var(--gold) !important;
+            background: transparent !important;
+        }
+
+        /* Bola dourada preenchida ao clicar */
+        .flatpickr-day.selected {
+            background: var(--gold) !important;
+            border-color: var(--gold) !important;
+            color: #000 !important;
+            font-weight: bold;
+        }
+
+        .flatpickr-day.disabled {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .flatpickr-current-month .numInputWrapper {
+            display: none;
+        }
+
+        /* Oculta caixa feia de ano caso apareça */
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="campaign-header">
+        <img src="portesdias_logo.png" alt="Portes Dias Buffet">
+    </header>
+
+    <!-- HERO -->
+    <section class="camp-hero">
+        <div class="camp-hero-bg"></div>
+        <div class="container fade-in visible">
+            <h1 class="camp-title display-text">
+                O Cenário Definitivo Para <br><span class="gold-text">Eventos Memoráveis</span>
+            </h1>
+            <p class="camp-desc">
+                Transformamos o seu espaço escolhido em um verdadeiro restaurante de luxo. Serviço impecável, estilo
+                finger food e o espetáculo exclusivo da nossa Parrilla Premium. Tudo onde você estiver.
+            </p>
+            <a href="#agendar" class="btn-pulse">Verificar Disponibilidade Março/2026</a>
+        </div>
+    </section>
+
+    <!-- MEGA SPACE SHOWCASE -->
+    <section class="space-showcase">
+        <div class="container">
+            <h2 class="section-title display-text fade-in">Um <span class="gold-text">Restaurante De Luxo</span> Onde
+                Você Estiver
+            </h2>
+
+            <div class="space-grid">
+                <!-- Using placeholder names based on standard conventions, user will replace with actual space photos -->
+                <div class="space-img-wrapper fade-in">
+                    <img src="marmoreio.png" alt="Cortes Nobres">
+                    <div class="space-caption">Cortes Nobres</div>
+                </div>
+                <div class="space-img-wrapper fade-in" style="transition-delay: 0.2s">
+                    <img src="pao.png" alt="Receitas Especiais">
+                    <div class="space-caption">Receitas Especiais</div>
+                </div>
+                <div class="space-img-wrapper fade-in" style="transition-delay: 0.4s">
+                    <img src="new_york_steak.jpg" alt="Festival de Hambúrgueres">
+                    <div class="space-caption">Festival de Hambúrgueres</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFFERENTIALS -->
+    <section class="differentials">
+        <div class="container fade-in">
+            <div class="diff-grid">
+                <div class="diff-item">
+                    <h3 class="display-text">Gastronomia Show</h3>
+                    <p>A exclusividade da parrilla ao vivo que transforma o jantar em entretenimento e sabor
+                        inigualável.</p>
+                </div>
+                <div class="diff-item">
+                    <h3 class="display-text">Mega Estrutura</h3>
+                    <p>Espaço versátil, pé direito duplo e tecnologia de ponta para receber desde casamentos íntimos a
+                        grandes confraternizações.</p>
+                </div>
+                <div class="diff-item">
+                    <h3 class="display-text">Serviço Finger Food</h3>
+                    <p>Mão de obra treinada para circular servindo delícias volantes, entregando uma experiência
+                        dinâmica e sofisticada a cada convidado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONVERSION FORM -->
+    <section id="agendar" class="fast-conversion">
+        <div class="container fade-in">
+            <h2 class="display-text" style="font-size: 2.5rem; margin-bottom: 10px;">Leve esta experiência para seu
+                evento</h2>
+            <p style="color: var(--text-secondary);">Fale diretamente com nossa diretoria comercial via WhatsApp.</p>
+
+            <form class="fast-form" onsubmit="sendCampaignWA(event)">
+                <input type="text" id="c-name" class="camp-input" placeholder="Seu Nome Completo" required>
+                <input type="text" id="c-event" class="camp-input" placeholder="Tipo de Evento (Ex: Casamento)"
+                    required>
+                <input type="text" id="c-date" class="camp-input" placeholder="📅 Escolha sua Data no Calendário"
+                    required readonly style="cursor: pointer;">
+
+                <button type="submit" class="camp-btn">Solicitar Orçamento no WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding: 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px;">
+        <img src="portesdias_logo.png" style="height: 220px; mix-blend-mode: screen; margin-bottom: 20px;">
+        <p style="color: #555; font-size: 0.9rem;">&copy; 2026 Portes Dias Buffet</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+
+    <script>
+        // Simple Intersection Observer for Fades
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // ===========================================
+        // GESTOR DE DATAS DO CALENDÁRIO (TIPO AIRBNB)
+        // ===========================================
+        // Digite APENAS as datas que você tem disponibilidade para realizar eventos
+        // sempre no formato "Ano-Mês-Dia". Não esqueça as aspas e vírgulas.
+        // O calendário bloqueará TODAS as outras datas automaticamente.
+        const datasDisponiveis = [
+            "2026-03-20", // Exemplo: Sexta livre
+            "2026-03-21", // Exemplo: Sábado livre
+            "2026-04-05"  // Exemplo: Domingo livre
+        ];
+
+        flatpickr("#c-date", {
+            locale: "pt",                // Calendário em Português-BR
+            minDate: "today",            // Impede escolhas no passado
+            enable: datasDisponiveis,    // HABILITA apenas as datas que você configurou acima
+            dateFormat: "d/m/Y",         // Formato que vai pro WhatsApp (Ex: 15/03/2026)
+            // inline: true                 // Abre o calendário montado na página, como Airbnb
+        });
+
+        // WhatsApp Custom Form
+        function sendCampaignWA(e) {
+            e.preventDefault();
+            const name = document.getElementById('c-name').value;
+            const event = document.getElementById('c-event').value;
+
+            // O Flatpickr já entrega a data formatada certinha em dd/mm/yyyy
+            const date = document.getElementById('c-date').value;
+
+            const text = `*Orçamento VIP: Mega Espaço*%0A%0A`
+                + `*Nome:* ${name}%0A`
+                + `*Evento:* ${event}%0A`
+                + `*Data Prevista:* ${date}%0A%0A`
+                + `_Vim pelo anúncio no Instagram_`;
+
+            const phone = "5521983710895";
+            const url = `https://wa.me/${phone}?text=${text}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+
+</html>
