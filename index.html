@@ -320,7 +320,7 @@
             z-index: -1;
             /* Parallax logic applied via JS */
             transform: scale(1.05);
-            transition: transform 0.1s linear;
+            will-change: transform;
         }
 
         .hero-content {
@@ -1533,7 +1533,7 @@
             // Hero Parallax
             const heroBg = document.getElementById('heroBg');
             if (currentScroll < window.innerHeight) {
-                heroBg.style.transform = `scale(1.05) translateY(${currentScroll * 0.4}px)`;
+                heroBg.style.transform = `scale(1.05) translate3d(0, ${currentScroll * 0.4}px, 0)`;
             }
         });
 
