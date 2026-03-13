@@ -81,7 +81,7 @@
         }
 
         .campaign-header img {
-            height: 500px;
+            height: 380px;
             object-fit: contain;
             mix-blend-mode: screen;
         }
@@ -109,9 +109,9 @@
         }
 
         .camp-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1.1;
-            margin-top: 400px;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            margin-top: 350px;
             margin-bottom: 2rem;
             text-wrap: balance;
         }
@@ -161,6 +161,29 @@
             }
         }
 
+        /* Scarcity Bar */
+        .scarcity-bar {
+            background: var(--gold);
+            color: #000;
+            text-align: center;
+            padding: 8px 0;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .scarcity-bar i {
+            margin-right: 8px;
+        }
+
         /* Floating WhatsApp Button */
         .wa-float {
             position: fixed;
@@ -188,6 +211,25 @@
             width: 35px;
             height: 35px;
             fill: currentColor;
+        }
+
+        /* Coupon Badge */
+        .coupon-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px dashed var(--gold);
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 15px 0;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: var(--gold); }
+            50% { border-color: #fff; }
+            100% { border-color: var(--gold); }
         }
 
         @keyframes bounce {
@@ -391,7 +433,6 @@
             text-decoration: line-through;
             color: rgba(255, 255, 255, 0.2) !important;
         }
-
         .flatpickr-current-month .numInputWrapper {
             display: none;
         }
@@ -402,10 +443,19 @@
            MOBILE RESPONSIVENESS
         ==================== */
         @media (max-width: 768px) {
+            .scarcity-bar {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
 
             /* Hero adjustments */
+            .campaign-header {
+                top: 25px !important;
+                padding: 1rem 0;
+            }
+
             .campaign-header img {
-                height: 200px !important;
+                height: 180px !important;
                 /* Logo much smaller on mobile */
             }
 
@@ -414,14 +464,16 @@
             }
 
             .camp-title {
-                margin-top: 220px !important;
+                margin-top: 180px !important;
                 /* Reduce massive gap from desktop */
-                font-size: 2rem;
+                font-size: 1.8rem;
+                padding: 0 10px;
             }
 
             .camp-desc {
-                font-size: 1rem;
+                font-size: 0.95rem;
                 padding: 0 15px;
+                margin-bottom: 2rem;
             }
 
             .btn-pulse {
@@ -430,6 +482,12 @@
                 width: 90%;
                 /* full width button on mobile */
                 max-width: 350px;
+            }
+
+            .coupon-badge {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+                width: 95%;
             }
 
             /* Section Padding */
@@ -481,8 +539,13 @@
 </head>
 
 <body>
+    <!-- SCARCITY BAR -->
+    <div class="scarcity-bar">
+        🕒 AGENDA 2026: 50% das datas de Sábado já reservadas. Consulte a sua agora.
+    </div>
+
     <!-- HEADER -->
-    <header class="campaign-header">
+    <header class="campaign-header" style="top: 35px;">
         <img src="portesdias_logo.png" alt="Portes Dias Buffet">
     </header>
 
@@ -491,18 +554,25 @@
         <div class="camp-hero-bg"></div>
         <div class="container fade-in visible">
             <h1 class="camp-title display-text">
-                O Cenário Definitivo Para <br><span class="gold-text">Eventos Memoráveis</span>
+                A Experiência Gastronômica que <br><span class="gold-text">Transformará o Seu Evento</span>
             </h1>
             <p class="camp-desc">
-                Transformamos o seu espaço escolhido em um verdadeiro restaurante de luxo. Serviço impecável, estilo
-                finger food e o espetáculo exclusivo da nossa Parrilla Premium. Tudo onde você estiver.
+                Leve o luxo de um restaurante 5 estrelas para onde você estiver. Parrilla Premium, serviço impecável e sabor inesquecível para convidados exigentes.
             </p>
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="#agendar" class="btn-pulse">Consultar Data do Meu Evento</a>
-                <a href="https://wa.me/5521983710895?text=*Olá! Vim pelo site e gostaria de tirar uma dúvida rápida.*" target="_blank" 
-                   style="display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 1.2rem 2.5rem; border-radius: 5px; font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;">
-                   Falar no WhatsApp
-                </a>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#agendar" class="btn-pulse" style="background: #fff; color: #000; box-shadow: 0 0 25px rgba(255,255,255,0.4);">Garantir Minha Data Exclusiva</a>
+                    <a href="https://wa.me/5521983710895?text=*Olá! Vim pelo site e gostaria de tirar uma dúvida rápida.*" target="_blank" 
+                       style="display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 1.2rem 2.5rem; border-radius: 5px; font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; background: rgba(212, 175, 55, 0.1);">
+                       Atendimento Exclusivo
+                    </a>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--gold); letter-spacing: 2px; font-weight: 500;">
+                    ⭐ DESDE 2024 | MAIS DE 100 EVENTOS REALIZADOS COM EXCELÊNCIA PREMIUM
+                </p>
+                <div class="coupon-badge">
+                    🎟️ CUPOM: COPA15 | 15% OFF EM EVENTOS DE JUNHO E JULHO
+                </div>
             </div>
         </div>
     </section>
@@ -560,6 +630,9 @@
         <div class="container fade-in">
             <h2 class="display-text" style="font-size: 2.5rem; margin-bottom: 10px;">Leve esta experiência para seu
                 evento</h2>
+            <div style="color: var(--gold); font-weight: bold; margin-bottom: 15px; background: rgba(212, 175, 55, 0.1); padding: 10px; display: inline-block; border-radius: 5px;">
+                🎁 JUNHO E JULHO COM 15% DE DESCONTO | USE O CUPOM: COPA15
+            </div>
             <p style="color: var(--text-secondary);">Fale diretamente com nossa diretoria comercial via WhatsApp.</p>
 
             <form class="fast-form" onsubmit="sendCampaignWA(event)">
@@ -569,7 +642,10 @@
                 <input type="text" id="c-date" class="camp-input" placeholder="📅 Escolha sua Data no Calendário"
                     required readonly style="cursor: pointer;">
 
-                <button type="submit" class="camp-btn">Solicitar Orçamento no WhatsApp</button>
+                <button type="submit" class="camp-btn">Garantir Meu Orçamento Personalizado</button>
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #666;">
+                    Solicitação gratuita. Respondemos em menos de 5 minutos no horário comercial.
+                </p>
             </form>
         </div>
     </section>
