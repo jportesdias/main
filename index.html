@@ -5,713 +5,1308 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portes Dias Buffet | Eventos de Alto Padrão</title>
-    <!-- Same premium fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
-        rel="stylesheet">
-
-    <!-- Calendário -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
     <style>
-        /* ====================
-           CORE VARIABLES & RESET
-        ==================== */
+        /* =====================
+           VARIÁVEIS & RESET
+        ===================== */
         :root {
-            --bg-color: #050505;
-            --bg-surface: #0a0a0a;
-            --gold: #D4AF37;
-            --gold-dim: #AA8C2C;
-            --text-primary: #F0F0F0;
-            --text-secondary: #AAAAAA;
+            --bg: #060606;
+            --bg-surface: #0d0d0d;
+            --bg-card: #111111;
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --gold-dim: #8A6E2F;
+            --text: #F2F2F2;
+            --text-muted: #888;
             --font-display: 'Cinzel', serif;
             --font-body: 'Montserrat', sans-serif;
-            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease: cubic-bezier(0.25, 1, 0.5, 1);
+            --nav-h: 70px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        .gold { color: var(--gold); }
+        .display { font-family: var(--font-display); }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .gold-text {
-            color: var(--gold);
-        }
-
-        .display-text {
-            font-family: var(--font-display);
-        }
-
-        /* ====================
-           CAMPAIGN HEADER (Minimal)
-        ==================== */
-        .campaign-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem 0;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .campaign-header img {
-            height: 380px;
-            object-fit: contain;
-            mix-blend-mode: screen;
-        }
-
-        /* ====================
-           HERO SECTION (High Impact)
-        ==================== */
-        .camp-hero {
-            height: 100vh;
-            min-height: 1000px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            text-align: center;
-        }
-
-        .camp-hero-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.4) 50%, rgba(5, 5, 5, 1) 100%),
-                url('wedding_reception_1.png') center/cover no-repeat;
-            z-index: -1;
-            filter: brightness(0.6);
-        }
-
-        .camp-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            line-height: 1.2;
-            margin-top: 350px;
-            margin-bottom: 2rem;
-            text-wrap: balance;
-        }
-
-        .camp-desc {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-        }
-
-        /* Pulsuating CTA Button */
-        .btn-pulse {
-            display: inline-block;
-            background: var(--gold);
-            color: #000;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 600;
-            padding: 1.2rem 3rem;
-            border-radius: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            animation: pulse 2s infinite;
-            transition: all 0.3s;
-        }
-
-        .btn-pulse:hover {
-            background: #fff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-            transform: translateY(-3px);
-            animation: none;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-            }
-        }
-
-        /* Scarcity Bar */
+        /* =====================
+           SCARCITY BAR
+        ===================== */
         .scarcity-bar {
             background: var(--gold);
             color: #000;
             text-align: center;
-            padding: 8px 0;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
+            padding: 9px 20px;
+            font-size: 0.78rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1001;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            top: 0; left: 0; width: 100%;
+            z-index: 1100;
         }
 
-        .scarcity-bar i {
-            margin-right: 8px;
-        }
-
-        /* Floating WhatsApp Button */
-        .wa-float {
+        /* =====================
+           NAVEGAÇÃO
+        ===================== */
+        nav {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25d366;
-            color: #fff;
-            width: 65px;
-            height: 65px;
+            top: 36px; left: 0; width: 100%;
+            z-index: 1000;
+            transition: background 0.4s, backdrop-filter 0.4s, top 0.3s;
+            padding: 0;
+        }
+        nav.scrolled {
+            background: rgba(6, 6, 6, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            top: 0;
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--nav-h);
+            padding: 0 5%;
+            max-width: 100%;
+        }
+        .nav-logo img {
+            height: 52px;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            transition: height 0.3s;
+        }
+        nav.scrolled .nav-logo img { height: 42px; }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(242, 242, 242, 0.7);
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            padding: 8px 20px;
+            border-radius: 3px;
+            font-size: 0.72rem !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase;
+            transition: background 0.3s, color 0.3s !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: #000 !important;
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+        }
+
+        /* =====================
+           HERO COM VÍDEO
+        ===================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-media {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-media video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .hero-media::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(6,6,6,0.55) 0%,
+                rgba(6,6,6,0.3) 40%,
+                rgba(6,6,6,0.75) 80%,
+                rgba(6,6,6,1) 100%
+            );
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+            max-width: 900px;
+        }
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.3s forwards;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.15;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.5s forwards;
+        }
+        .hero-sub {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: rgba(242,242,242,0.65);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.7s forwards;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.9s forwards;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            animation: pulse-gold 2.5s infinite;
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(201, 168, 76, 0.35);
+            animation: none;
+        }
+        .btn-secondary {
+            display: inline-block;
+            border: 1px solid rgba(201, 168, 76, 0.5);
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            padding: 1rem 2.5rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.08);
+            transform: translateY(-2px);
+        }
+        .hero-badge {
+            margin-top: 2.5rem;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            color: rgba(242,242,242,0.4);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 1.1s forwards;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) 1.4s forwards;
+        }
+        .hero-scroll span {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(242,242,242,0.3);
+        }
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollLine 1.5s ease-in-out infinite;
+        }
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            51% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* =====================
+           STATS BAR
+        ===================== */
+        .stats-bar {
+            background: var(--bg-surface);
+            border-top: 1px solid rgba(201,168,76,0.12);
+            border-bottom: 1px solid rgba(201,168,76,0.12);
+            padding: 40px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-item {}
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* =====================
+           SEÇÃO GENÉRICA
+        ===================== */
+        section { position: relative; }
+        .section-label {
+            font-size: 0.68rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        /* =====================
+           SERVIÇOS / DIFERENCIAIS
+        ===================== */
+        .services {
+            padding: 120px 0;
+            background: var(--bg);
+        }
+        .services-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: end;
+            margin-bottom: 5rem;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5px;
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.08);
+        }
+        .service-card {
+            background: var(--bg-card);
+            padding: 3rem 2.5rem;
+            transition: background 0.3s;
+            cursor: default;
+        }
+        .service-card:hover { background: #161616; }
+        .service-icon {
+            width: 48px; height: 48px;
+            border: 1px solid rgba(201,168,76,0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            transition: transform 0.3s;
-            animation: bounce 2s infinite;
-        }
-
-        .wa-float:hover {
-            transform: scale(1.1);
-        }
-
-        .wa-float svg {
-            width: 35px;
-            height: 35px;
-            fill: currentColor;
-        }
-
-        /* Coupon Badge */
-        .coupon-badge {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed var(--gold);
-            padding: 10px 20px;
-            border-radius: 8px;
+            margin-bottom: 1.8rem;
             color: var(--gold);
-            font-weight: 700;
-            margin: 15px 0;
-            animation: pulse-border 2s infinite;
+            font-size: 1.3rem;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .service-card:hover .service-icon {
+            background: rgba(201,168,76,0.1);
+            border-color: var(--gold);
+        }
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        .service-card p {
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: var(--text-muted);
         }
 
-        @keyframes pulse-border {
-            0% { border-color: var(--gold); }
-            50% { border-color: #fff; }
-            100% { border-color: var(--gold); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* ====================
-           THE SPACE (Visual Showcase)
-        ==================== */
-        .space-showcase {
-            padding: 100px 0;
+        /* =====================
+           GALERIA DE PORTFOLIO
+        ===================== */
+        .portfolio {
+            padding: 120px 0;
             background: var(--bg-surface);
         }
-
-        .section-title {
+        .portfolio-header {
             text-align: center;
-            font-size: 3rem;
             margin-bottom: 4rem;
         }
-
-        .space-grid {
+        .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            gap: 6px;
         }
-
-        .space-img-wrapper {
+        .portfolio-item {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
-            aspect-ratio: 4/5;
+            background: #111;
         }
+        .portfolio-item:nth-child(1) { grid-column: span 7; grid-row: span 2; aspect-ratio: 7/5; }
+        .portfolio-item:nth-child(2) { grid-column: span 5; aspect-ratio: 5/4; }
+        .portfolio-item:nth-child(3) { grid-column: span 5; aspect-ratio: 5/4; }
+        .portfolio-item:nth-child(4) { grid-column: span 4; aspect-ratio: 4/3; }
+        .portfolio-item:nth-child(5) { grid-column: span 4; aspect-ratio: 4/3; }
+        .portfolio-item:nth-child(6) { grid-column: span 4; aspect-ratio: 4/3; }
 
-        .space-img-wrapper img {
-            width: 100%;
-            height: 100%;
+        .portfolio-item img {
+            width: 100%; height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
-            filter: grayscale(30%);
+            transition: transform 0.7s var(--ease), filter 0.7s;
+            filter: brightness(0.85) saturate(0.8);
         }
-
-        .space-img-wrapper:hover img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
+        .portfolio-item:hover img {
+            transform: scale(1.06);
+            filter: brightness(1) saturate(1);
         }
-
-        .space-caption {
+        .portfolio-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem 1.5rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            inset: 0;
+            background: linear-gradient(to top, rgba(6,6,6,0.85) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay span {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: 0.9rem;
             color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* ====================
-           DIFFERENTIALS (Quick Info)
-        ==================== */
-        .differentials {
-            padding: 100px 0;
-            background: var(--bg-color);
+        /* =====================
+           DESTAQUE / CARDÁPIO PREVIEW
+        ===================== */
+        .menu-preview {
+            padding: 120px 0;
+            background: var(--bg);
         }
+        .menu-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .menu-text .section-desc { margin-top: 1.5rem; margin-bottom: 2.5rem; }
+        .menu-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        .menu-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .menu-list li::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+        .menu-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .menu-img-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .menu-img-item:first-child {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+        .menu-img-item:not(:first-child) { aspect-ratio: 1; }
+        .menu-img-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--ease);
+        }
+        .menu-img-item:hover img { transform: scale(1.05); }
 
-        .diff-grid {
+        /* =====================
+           DEPOIMENTOS
+        ===================== */
+        .testimonials {
+            padding: 120px 0;
+            background: var(--bg-surface);
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            text-align: center;
+            gap: 1.5rem;
         }
-
-        .diff-item h3 {
-            font-size: 1.8rem;
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(201,168,76,0.08);
+            padding: 2.5rem;
+            border-radius: 4px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateY(-4px);
+        }
+        .testimonial-stars {
             color: var(--gold);
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-text {
+            font-size: 0.9rem;
+            line-height: 1.85;
+            color: rgba(242,242,242,0.7);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .author-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid rgba(201,168,76,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+        .author-info .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .author-info .event {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
-        .diff-item p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-
-
-        /* ====================
-           FAST CONVERSION (Form)
-        ==================== */
-        .fast-conversion {
+        /* =====================
+           FORMULÁRIO DE CONVERSÃO
+        ===================== */
+        .conversion {
             padding: 120px 0;
-            background: #080808;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: center;
+            background: var(--bg);
+            border-top: 1px solid rgba(201,168,76,0.1);
         }
-
-        .fast-form {
-            max-width: 500px;
-            margin: 3rem auto 0;
+        .conversion-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
         }
-
-        .camp-input {
+        .conversion-left .section-desc { margin-top: 1.5rem; }
+        .conversion-perks {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .perk {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .perk-icon {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(201,168,76,0.12);
+            padding: 3rem;
+            border-radius: 6px;
+        }
+        .form-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .field-group { margin-bottom: 1.5rem; }
+        .field-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .field-group input {
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding: 15px 0;
-            margin-bottom: 2rem;
-            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 0;
+            color: var(--text);
             font-family: var(--font-body);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             transition: border-color 0.3s;
         }
-
-        .camp-input:focus {
+        .field-group input:focus {
             outline: none;
             border-color: var(--gold);
         }
-
-        .camp-btn {
+        .field-group input::placeholder { color: rgba(255,255,255,0.2); }
+        .btn-form {
             width: 100%;
             background: var(--gold);
             color: #000;
             border: none;
-            padding: 20px;
+            padding: 18px;
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-form:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+        .form-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+        .coupon-strip {
+            background: rgba(201,168,76,0.08);
+            border: 1px dashed rgba(201,168,76,0.4);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 1.8rem;
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
-        /* ====================
-           ANIMATIONS UTIL
-        ==================== */
-        .fade-in {
+        /* =====================
+           RODAPÉ
+        ===================== */
+        footer {
+            background: #040404;
+            border-top: 1px solid rgba(201,168,76,0.1);
+            padding: 60px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 2rem;
+        }
+        .footer-brand img {
+            height: 60px;
+            mix-blend-mode: screen;
+            margin-bottom: 1.5rem;
+        }
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 260px;
+        }
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .footer-col ul li:hover { color: var(--text); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.2);
+        }
+        .footer-bottom a { color: var(--gold); }
+
+        /* =====================
+           WHATSAPP FLUTUANTE
+        ===================== */
+        .wa-float {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            background: #25d366;
+            color: #fff;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            z-index: 900;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .wa-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(37,211,102,0.35);
+        }
+        .wa-float svg { width: 30px; height: 30px; fill: currentColor; }
+
+        /* =====================
+           ANIMAÇÕES
+        ===================== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
+            70% { box-shadow: 0 0 0 14px rgba(201,168,76,0); }
+            100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+        }
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1s, transform 1s var(--ease-out);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
         }
-
-        .fade-in.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Tema Dourado do Calendário */
+        /* =====================
+           FLATPICKR CUSTOMIZADO
+        ===================== */
         .flatpickr-calendar {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
-            border: 1px solid rgba(212, 175, 55, 0.4) !important;
-            font-family: var(--font-body);
-            margin-bottom: 2rem !important;
-            background: transparent !important;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
+            border: 1px solid rgba(201,168,76,0.3) !important;
+            font-family: var(--font-body) !important;
+            background: #111 !important;
         }
-
-        .flatpickr-calendar.arrowTop:before,
-        .flatpickr-calendar.arrowBottom:before,
-        .flatpickr-calendar.arrowTop:after,
-        .flatpickr-calendar.arrowBottom:after {
-            display: none !important;
-            /* Remove as 'setinhas' de balão brancas */
-        }
-
-        .flatpickr-innerContainer,
-        .flatpickr-months,
-        .flatpickr-weekdays,
-        .flatpickr-days {
-            background: transparent !important;
-        }
-
+        .flatpickr-innerContainer, .flatpickr-months,
+        .flatpickr-weekdays, .flatpickr-days { background: transparent !important; }
         .flatpickr-current-month .flatpickr-monthDropdown-months,
-        .flatpickr-current-month .numInputWrapper {
-            color: var(--gold) !important;
-        }
-
-        .flatpickr-day {
-            color: #ccc !important;
-        }
-
-        /* Círculo dourado vazado para dias disponíveis */
+        .flatpickr-current-month .numInputWrapper { color: var(--gold) !important; }
+        .flatpickr-day { color: #ccc !important; }
         .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
             border: 1px solid var(--gold) !important;
             border-radius: 50% !important;
             color: var(--gold) !important;
             background: transparent !important;
         }
-
-        /* Bola dourada preenchida ao clicar */
         .flatpickr-day.selected {
             background: var(--gold) !important;
             border-color: var(--gold) !important;
             color: #000 !important;
             font-weight: bold;
         }
+        .flatpickr-day.disabled { text-decoration: line-through; color: rgba(255,255,255,0.2) !important; }
+        .flatpickr-current-month .numInputWrapper { display: none; }
+        .flatpickr-calendar.arrowTop:before, .flatpickr-calendar.arrowTop:after,
+        .flatpickr-calendar.arrowBottom:before, .flatpickr-calendar.arrowBottom:after { display: none !important; }
 
-        .flatpickr-day.disabled {
-            text-decoration: line-through;
-            color: rgba(255, 255, 255, 0.2) !important;
+        /* =====================
+           RESPONSIVO
+        ===================== */
+        @media (max-width: 1024px) {
+            .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+            .conversion-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .menu-layout { grid-template-columns: 1fr; gap: 3rem; }
         }
-        .flatpickr-current-month .numInputWrapper {
-            display: none;
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .portfolio-item:nth-child(1) { grid-column: span 12; }
+            .portfolio-item:nth-child(2),
+            .portfolio-item:nth-child(3) { grid-column: span 6; }
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(5),
+            .portfolio-item:nth-child(6) { grid-column: span 4; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .footer-brand { grid-column: span 2; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
         }
-
-        /* Oculta caixa feia de ano caso apareça */
-
-        /* ====================
-           MOBILE RESPONSIVENESS
-        ==================== */
-        @media (max-width: 768px) {
-            .scarcity-bar {
-                font-size: 0.75rem;
-                padding: 5px 10px;
-            }
-
-            /* Hero adjustments */
-            .campaign-header {
-                top: 25px !important;
-                padding: 1rem 0;
-            }
-
-            .campaign-header img {
-                height: 180px !important;
-                /* Logo much smaller on mobile */
-            }
-
-            .camp-hero {
-                min-height: 80vh;
-            }
-
-            .camp-title {
-                margin-top: 180px !important;
-                /* Reduce massive gap from desktop */
-                font-size: 1.8rem;
-                padding: 0 10px;
-            }
-
-            .camp-desc {
-                font-size: 0.95rem;
-                padding: 0 15px;
-                margin-bottom: 2rem;
-            }
-
-            .btn-pulse {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-                width: 90%;
-                /* full width button on mobile */
-                max-width: 350px;
-            }
-
-            .coupon-badge {
-                font-size: 0.8rem;
-                padding: 8px 15px;
-                width: 95%;
-            }
-
-            /* Section Padding */
-            .space-showcase {
-                padding: 60px 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            /* Differentials Grid */
-            .differentials {
-                padding: 60px 0;
-            }
-
-            .diff-grid {
-                grid-template-columns: 1fr;
-                /* Stack differentials vertically */
-                gap: 2rem;
-            }
-
-            /* Form / CTA */
-            .fast-conversion {
-                padding: 60px 0;
-            }
-
-            .fast-conversion h2 {
-                font-size: 1.8rem !important;
-            }
-
-            .camp-btn {
-                font-size: 1rem;
-                padding: 15px;
-            }
-
-            /* Footer */
-            footer {
-                padding: 20px !important;
-            }
-
-            footer img {
-                height: 120px !important;
-                /* Scale down giant footer logo */
-            }
+        @media (max-width: 600px) {
+            .scarcity-bar { font-size: 0.65rem; padding: 7px 10px; }
+            .hero-title { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-item:nth-child(1) { grid-column: span 12; }
+            .portfolio-item:nth-child(2),
+            .portfolio-item:nth-child(3),
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(5),
+            .portfolio-item:nth-child(6) { grid-column: span 6; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-brand { grid-column: span 1; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .menu-images { grid-template-columns: 1fr; }
+            .menu-img-item:first-child { grid-column: span 1; }
+            .conversion-layout { gap: 2rem; }
+            .form-card { padding: 2rem 1.5rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 
 <body>
-    <!-- SCARCITY BAR -->
+
+    <!-- BARRA DE ESCASSEZ -->
     <div class="scarcity-bar">
-        🕒 AGENDA 2026: 50% das datas de Sábado já reservadas. Consulte a sua agora.
+        🕒 Agenda 2026 — 50% das datas de sábado já reservadas. Consulte a sua agora.
     </div>
 
-    <!-- HEADER -->
-    <header class="campaign-header" style="top: 35px;">
-        <img src="portesdias_logo.png" alt="Portes Dias Buffet">
-    </header>
+    <!-- NAVEGAÇÃO -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="portesdias_logo.png" alt="Portes Dias Buffet">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#agendar" class="nav-cta">Agendar</a></li>
+            </ul>
+            <div class="nav-hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
 
-    <!-- HERO -->
-    <section class="camp-hero">
-        <div class="camp-hero-bg"></div>
-        <div class="container fade-in visible">
-            <h1 class="camp-title display-text">
-                A Experiência Gastronômica que <br><span class="gold-text">Transformará o Seu Evento</span>
+    <!-- HERO COM VÍDEO -->
+    <section class="hero">
+        <div class="hero-media">
+            <video autoplay muted loop playsinline poster="wedding_reception_1.png">
+                <source src="parrillaaovivo.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Parrilla Premium · Buffet de Alto Padrão</p>
+            <h1 class="hero-title">
+                A Experiência Gastronômica que<br>
+                <span class="gold">Transforma o Seu Evento</span>
             </h1>
-            <p class="camp-desc">
-                Leve o luxo de um restaurante 5 estrelas para onde você estiver. Parrilla Premium, serviço impecável e sabor inesquecível para convidados exigentes.
+            <p class="hero-sub">
+                Leve o luxo de um restaurante 5 estrelas para onde você estiver. Parrilla ao vivo, cortes nobres e serviço impecável para convidados exigentes.
             </p>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="#agendar" class="btn-pulse" style="background: #fff; color: #000; box-shadow: 0 0 25px rgba(255,255,255,0.4);">Garantir Minha Data Exclusiva</a>
-                    <a href="https://wa.me/5521983710895?text=*Olá! Vim pelo site e gostaria de tirar uma dúvida rápida.*" target="_blank" 
-                       style="display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 1.2rem 2.5rem; border-radius: 5px; font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; background: rgba(212, 175, 55, 0.1);">
-                       Atendimento Exclusivo
-                    </a>
-                </div>
-                <p style="font-size: 0.8rem; color: var(--gold); letter-spacing: 2px; font-weight: 500;">
-                    ⭐ DESDE 2024 | MAIS DE 100 EVENTOS REALIZADOS COM EXCELÊNCIA PREMIUM
-                </p>
-                <div class="coupon-badge">
-                    🎟️ CUPOM: COPA15 | 15% OFF EM EVENTOS DE JUNHO E JULHO
-                </div>
+            <div class="hero-btns">
+                <a href="#agendar" class="btn-primary">Garantir Minha Data</a>
+                <a href="https://wa.me/5521983710895?text=*Olá! Vim pelo site e gostaria de tirar uma dúvida rápida.*" target="_blank" class="btn-secondary">Atendimento Exclusivo</a>
             </div>
+            <p class="hero-badge">⭐ Desde 2024 &nbsp;·&nbsp; +100 Eventos Realizados &nbsp;·&nbsp; Alto Padrão</p>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
         </div>
     </section>
 
-    <!-- MEGA SPACE SHOWCASE -->
-    <section class="space-showcase">
+    <!-- STATS BAR -->
+    <div class="stats-bar">
         <div class="container">
-            <h2 class="section-title display-text fade-in">Um <span class="gold-text">Restaurante De Luxo</span> Onde
-                Você Estiver
-            </h2>
-
-            <div class="space-grid">
-                <!-- Using placeholder names based on standard conventions, user will replace with actual space photos -->
-                <div class="space-img-wrapper fade-in">
-                    <img src="marmoreio.png" alt="Cortes Nobres">
-                    <div class="space-caption">Cortes Nobres</div>
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Eventos Realizados</div>
                 </div>
-                <div class="space-img-wrapper fade-in" style="transition-delay: 0.2s">
-                    <img src="pao.png" alt="Receitas Especiais">
-                    <div class="space-caption">Receitas Especiais</div>
+                <div class="stat-item reveal" style="transition-delay:0.1s">
+                    <div class="stat-number" data-target="40">0</div>
+                    <div class="stat-label">Mínimo de Convidados</div>
                 </div>
-                <div class="space-img-wrapper fade-in" style="transition-delay: 0.4s">
-                    <img src="new_york_steak.jpg" alt="Festival de Hambúrgueres">
-                    <div class="space-caption">Festival de Hambúrgueres</div>
+                <div class="stat-item reveal" style="transition-delay:0.2s">
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Min. p/ Resposta WA</div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DIFFERENTIALS -->
-    <section class="differentials">
-        <div class="container fade-in">
-            <div class="diff-grid">
-                <div class="diff-item">
-                    <h3 class="display-text">Parrilla Móvel</h3>
-                    <p>A exclusividade da parrilla ao vivo que transforma o evento em entretenimento e sabor
-                        inigualável. Sob disponibilidade.</p>
-                </div>
-                <div class="diff-item">
-                    <h3 class="display-text">Estrutura Flexível</h3>
-                    <p>Nos adaptamos a qualquer tamanho de evento, mas temos um mínimo de convidados de 40 pessoas.</p>
-                </div>
-                <div class="diff-item">
-                    <h3 class="display-text">Finger Food</h3>
-                    <p>Nosso serviço é finger food, todas as carnes são filetadas e colocadas nas tábuas. Se necessário,
-                        temos mão de obra treinada para circular servindo, entregando uma experiência
-                        dinâmica e sofisticada a cada convidado.</p>
+                <div class="stat-item reveal" style="transition-delay:0.3s">
+                    <div class="stat-number" data-target="2024">0</div>
+                    <div class="stat-label">Ano de Fundação</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CONVERSION FORM -->
-    <section id="agendar" class="fast-conversion">
-        <div class="container fade-in">
-            <h2 class="display-text" style="font-size: 2.5rem; margin-bottom: 10px;">Leve esta experiência para seu
-                evento</h2>
-            <div style="color: var(--gold); font-weight: bold; margin-bottom: 15px; background: rgba(212, 175, 55, 0.1); padding: 10px; display: inline-block; border-radius: 5px;">
-                🎁 JUNHO E JULHO COM 15% DE DESCONTO | USE O CUPOM: COPA15
-            </div>
-            <p style="color: var(--text-secondary);">Fale diretamente com nossa diretoria comercial via WhatsApp.</p>
-
-            <form class="fast-form" onsubmit="sendCampaignWA(event)">
-                <input type="text" id="c-name" class="camp-input" placeholder="Seu Nome Completo" required>
-                <input type="text" id="c-event" class="camp-input" placeholder="Tipo de Evento (Ex: Casamento)"
-                    required>
-                <input type="text" id="c-date" class="camp-input" placeholder="📅 Escolha sua Data no Calendário"
-                    required readonly style="cursor: pointer;">
-
-                <button type="submit" class="camp-btn">Garantir Meu Orçamento Personalizado</button>
-                <p style="margin-top: 15px; font-size: 0.8rem; color: #666;">
-                    Solicitação gratuita. Respondemos em menos de 5 minutos no horário comercial.
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="services">
+        <div class="container">
+            <div class="services-header">
+                <div>
+                    <p class="section-label reveal">O Que Oferecemos</p>
+                    <h2 class="section-title reveal">
+                        Um restaurante<br><span class="gold">de luxo móvel</span>
+                    </h2>
+                </div>
+                <p class="section-desc reveal">
+                    Cada evento é único. Por isso criamos uma experiência sob medida, combinando parrilla ao vivo, cortes nobres e serviço sofisticado onde você precisar.
                 </p>
-            </form>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9650;</div>
+                    <h3>Parrilla Ao Vivo</h3>
+                    <p>A exclusividade de uma parrilla móvel que transforma o momento em entretenimento gastronômico. Seus convidados assistem e se deliciam ao mesmo tempo.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.1s">
+                    <div class="service-icon">&#9671;</div>
+                    <h3>Cortes Nobres</h3>
+                    <p>Seleção criteriosa de carnes premium, preparadas com técnicas de parrilla argentina. Cada corte é uma obra de arte servida na tábua.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.2s">
+                    <div class="service-icon">&#10022;</div>
+                    <h3>Finger Food Premium</h3>
+                    <p>Carnes filetadas e servidas em tábuas. Com mão de obra treinada circulando entre os convidados, entregando uma experiência dinâmica e sofisticada.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.3s">
+                    <div class="service-icon">&#9670;</div>
+                    <h3>Estrutura Flexível</h3>
+                    <p>Nos adaptamos a qualquer espaço e tamanho de evento a partir de 40 convidados. Casamentos, corporativos, formaturas e eventos sociais.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.4s">
+                    <div class="service-icon">&#9651;</div>
+                    <h3>Cardápio Exclusivo</h3>
+                    <p>De hambúrgueres artesanais smash a New York strip e mini steaks. Cada item pensado para surpreender o paladar mais exigente.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.5s">
+                    <div class="service-icon">&#9633;</div>
+                    <h3>Atendimento Direto</h3>
+                    <p>Orçamento personalizado via WhatsApp. Respondemos em até 5 minutos no horário comercial. Sem intermediários, direto com a diretoria.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer style="padding: 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px;">
-        <img src="portesdias_logo.png" style="height: 220px; mix-blend-mode: screen; margin-bottom: 20px;">
-        <p style="color: #555; font-size: 0.9rem;">&copy; 2026 Portes Dias Buffet</p>
-        <p style="margin-top: 15px;"><a href="https://wa.me/5521983710895" style="color: var(--gold); font-size: 0.8rem; letter-spacing: 2px;">CONTATO DIRETO: (21) 98371-0895</a></p>
+    <!-- PORTFÓLIO -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="portfolio-header">
+                <p class="section-label reveal">Portfólio</p>
+                <h2 class="section-title reveal">Cada evento,<br><span class="gold">uma obra prima</span></h2>
+            </div>
+        </div>
+        <div style="padding: 0 5%; max-width: 1440px; margin: 0 auto;">
+            <div class="portfolio-grid reveal">
+                <div class="portfolio-item">
+                    <img src="portfolio_corte_fogo_vivo.jpg" alt="Corte ao fogo vivo" loading="lazy">
+                    <div class="portfolio-overlay"><span>Corte ao Fogo Vivo</span></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="portfolio_ambiente_evento.jpg" alt="Ambiente do evento" loading="lazy">
+                    <div class="portfolio-overlay"><span>Ambiente Exclusivo</span></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="portfolio_corte_parrilla.jpg" alt="Corte na parrilla" loading="lazy">
+                    <div class="portfolio-overlay"><span>Parrilla Premium</span></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="portfolio_detalhe_brasa.jpg" alt="Detalhe da brasa" loading="lazy">
+                    <div class="portfolio-overlay"><span>Detalhe da Brasa</span></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="portfolio_mesa_sequencia_carnes.jpg" alt="Mesa com carnes" loading="lazy">
+                    <div class="portfolio-overlay"><span>Sequência de Carnes</span></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="portfolio_servico_tabua.jpg" alt="Serviço na tábua" loading="lazy">
+                    <div class="portfolio-overlay"><span>Serviço na Tábua</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARDÁPIO / MENU PREVIEW -->
+    <section id="cardapio" class="menu-preview">
+        <div class="container">
+            <div class="menu-layout">
+                <div class="menu-text">
+                    <p class="section-label reveal">Cardápio</p>
+                    <h2 class="section-title reveal">Sabores que<br><span class="gold">ficam na memória</span></h2>
+                    <p class="section-desc reveal">
+                        Do hambúrguer artesanal ao corte nobre na parrilla. Cada prato é cuidadosamente preparado para oferecer uma experiência gastronômica inesquecível.
+                    </p>
+                    <ul class="menu-list reveal">
+                        <li>New York Strip — Corte premium grelhado na parrilla ao vivo</li>
+                        <li>Smash Steak — Hambúrguer artesanal prensado na chapa quente</li>
+                        <li>Mini Steak — Formato finger food, ideal para circulação</li>
+                        <li>Tábua de Cortes Nobres — Seleção especial servida na madeira</li>
+                        <li>Receitas Especiais — Pães e acompanhamentos artesanais</li>
+                    </ul>
+                    <a href="#agendar" class="btn-primary reveal" style="display:inline-block">Ver Cardápio Completo</a>
+                </div>
+                <div class="menu-images reveal">
+                    <div class="menu-img-item">
+                        <img src="new_york_steak.jpg" alt="New York Steak" loading="lazy">
+                    </div>
+                    <div class="menu-img-item">
+                        <img src="smash_steak.jpg" alt="Smash Steak" loading="lazy">
+                    </div>
+                    <div class="menu-img-item">
+                        <img src="mini_steak.jpg" alt="Mini Steak" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <p class="section-label reveal">Depoimentos</p>
+                <h2 class="section-title reveal">O que nossos<br><span class="gold">clientes dizem</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Contratamos para o nosso casamento e foi simplesmente incrível. A parrilla ao vivo virou o centro das atenções. Todos os convidados elogiaram muito a qualidade da carne e o atendimento da equipe."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <div class="name">Ana & Ricardo</div>
+                            <div class="event">Casamento · 120 convidados</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay:0.15s">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Perfeito para nosso evento corporativo de fim de ano. Profissionalismo do início ao fim, comida de altíssimo nível e apresentação impecável. Com certeza vamos contratar novamente."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <div class="name">Marcos Andrade</div>
+                            <div class="event">Evento Corporativo · 80 pessoas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay:0.3s">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Festei de 15 anos da minha filha com a Portes Dias e não me arrependi. O finger food é sensacional e o serviço é muito sofisticado. Recomendo de olhos fechados para quem quer qualidade premium."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <div class="name">Carla Mendes</div>
+                            <div class="event">Festa de 15 anos · 60 convidados</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE CONVERSÃO -->
+    <section id="agendar" class="conversion">
+        <div class="container">
+            <div class="conversion-layout">
+                <div class="conversion-left">
+                    <p class="section-label reveal">Agendar</p>
+                    <h2 class="section-title reveal">Leve esta<br><span class="gold">experiência ao seu<br>evento</span></h2>
+                    <p class="section-desc reveal">Fale diretamente com nossa diretoria comercial via WhatsApp. Orçamento personalizado e sem compromisso.</p>
+                    <div class="conversion-perks reveal">
+                        <div class="perk">
+                            <span class="perk-icon">◆</span>
+                            <span>Resposta em até 5 minutos no horário comercial</span>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">◆</span>
+                            <span>Orçamento 100% gratuito e sem compromisso</span>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">◆</span>
+                            <span>Atendimento direto com a diretoria, sem intermediários</span>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">◆</span>
+                            <span>Cardápio personalizado para o seu tipo de evento</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="form-card">
+                        <h3>Solicitar Orçamento</h3>
+                        <p>Preencha abaixo e receba sua proposta personalizada.</p>
+                        <div class="coupon-strip">
+                            🎟️ CUPOM: COPA15 — 15% OFF em eventos de Junho e Julho
+                        </div>
+                        <form onsubmit="sendWA(event)">
+                            <div class="field-group">
+                                <label>Seu nome completo</label>
+                                <input type="text" id="f-name" placeholder="Ex: João da Silva" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Tipo de evento</label>
+                                <input type="text" id="f-event" placeholder="Ex: Casamento, Corporativo..." required>
+                            </div>
+                            <div class="field-group">
+                                <label>Data do evento</label>
+                                <input type="text" id="f-date" placeholder="Clique para escolher a data" required readonly style="cursor:pointer">
+                            </div>
+                            <button type="submit" class="btn-form">Garantir Meu Orçamento →</button>
+                            <p class="form-note">Solicitação gratuita. Resposta em até 5 min.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="portesdias_logo.png" alt="Portes Dias Buffet">
+                    <p>Buffet premium com parrilla ao vivo para eventos de alto padrão no Rio de Janeiro. Casamentos, corporativos, festas e muito mais.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#cardapio">Cardápio</a></li>
+                        <li><a href="#agendar">Agendar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="https://wa.me/5521983710895">(21) 98371-0895</a></li>
+                        <li>Rio de Janeiro, RJ</li>
+                        <li>contato@portesdias.com.br</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Portes Dias Buffet. Todos os direitos reservados.</span>
+                <a href="https://wa.me/5521983710895">WhatsApp: (21) 98371-0895</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/5521983710895?text=*Contato Rápido - Site Campanha*%0A%0A_Gostaria de mais informações sobre o Buffet Premium._" class="wa-float" target="_blank">
+    <!-- WHATSAPP FLUTUANTE -->
+    <a href="https://wa.me/5521983710895?text=*Contato Rápido - Site*%0A%0A_Gostaria de mais informações sobre o Buffet Premium._" class="wa-float" target="_blank" title="Chamar no WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
 
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
-
     <script>
-        // Simple Intersection Observer for Fades
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+        // Scarcity bar height para nav offset
+        const scarcityH = document.querySelector('.scarcity-bar').offsetHeight;
+        const navbar = document.getElementById('navbar');
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // ===========================================
-        // GESTOR DE DATAS (NOVA LÓGICA DE CONVERSÃO)
-        // ===========================================
-        // Agora TODAS as datas estão LIVRES por padrão para não travar o cliente.
-        // Se você já vendeu uma data, coloque-a na lista abaixo para BLOQUEÁ-LA.
-        const datasOcupadas = [
-            // "2026-03-15", // Exemplo: Bloqueia este dia específico
-        ];
-
-        flatpickr("#c-date", {
-            locale: "pt",                // Calendário em Português-BR
-            minDate: "today",            // Impede escolhas no passado
-            disable: datasOcupadas,      // BLOQUEIA apenas as datas que você colocar acima
-            dateFormat: "d/m/Y",         // Formato que vai pro WhatsApp
+        // Nav scroll behavior
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
 
-        // WhatsApp Custom Form
-        function sendCampaignWA(e) {
+        // Hamburger toggle (mobile)
+        document.getElementById('hamburger').addEventListener('click', () => {
+            const links = document.querySelector('.nav-links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+            links.style.position = 'fixed';
+            links.style.top = '106px';
+            links.style.left = '0';
+            links.style.width = '100%';
+            links.style.background = 'rgba(6,6,6,0.97)';
+            links.style.flexDirection = 'column';
+            links.style.padding = '2rem';
+            links.style.gap = '2rem';
+            links.style.borderBottom = '1px solid rgba(201,168,76,0.2)';
+        });
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Counter animation
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 1800;
+            const start = performance.now();
+            const update = (now) => {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target) + (target >= 100 && target < 2000 ? '+' : '');
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = target + (target >= 100 && target < 2000 ? '+' : '');
+            };
+            requestAnimationFrame(update);
+        }
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
+                    counterObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        const statsEl = document.querySelector('.stats-grid');
+        if (statsEl) counterObs.observe(statsEl);
+
+        // Flatpickr
+        const datasOcupadas = [];
+        flatpickr("#f-date", {
+            locale: "pt",
+            minDate: "today",
+            disable: datasOcupadas,
+            dateFormat: "d/m/Y",
+        });
+
+        // WhatsApp form
+        function sendWA(e) {
             e.preventDefault();
-            const name = document.getElementById('c-name').value;
-            const event = document.getElementById('c-event').value;
-
-            // O Flatpickr já entrega a data formatada certinha em dd/mm/yyyy
-            const date = document.getElementById('c-date').value;
-
-            const text = `*Orçamento VIP: Mega Espaço*%0A%0A`
+            const name = document.getElementById('f-name').value;
+            const event = document.getElementById('f-event').value;
+            const date = document.getElementById('f-date').value;
+            const text = `*Orçamento Personalizado — Portes Dias Buffet*%0A%0A`
                 + `*Nome:* ${name}%0A`
                 + `*Evento:* ${event}%0A`
                 + `*Data Prevista:* ${date}%0A%0A`
-                + `_Vim pelo anúncio no Instagram_`;
-
-            const phone = "5521983710895";
-            const url = `https://wa.me/${phone}?text=${text}`;
-            window.open(url, '_blank');
+                + `_Vim pelo site e gostaria de um orçamento._`;
+            window.open(`https://wa.me/5521983710895?text=${text}`, '_blank');
         }
     </script>
 </body>
-
 </html>
