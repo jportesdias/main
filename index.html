@@ -733,6 +733,142 @@ nav.solid {
 }
 
 /* ======================================
+   PRECOS / PACOTES
+====================================== */
+.pricing {
+  padding: 120px 7%;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(232,93,4,0.13), transparent 34%),
+    linear-gradient(135deg, #080503 0%, #130b06 48%, #080503 100%);
+  border-top: 1px solid rgba(232,93,4,0.12);
+  border-bottom: 1px solid rgba(232,93,4,0.12);
+}
+.pricing-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+.pricing-intro {
+  font-size: 0.94rem;
+  color: var(--ash);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.pricing-min {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: start;
+  color: var(--white);
+}
+.pricing-min small {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.4);
+}
+.pricing-min strong {
+  display: block;
+  font-family: var(--big);
+  font-size: clamp(4rem, 8vw, 6.6rem);
+  line-height: 0.82;
+  color: var(--fire);
+  letter-spacing: 0.03em;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(248,244,238,0.08);
+}
+.price-card {
+  position: relative;
+  background: rgba(14,10,7,0.96);
+  padding: 2.4rem 2rem;
+  min-height: 100%;
+}
+.price-card.featured {
+  background:
+    linear-gradient(180deg, rgba(232,93,4,0.16), rgba(14,10,7,0.98) 38%),
+    #0e0a07;
+  box-shadow: inset 0 0 0 1px rgba(255,186,8,0.25);
+}
+.price-tag {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(255,186,8,0.35);
+  color: var(--gold);
+  font-size: 0.62rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.price-card h3 {
+  font-family: var(--h);
+  font-size: 1.35rem;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+  padding-right: 4.5rem;
+}
+.price-card p {
+  color: var(--ash);
+  font-size: 0.86rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.price-value {
+  margin: 2rem 0 1.5rem;
+}
+.price-value span {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.4);
+  margin-bottom: 0.35rem;
+}
+.price-value strong {
+  font-family: var(--big);
+  font-size: 3.2rem;
+  color: var(--fire);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+.price-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+.price-list li {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--ash);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.price-list li::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--ember);
+  flex: 0 0 16px;
+  margin-top: 0.7rem;
+}
+.pricing-note {
+  margin-top: 2rem;
+  color: rgba(248,244,238,0.42);
+  font-size: 0.76rem;
+  line-height: 1.7;
+}
+
+/* ======================================
    DIFERENCIAIS
 ====================================== */
 .diffs {
@@ -1081,6 +1217,8 @@ footer {
 
 @media (max-width: 1024px) {
   .cortes-layout  { grid-template-columns: 1fr; gap: 3rem; }
+  .pricing-header { grid-template-columns: 1fr; gap: 2rem; }
+  .pricing-grid   { grid-template-columns: 1fr; }
   .diffs-header   { grid-template-columns: 1fr; gap: 1.5rem; }
   .cta-layout     { grid-template-columns: 1fr; gap: 3rem; }
   .footer-top     { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
@@ -1142,6 +1280,9 @@ footer {
   .parrilla-bg img  { transform: none !important; }
 
   /* Diferenciais */
+  .pricing         { padding: 80px 6%; }
+  .pricing-min     { justify-items: start; }
+  .price-card      { padding: 2rem 1.5rem; }
   .diffs            { padding: 80px 0; }
   .diffs-container  { padding: 0 6%; }
   .diffs-grid       { grid-template-columns: 1fr 1fr; }
@@ -1180,6 +1321,7 @@ footer {
   .gallery-item:nth-child(even) { width: 80vw; }
 
   /* Diferenciais */
+  .price-value strong { font-size: 2.8rem; }
   .diffs-grid { grid-template-columns: 1fr; }
   .diff-card  { padding: 1.8rem 1.2rem; }
 
@@ -1218,6 +1360,7 @@ footer {
     <li><a href="#cortes">Cardápio</a></li>
     <li><a href="#galeria">Portfólio</a></li>
     <li><a href="#parrilla">Parrilla</a></li>
+    <li><a href="#precos">Preços</a></li>
     <li><a href="#contato">Contato</a></li>
     <li><a href="https://wa.me/5521983710895?text=*Olá! Gostaria de um orçamento.*" target="_blank" class="nav-wa">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
@@ -1246,14 +1389,16 @@ footer {
     </p>
     <div class="hero-actions">
       <a href="#contato" class="btn-fire">Solicitar Orçamento</a>
-      <a href="#galeria" class="btn-ghost">Ver Portfólio</a>
+      <a href="#precos" class="btn-ghost">Ver Pacotes</a>
     </div>
     <div class="hero-badges">
       <span class="hero-badge-item">⭐ +100 eventos</span>
       <span class="hero-badge-sep">·</span>
-      <span class="hero-badge-item">Desde 2024</span>
+      <span class="hero-badge-item">A partir de R$ 78,90/pessoa</span>
       <span class="hero-badge-sep">·</span>
-      <span class="hero-badge-item">Rio de Janeiro</span>
+      <span class="hero-badge-item">Mín. 40 convidados</span>
+      <span class="hero-badge-sep">·</span>
+      <span class="hero-badge-item">Desde 2024</span>
     </div>
   </div>
   <div class="hero-scroll-hint">
@@ -1394,6 +1539,80 @@ footer {
   </div>
 </section>
 
+<!-- PRECOS / PACOTES -->
+<section id="precos" class="pricing">
+  <div class="pricing-header">
+    <div class="rv">
+      <p class="section-eyebrow">Pacotes</p>
+      <h2 class="section-h">Churrasco a domicílio com <em>preço claro</em></h2>
+    </div>
+    <div class="rv" style="transition-delay:0.12s">
+      <p class="pricing-intro">
+        Escolha o formato ideal para o seu evento. O pacote de entrada atende celebrações a partir de 40 convidados, e as opções superiores ampliam cortes, equipe e apresentação.
+      </p>
+      <div class="pricing-min">
+        <small>A partir de</small>
+        <strong>R$ 78,90</strong>
+        <small>por pessoa</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <article class="price-card featured rv">
+      <div class="price-tag">Mais acessível</div>
+      <h3>Essencial Brasa</h3>
+      <p>Para eventos sociais e corporativos que precisam de churrasco bem servido, com operação enxuta e sem complicação.</p>
+      <div class="price-value">
+        <span>A partir de</span>
+        <strong>R$ 78,90</strong>
+      </div>
+      <ul class="price-list">
+        <li>Mínimo de 40 convidados</li>
+        <li>Cortes selecionados, pao de alho e acompanhamentos</li>
+        <li>Churrasqueiro para preparo no local</li>
+        <li>Orçamento ajustado conforme data, local e estrutura</li>
+      </ul>
+    </article>
+
+    <article class="price-card rv" style="transition-delay:0.12s">
+      <div class="price-tag">Mais pedido</div>
+      <h3>Parrilla Evento</h3>
+      <p>O pacote recomendado para vender experiência: fogo ao vivo, montagem mais presente e serviço com ritmo de buffet.</p>
+      <div class="price-value">
+        <span>Consulte</span>
+        <strong>Premium</strong>
+      </div>
+      <ul class="price-list">
+        <li>Parrilla movel como ponto de atracao do evento</li>
+        <li>Seleção ampliada de cortes e guarnições</li>
+        <li>Equipe dimensionada para fluxo dos convidados</li>
+        <li>Ideal para casamentos, aniversários e confraternizações</li>
+      </ul>
+    </article>
+
+    <article class="price-card rv" style="transition-delay:0.24s">
+      <div class="price-tag">Sob medida</div>
+      <h3>Fogo & Brasa Signature</h3>
+      <p>Para eventos de maior impacto, com proposta personalizada, cortes especiais e apresentação mais sofisticada.</p>
+      <div class="price-value">
+        <span>Projeto</span>
+        <strong>Custom</strong>
+      </div>
+      <ul class="price-list">
+        <li>Cardápio desenhado para o perfil dos convidados</li>
+        <li>Cortes nobres, finger food e serviço em tábuas</li>
+        <li>Possibilidade de entradas, sobremesas e extras</li>
+        <li>Proposta comercial fechada após briefing rápido</li>
+      </ul>
+    </article>
+  </div>
+
+  <p class="pricing-note rv">
+    Valores variam conforme data, local, número de convidados e estrutura necessária. Envie os dados do evento para receber uma proposta fechada pelo WhatsApp.
+  </p>
+</section>
+
 <!-- DIFERENCIAIS -->
 <section class="diffs">
   <div class="diffs-container">
@@ -1456,9 +1675,10 @@ footer {
       </p>
       <ul class="cta-perks">
         <li>Orçamento 100% gratuito e sem compromisso</li>
+        <li>Churrasco a domicílio a partir de R$ 78,90 por pessoa</li>
+        <li>Atendimento para eventos com mínimo de 40 convidados</li>
         <li>Cardápio personalizado para o seu evento</li>
         <li>Agenda 2026 — datas ainda disponíveis</li>
-        <li>Cupom COPA15 — 15% OFF em junho e julho</li>
       </ul>
     </div>
     <div class="rv" style="transition-delay:0.2s">
@@ -1467,7 +1687,7 @@ footer {
           <h3>Solicitar Orçamento</h3>
           <p>Fale com nossa diretoria agora.</p>
         </div>
-        <div class="coupon-tag">🔥 COPA15 — 15% OFF · Junho & Julho 2026</div>
+        <div class="coupon-tag">A partir de R$ 78,90 por pessoa · Mínimo 40 convidados</div>
         <form onsubmit="sendWA(event)">
           <div class="f-group">
             <label>Nome completo</label>
@@ -1476,6 +1696,10 @@ footer {
           <div class="f-group">
             <label>Tipo de evento</label>
             <input type="text" id="fe" placeholder="Ex: Casamento, Corporativo..." required>
+          </div>
+          <div class="f-group">
+            <label>Número de convidados</label>
+            <input type="number" id="fg" min="40" placeholder="Mínimo 40 convidados" required>
           </div>
           <div class="f-group">
             <label>Data do evento</label>
@@ -1502,6 +1726,7 @@ footer {
         <li><a href="#cortes">Cardápio</a></li>
         <li><a href="#galeria">Portfólio</a></li>
         <li><a href="#parrilla">Parrilla</a></li>
+        <li><a href="#precos">Preços</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </div>
@@ -1607,12 +1832,14 @@ function sendWA(e) {
   e.preventDefault();
   const n = document.getElementById('fn').value;
   const ev= document.getElementById('fe').value;
+  const g = document.getElementById('fg').value;
   const d = document.getElementById('fd').value;
   const msg = `*Orçamento — Portes Dias Fogo & Brasa*%0A%0A`
     + `*Nome:* ${n}%0A`
     + `*Evento:* ${ev}%0A`
+    + `*Convidados:* ${g}%0A`
     + `*Data:* ${d}%0A%0A`
-    + `_Vim pelo site e quero um orçamento personalizado._`;
+    + `_Vim pelo site. Vi o valor a partir de R$ 78,90 por pessoa para mínimo de 40 convidados e quero um orçamento personalizado._`;
   window.open(`https://wa.me/5521983710895?text=${msg}`, '_blank');
 }
 </script>
