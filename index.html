@@ -1,1312 +1,1620 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portes Dias Buffet | Eventos de Alto Padrão</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
-    <style>
-        /* =====================
-           VARIÁVEIS & RESET
-        ===================== */
-        :root {
-            --bg: #060606;
-            --bg-surface: #0d0d0d;
-            --bg-card: #111111;
-            --gold: #C9A84C;
-            --gold-light: #E8C96A;
-            --gold-dim: #8A6E2F;
-            --text: #F2F2F2;
-            --text-muted: #888;
-            --font-display: 'Cinzel', serif;
-            --font-body: 'Montserrat', sans-serif;
-            --ease: cubic-bezier(0.25, 1, 0.5, 1);
-            --nav-h: 70px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portes Dias — Fogo & Brasa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+/* ======================================
+   VARIÁVEIS
+====================================== */
+:root {
+  --black:    #060402;
+  --char:     #0e0a07;
+  --ember:    #E85D04;
+  --fire:     #F48C06;
+  --gold:     #FFBA08;
+  --ash:      #CCC5B9;
+  --white:    #F8F4EE;
+  --dim:      rgba(248,244,238,0.45);
+  --h:        'Playfair Display', Georgia, serif;
+  --b:        'Inter', system-ui, sans-serif;
+  --big:      'Bebas Neue', Impact, sans-serif;
+}
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        a { text-decoration: none; color: inherit; }
-        img { display: block; max-width: 100%; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--b);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration:none; color:inherit; }
+img { display:block; }
 
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        .gold { color: var(--gold); }
-        .display { font-family: var(--font-display); }
+/* ======================================
+   PRELOADER
+====================================== */
+#preloader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#preloader.done { opacity:0; visibility:hidden; }
+.pre-logo {
+  font-family: var(--big);
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.08em;
+  color: var(--white);
+  opacity: 0;
+  animation: preReveal 1.2s ease 0.3s forwards;
+}
+.pre-logo span { color: var(--ember); }
+.pre-line {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  margin-top: 1.2rem;
+  animation: preLineGrow 1s ease 0.8s forwards;
+}
+@keyframes preReveal {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes preLineGrow {
+  from { width: 0; }
+  to   { width: 220px; }
+}
 
-        /* =====================
-           SCARCITY BAR
-        ===================== */
-        .scarcity-bar {
-            background: var(--gold);
-            color: #000;
-            text-align: center;
-            padding: 9px 20px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 1100;
-        }
 
-        /* =====================
-           NAVEGAÇÃO
-        ===================== */
-        nav {
-            position: fixed;
-            top: 36px; left: 0; width: 100%;
-            z-index: 1000;
-            transition: background 0.4s, backdrop-filter 0.4s, top 0.3s;
-            padding: 0;
-        }
-        nav.scrolled {
-            background: rgba(6, 6, 6, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-            top: 0;
-        }
-        .nav-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: var(--nav-h);
-            padding: 0 5%;
-            max-width: 100%;
-        }
-        .nav-logo img {
-            height: 52px;
-            object-fit: contain;
-            mix-blend-mode: screen;
-            transition: height 0.3s;
-        }
-        nav.scrolled .nav-logo img { height: 42px; }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        .nav-links a {
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(242, 242, 242, 0.7);
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 0;
-            width: 0; height: 1px;
-            background: var(--gold);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold) !important;
-            padding: 8px 20px;
-            border-radius: 3px;
-            font-size: 0.72rem !important;
-            letter-spacing: 2px !important;
-            text-transform: uppercase;
-            transition: background 0.3s, color 0.3s !important;
-        }
-        .nav-cta::after { display: none !important; }
-        .nav-cta:hover {
-            background: var(--gold) !important;
-            color: #000 !important;
-        }
-        .nav-hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .nav-hamburger span {
-            display: block;
-            width: 24px; height: 2px;
-            background: var(--text);
-            transition: all 0.3s;
-        }
+/* ======================================
+   NAV
+====================================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 500;
+  padding: 0 5%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+nav.solid {
+  background: rgba(6,4,2,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(232,93,4,0.12);
+}
+.nav-brand {
+  font-family: var(--big);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+.nav-brand em { color: var(--ember); font-style:normal; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--fire); }
+.nav-wa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ember);
+  color: #fff !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  padding: 9px 20px;
+  border-radius: 2px;
+  transition: background 0.3s !important;
+}
+.nav-wa:hover { background: var(--fire) !important; color: #000 !important; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block; width: 26px; height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
 
-        /* =====================
-           HERO COM VÍDEO
-        ===================== */
-        .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-        }
-        .hero-media {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-        .hero-media video {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-        .hero-media::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(6,6,6,0.55) 0%,
-                rgba(6,6,6,0.3) 40%,
-                rgba(6,6,6,0.75) 80%,
-                rgba(6,6,6,1) 100%
-            );
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            padding: 0 20px;
-            max-width: 900px;
-        }
-        .hero-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease) 0.3s forwards;
-        }
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.2rem, 5vw, 4.2rem);
-            line-height: 1.15;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease) 0.5s forwards;
-        }
-        .hero-sub {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-            color: rgba(242,242,242,0.65);
-            max-width: 580px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.75;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease) 0.7s forwards;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease) 0.9s forwards;
-        }
-        .btn-primary {
-            display: inline-block;
-            background: var(--gold);
-            color: #000;
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 1rem 2.5rem;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            animation: pulse-gold 2.5s infinite;
-        }
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(201, 168, 76, 0.35);
-            animation: none;
-        }
-        .btn-secondary {
-            display: inline-block;
-            border: 1px solid rgba(201, 168, 76, 0.5);
-            color: var(--gold);
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            padding: 1rem 2.5rem;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-        }
-        .btn-secondary:hover {
-            border-color: var(--gold);
-            background: rgba(201,168,76,0.08);
-            transform: translateY(-2px);
-        }
-        .hero-badge {
-            margin-top: 2.5rem;
-            font-size: 0.72rem;
-            letter-spacing: 3px;
-            color: rgba(242,242,242,0.4);
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease) 1.1s forwards;
-        }
-        .hero-scroll {
-            position: absolute;
-            bottom: 2.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeUp 1s var(--ease) 1.4s forwards;
-        }
-        .hero-scroll span {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(242,242,242,0.3);
-        }
-        .scroll-line {
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-            animation: scrollLine 1.5s ease-in-out infinite;
-        }
-        @keyframes scrollLine {
-            0% { transform: scaleY(0); transform-origin: top; }
-            50% { transform: scaleY(1); transform-origin: top; }
-            51% { transform: scaleY(1); transform-origin: bottom; }
-            100% { transform: scaleY(0); transform-origin: bottom; }
-        }
+/* ======================================
+   HERO — BASE (mobile-first)
+====================================== */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--black);
+}
 
-        /* =====================
-           STATS BAR
-        ===================== */
-        .stats-bar {
-            background: var(--bg-surface);
-            border-top: 1px solid rgba(201,168,76,0.12);
-            border-bottom: 1px solid rgba(201,168,76,0.12);
-            padding: 40px 0;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-        .stat-item {}
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--gold);
-            font-weight: 600;
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.7rem;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
+/* Vídeo: fundo fullscreen no mobile */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-video video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-video::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top,  rgba(6,4,2,1) 0%, rgba(6,4,2,0.5) 50%, rgba(6,4,2,0.2) 100%);
+}
 
-        /* =====================
-           SEÇÃO GENÉRICA
-        ===================== */
-        section { position: relative; }
-        .section-label {
-            font-size: 0.68rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 600;
-            line-height: 1.2;
-        }
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            max-width: 520px;
-        }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6% 10%;
+  width: 100%;
+}
 
-        /* =====================
-           SERVIÇOS / DIFERENCIAIS
-        ===================== */
-        .services {
-            padding: 120px 0;
-            background: var(--bg);
-        }
-        .services-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: end;
-            margin-bottom: 5rem;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5px;
-            background: rgba(201,168,76,0.08);
-            border: 1px solid rgba(201,168,76,0.08);
-        }
-        .service-card {
-            background: var(--bg-card);
-            padding: 3rem 2.5rem;
-            transition: background 0.3s;
-            cursor: default;
-        }
-        .service-card:hover { background: #161616; }
-        .service-icon {
-            width: 48px; height: 48px;
-            border: 1px solid rgba(201,168,76,0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.8rem;
-            color: var(--gold);
-            font-size: 1.3rem;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        .service-card:hover .service-icon {
-            background: rgba(201,168,76,0.1);
-            border-color: var(--gold);
-        }
-        .service-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-        .service-card p {
-            font-size: 0.88rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-        }
+/* ======================================
+   HERO — DESKTOP SPLIT (≥ 860px)
+   Esquerda: texto sobre fundo sólido
+   Direita: vídeo enquadrado com borda
+====================================== */
+@media (min-width: 860px) {
+  .hero {
+    align-items: center;
+    min-height: 100vh;
+  }
 
-        /* =====================
-           GALERIA DE PORTFOLIO
-        ===================== */
-        .portfolio {
-            padding: 120px 0;
-            background: var(--bg-surface);
-        }
-        .portfolio-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: auto;
-            gap: 6px;
-        }
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            background: #111;
-        }
-        .portfolio-item:nth-child(1) { grid-column: span 7; grid-row: span 2; aspect-ratio: 7/5; }
-        .portfolio-item:nth-child(2) { grid-column: span 5; aspect-ratio: 5/4; }
-        .portfolio-item:nth-child(3) { grid-column: span 5; aspect-ratio: 5/4; }
-        .portfolio-item:nth-child(4) { grid-column: span 4; aspect-ratio: 4/3; }
-        .portfolio-item:nth-child(5) { grid-column: span 4; aspect-ratio: 4/3; }
-        .portfolio-item:nth-child(6) { grid-column: span 4; aspect-ratio: 4/3; }
+  /* Vídeo como caixa enquadrada — não ocupa tela toda */
+  .hero-video {
+    left: 53%;
+    right: 5%;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    transform: translateY(-50%);
+    aspect-ratio: 9/14;
+    max-height: 72vh;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+      0 40px 90px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(232,93,4,0.2),
+      0 0 60px rgba(232,93,4,0.08);
+  }
 
-        .portfolio-item img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s var(--ease), filter 0.7s;
-            filter: brightness(0.85) saturate(0.8);
-        }
-        .portfolio-item:hover img {
-            transform: scale(1.06);
-            filter: brightness(1) saturate(1);
-        }
-        .portfolio-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(6,6,6,0.85) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s;
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-        }
-        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-        .portfolio-overlay span {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+  /* Overlay suave apenas nas bordas do vídeo */
+  .hero-video::after {
+    background:
+      linear-gradient(to top,   rgba(6,4,2,0.55) 0%,  transparent 35%),
+      linear-gradient(to bottom, rgba(6,4,2,0.35) 0%, transparent 25%);
+  }
 
-        /* =====================
-           DESTAQUE / CARDÁPIO PREVIEW
-        ===================== */
-        .menu-preview {
-            padding: 120px 0;
-            background: var(--bg);
-        }
-        .menu-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-        .menu-text .section-desc { margin-top: 1.5rem; margin-bottom: 2.5rem; }
-        .menu-list {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-        .menu-list li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-        .menu-list li::before {
-            content: '';
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--gold);
-            flex-shrink: 0;
-        }
-        .menu-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-        .menu-img-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-        .menu-img-item:first-child {
-            grid-column: span 2;
-            aspect-ratio: 16/9;
-        }
-        .menu-img-item:not(:first-child) { aspect-ratio: 1; }
-        .menu-img-item img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s var(--ease);
-        }
-        .menu-img-item:hover img { transform: scale(1.05); }
+  /* Sem linha divisória — o espaço em branco já separa */
+  .hero::before { display: none; }
 
-        /* =====================
-           DEPOIMENTOS
-        ===================== */
-        .testimonials {
-            padding: 120px 0;
-            background: var(--bg-surface);
-        }
-        .testimonials-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .testimonial-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(201,168,76,0.08);
-            padding: 2.5rem;
-            border-radius: 4px;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .testimonial-card:hover {
-            border-color: rgba(201,168,76,0.3);
-            transform: translateY(-4px);
-        }
-        .testimonial-stars {
-            color: var(--gold);
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-        }
-        .testimonial-text {
-            font-size: 0.9rem;
-            line-height: 1.85;
-            color: rgba(242,242,242,0.7);
-            font-style: italic;
-            margin-bottom: 2rem;
-        }
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .author-avatar {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: rgba(201,168,76,0.15);
-            border: 1px solid rgba(201,168,76,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            color: var(--gold);
-        }
-        .author-info .name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .author-info .event {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+  /* Texto ocupa a esquerda */
+  .hero-content {
+    padding: 0 3% 0 7%;
+    max-width: 52%;
+    width: 52%;
+  }
 
-        /* =====================
-           FORMULÁRIO DE CONVERSÃO
-        ===================== */
-        .conversion {
-            padding: 120px 0;
-            background: var(--bg);
-            border-top: 1px solid rgba(201,168,76,0.1);
-        }
-        .conversion-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-        .conversion-left .section-desc { margin-top: 1.5rem; }
-        .conversion-perks {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .perk {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-        .perk-icon {
-            color: var(--gold);
-            font-size: 1rem;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(201,168,76,0.12);
-            padding: 3rem;
-            border-radius: 6px;
-        }
-        .form-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .form-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-        .field-group { margin-bottom: 1.5rem; }
-        .field-group label {
-            display: block;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-        .field-group input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 12px 0;
-            color: var(--text);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
-        }
-        .field-group input:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-        .field-group input::placeholder { color: rgba(255,255,255,0.2); }
-        .btn-form {
-            width: 100%;
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 18px;
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 3px;
-            margin-top: 0.5rem;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .btn-form:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-        .form-note {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
-        }
-        .coupon-strip {
-            background: rgba(201,168,76,0.08);
-            border: 1px dashed rgba(201,168,76,0.4);
-            border-radius: 4px;
-            padding: 12px 16px;
-            margin-bottom: 1.8rem;
-            font-size: 0.8rem;
-            color: var(--gold);
-            font-weight: 600;
-            text-align: center;
-            letter-spacing: 1px;
-        }
+  .hero-h1 {
+    font-size: clamp(3rem, 5.2vw, 6.5rem);
+  }
+  .hero-h1 .fire-word {
+    white-space: nowrap;
+  }
 
-        /* =====================
-           RODAPÉ
-        ===================== */
-        footer {
-            background: #040404;
-            border-top: 1px solid rgba(201,168,76,0.1);
-            padding: 60px 0 30px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 2rem;
-        }
-        .footer-brand img {
-            height: 60px;
-            mix-blend-mode: screen;
-            margin-bottom: 1.5rem;
-        }
-        .footer-brand p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            max-width: 260px;
-        }
-        .footer-col h4 {
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-        }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-        .footer-col ul li:hover { color: var(--text); }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.2);
-        }
-        .footer-bottom a { color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem;
+    max-width: 420px;
+  }
 
-        /* =====================
-           WHATSAPP FLUTUANTE
-        ===================== */
-        .wa-float {
-            position: fixed;
-            bottom: 28px; right: 28px;
-            background: #25d366;
-            color: #fff;
-            width: 60px; height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            z-index: 900;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .wa-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 40px rgba(37,211,102,0.35);
-        }
-        .wa-float svg { width: 30px; height: 30px; fill: currentColor; }
+  .hero-scroll-hint {
+    display: flex !important;
+  }
+}
 
-        /* =====================
-           ANIMAÇÕES
-        ===================== */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
-            70% { box-shadow: 0 0 0 14px rgba(201,168,76,0); }
-            100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@media (min-width: 1100px) {
+  .hero-video {
+    left: 55%;
+    right: 6%;
+    max-height: 75vh;
+  }
+}
 
-        /* =====================
-           FLATPICKR CUSTOMIZADO
-        ===================== */
-        .flatpickr-calendar {
-            box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
-            border: 1px solid rgba(201,168,76,0.3) !important;
-            font-family: var(--font-body) !important;
-            background: #111 !important;
-        }
-        .flatpickr-innerContainer, .flatpickr-months,
-        .flatpickr-weekdays, .flatpickr-days { background: transparent !important; }
-        .flatpickr-current-month .flatpickr-monthDropdown-months,
-        .flatpickr-current-month .numInputWrapper { color: var(--gold) !important; }
-        .flatpickr-day { color: #ccc !important; }
-        .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
-            border: 1px solid var(--gold) !important;
-            border-radius: 50% !important;
-            color: var(--gold) !important;
-            background: transparent !important;
-        }
-        .flatpickr-day.selected {
-            background: var(--gold) !important;
-            border-color: var(--gold) !important;
-            color: #000 !important;
-            font-weight: bold;
-        }
-        .flatpickr-day.disabled { text-decoration: line-through; color: rgba(255,255,255,0.2) !important; }
-        .flatpickr-current-month .numInputWrapper { display: none; }
-        .flatpickr-calendar.arrowTop:before, .flatpickr-calendar.arrowTop:after,
-        .flatpickr-calendar.arrowBottom:before, .flatpickr-calendar.arrowBottom:after { display: none !important; }
+@media (min-width: 1200px) {
+  .hero-h1 { font-size: clamp(5rem, 5.5vw, 7.5rem); }
+  .hero-content { max-width: 52%; width: 52%; padding: 0 3% 0 8%; }
+}
 
-        /* =====================
-           RESPONSIVO
-        ===================== */
-        @media (max-width: 1024px) {
-            .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
-            .conversion-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .menu-layout { grid-template-columns: 1fr; gap: 3rem; }
-        }
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .nav-hamburger { display: flex; }
-            .services-grid { grid-template-columns: 1fr 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .portfolio-item:nth-child(1) { grid-column: span 12; }
-            .portfolio-item:nth-child(2),
-            .portfolio-item:nth-child(3) { grid-column: span 6; }
-            .portfolio-item:nth-child(4),
-            .portfolio-item:nth-child(5),
-            .portfolio-item:nth-child(6) { grid-column: span 4; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-            .footer-brand { grid-column: span 2; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        }
-        @media (max-width: 600px) {
-            .scarcity-bar { font-size: 0.65rem; padding: 7px 10px; }
-            .hero-title { font-size: 2rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .portfolio-item:nth-child(1) { grid-column: span 12; }
-            .portfolio-item:nth-child(2),
-            .portfolio-item:nth-child(3),
-            .portfolio-item:nth-child(4),
-            .portfolio-item:nth-child(5),
-            .portfolio-item:nth-child(6) { grid-column: span 6; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-brand { grid-column: span 1; }
-            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-            .menu-images { grid-template-columns: 1fr; }
-            .menu-img-item:first-child { grid-column: span 1; }
-            .conversion-layout { gap: 2rem; }
-            .form-card { padding: 2rem 1.5rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+/* ======================================
+   HERO — ELEMENTOS COMUNS
+====================================== */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--fire);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: revUp 0.9s ease 1.5s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--fire);
+}
+.hero-h1 {
+  font-family: var(--big);
+  font-size: clamp(3.2rem, 11vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  opacity: 0;
+  animation: revUp 0.9s ease 1.7s forwards;
+}
+.hero-h1 .fire-word {
+  display: block;
+  background: linear-gradient(135deg, var(--fire) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--dim);
+  line-height: 1.75;
+  max-width: 460px;
+  margin: 1.5rem 0 2.2rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: revUp 0.9s ease 1.9s forwards;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: revUp 0.9s ease 2.1s forwards;
+}
+.btn-fire {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--ember), var(--fire));
+  color: #fff;
+  font-family: var(--b);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 1rem 2.6rem;
+  border-radius: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 8px 30px rgba(232,93,4,0.35);
+  animation: pulseFireBtn 2.5s ease-in-out 2.5s infinite;
+}
+.btn-fire:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(232,93,4,0.55);
+  animation: none;
+}
+.btn-ghost {
+  display: inline-block;
+  border: 1px solid rgba(248,244,238,0.25);
+  color: var(--ash);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-ghost:hover {
+  border-color: var(--fire);
+  color: var(--fire);
+  transform: translateY(-2px);
+}
+/* Badges embaixo dos botões */
+.hero-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: revUp 0.9s ease 2.3s forwards;
+}
+.hero-badge-item {
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.35);
+  font-weight: 500;
+}
+.hero-badge-sep {
+  color: rgba(232,93,4,0.4);
+  font-size: 0.75rem;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem; right: 6%;
+  z-index: 2;
+  display: none; /* oculto no mobile, aparece no desktop via media query acima */
+  align-items: center;
+  gap: 10px;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.3);
+  opacity: 0;
+  animation: revUp 1s ease 2.4s forwards;
+}
+.scroll-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ember);
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100% { transform:scale(1); opacity:1; }
+  50%      { transform:scale(1.8); opacity:0.5; }
+}
+@keyframes revUp {
+  from { opacity:0; transform:translateY(30px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes pulseFireBtn {
+  0%,100% { box-shadow: 0 8px 30px rgba(232,93,4,0.35); }
+  50%     { box-shadow: 0 8px 50px rgba(232,93,4,0.65); }
+}
+
+/* ======================================
+   STATEMENT — frase de impacto
+====================================== */
+.statement {
+  background: linear-gradient(135deg, #100806 0%, #1a0f08 50%, #100806 100%);
+  border-top: 1px solid rgba(232,93,4,0.15);
+  border-bottom: 1px solid rgba(232,93,4,0.15);
+  padding: 80px 7%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.statement::before {
+  content: 'BRASA';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--big);
+  font-size: clamp(10rem, 25vw, 22rem);
+  color: rgba(232,93,4,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.1em;
+}
+.statement-inner {
+  position: relative; z-index:1;
+}
+.statement-text {
+  font-family: var(--h);
+  font-size: clamp(1.25rem, 2.6vw, 2.2rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.statement-text strong {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--fire);
+}
+
+/* ======================================
+   CORTES — seção de produtos
+====================================== */
+.cortes {
+  padding: 130px 0;
+  background: var(--char);
+}
+.section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.section-h {
+  font-family: var(--h);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+}
+.section-h em {
+  font-style: italic;
+  color: var(--fire);
+}
+.cortes-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  padding: 0 7%;
+}
+.cortes-text { }
+.cortes-text .section-h { margin-bottom: 2rem; }
+.cortes-desc {
+  font-size: 0.95rem;
+  color: var(--ash);
+  line-height: 1.85;
+  max-width: 460px;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+.cut-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(248,244,238,0.06);
+  transition: padding-left 0.3s;
+  cursor: default;
+}
+.cut-item:hover { padding-left: 8px; }
+.cut-item:hover .cut-name { color: var(--fire); }
+.cut-name {
+  font-family: var(--h);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.cut-note {
+  font-size: 0.75rem;
+  color: var(--ash);
+  font-weight: 300;
+}
+.cut-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--ember);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.cortes-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 6px;
+}
+.cut-img {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+.cut-img:first-child {
+  grid-column: span 2;
+  aspect-ratio: 16/10;
+}
+.cut-img:not(:first-child) { aspect-ratio: 1/1; }
+.cut-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25,1,0.5,1), filter 0.7s;
+  filter: saturate(0.7) brightness(0.85);
+}
+.cut-img:hover img {
+  transform: scale(1.07);
+  filter: saturate(1.1) brightness(1);
+}
+.cut-img::after {
+  content: '';
+  position: absolute; inset:0;
+  background: linear-gradient(to top, rgba(6,4,2,0.5), transparent 50%);
+}
+
+/* ======================================
+   GALERIA HORIZONTAL SCROLL
+====================================== */
+.gallery-section {
+  padding: 100px 0 0;
+  background: var(--black);
+}
+.gallery-header {
+  padding: 0 7%;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.gallery-track-wrap {
+  overflow-x: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-track-wrap:active { cursor: grabbing; }
+@media (hover: none) {
+  .gallery-track-wrap { overflow-x: auto; cursor: default; }
+}
+.gallery-track {
+  display: flex;
+  gap: 6px;
+  padding: 0 7% 80px;
+  width: max-content;
+}
+.gallery-item {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+.gallery-item:nth-child(odd)  { width: clamp(260px, 28vw, 400px); aspect-ratio: 3/4; }
+.gallery-item:nth-child(even) { width: clamp(320px, 35vw, 500px); aspect-ratio: 4/3; align-self: flex-end; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25,1,0.5,1), filter 0.6s;
+  filter: saturate(0.65) brightness(0.8);
+  pointer-events: none;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+  filter: saturate(1) brightness(1);
+}
+.gallery-item-cap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.5rem 1.5rem;
+  background: linear-gradient(to top, rgba(6,4,2,0.9), transparent);
+  font-family: var(--h);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--fire);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gallery-item:hover .gallery-item-cap { opacity: 1; }
+.gallery-drag-hint {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drag-arrow {
+  display: inline-block;
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+@keyframes arrowBounce {
+  0%,100% { transform:translateX(0); }
+  50%     { transform:translateX(6px); }
+}
+
+/* ======================================
+   PARRILLA — destaque visual
+====================================== */
+.parrilla {
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.parrilla-bg {
+  position: absolute; inset:0;
+}
+.parrilla-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(0.7);
+  transition: transform 0.1s linear;
+}
+.parrilla-bg::after {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to right, rgba(6,4,2,0.9) 30%, transparent 80%),
+    linear-gradient(to top, rgba(6,4,2,0.7) 0%, transparent 60%);
+}
+.parrilla-content {
+  position: relative; z-index:1;
+  padding: 0 7%;
+  max-width: 700px;
+}
+.parrilla-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--fire);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.parrilla-label::before {
+  content:'';
+  width: 28px; height: 1px;
+  background: var(--fire);
+}
+.parrilla-title {
+  font-family: var(--big);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+.parrilla-title span {
+  display: block;
+  background: linear-gradient(135deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.parrilla-desc {
+  font-size: 1rem;
+  color: var(--ash);
+  line-height: 1.8;
+  max-width: 430px;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+.parrilla-stats {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.p-stat-num {
+  font-family: var(--big);
+  font-size: 2.8rem;
+  color: var(--fire);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.p-stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-top: 4px;
+}
+
+/* ======================================
+   DIFERENCIAIS
+====================================== */
+.diffs {
+  padding: 130px 0;
+  background: var(--char);
+}
+.diffs-container {
+  padding: 0 7%;
+}
+.diffs-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+.diffs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(248,244,238,0.05);
+}
+.diff-card {
+  background: var(--char);
+  padding: 2.8rem 2.5rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.diff-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--ember), var(--fire));
+  transition: width 0.4s ease;
+}
+.diff-card:hover { background: #141009; }
+.diff-card:hover::before { width: 100%; }
+.diff-num {
+  font-family: var(--big);
+  font-size: 4rem;
+  color: rgba(232,93,4,0.12);
+  line-height: 1;
+  margin-bottom: 1.2rem;
+  transition: color 0.3s;
+}
+.diff-card:hover .diff-num { color: rgba(232,93,4,0.2); }
+.diff-card h3 {
+  font-family: var(--h);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.diff-card p {
+  font-size: 0.87rem;
+  color: var(--ash);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+/* ======================================
+   CONTATO / CTA
+====================================== */
+.cta-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--black);
+  overflow: hidden;
+}
+.cta-bg-text {
+  position: absolute;
+  bottom: -5%;
+  right: -2%;
+  font-family: var(--big);
+  font-size: clamp(12rem, 30vw, 28rem);
+  color: rgba(232,93,4,0.04);
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.cta-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: center;
+  padding: 100px 7%;
+  position: relative; z-index:1;
+  width: 100%;
+}
+.cta-left { }
+.cta-left .section-eyebrow { margin-bottom: 1.5rem; }
+.cta-title {
+  font-family: var(--big);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+.cta-title span {
+  display: block;
+  background: linear-gradient(135deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-desc {
+  font-size: 0.95rem;
+  color: var(--ash);
+  line-height: 1.85;
+  max-width: 400px;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+.cta-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cta-perks li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: var(--ash);
+}
+.cta-perks li::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--ember);
+  flex-shrink: 0;
+}
+/* Formulário */
+.form-box {
+  background: #0e0a07;
+  border: 1px solid rgba(232,93,4,0.15);
+  padding: 3rem;
+  border-radius: 4px;
+}
+.form-box-header {
+  margin-bottom: 2.5rem;
+}
+.form-box-header h3 {
+  font-family: var(--h);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.form-box-header p {
+  font-size: 0.85rem;
+  color: var(--ash);
+}
+.coupon-tag {
+  background: rgba(232,93,4,0.1);
+  border: 1px dashed rgba(232,93,4,0.4);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fire);
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.f-group { margin-bottom: 1.6rem; }
+.f-group label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(248,244,238,0.35);
+  margin-bottom: 8px;
+}
+.f-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(248,244,238,0.1);
+  padding: 12px 0;
+  color: var(--white);
+  font-family: var(--b);
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+.f-group input:focus { outline:none; border-color: var(--ember); }
+.f-group input::placeholder { color: rgba(248,244,238,0.15); }
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--ember), var(--fire));
+  color: #fff;
+  border: none;
+  padding: 17px;
+  font-family: var(--b);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity 0.3s, transform 0.2s;
+  box-shadow: 0 6px 25px rgba(232,93,4,0.3);
+}
+.btn-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 35px rgba(232,93,4,0.45);
+}
+.f-note {
+  text-align: center;
+  font-size: 0.73rem;
+  color: rgba(248,244,238,0.2);
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Flatpickr */
+.flatpickr-calendar {
+  background: #151008 !important;
+  border: 1px solid rgba(232,93,4,0.3) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8) !important;
+  font-family: var(--b) !important;
+}
+.flatpickr-innerContainer,.flatpickr-months,.flatpickr-weekdays,.flatpickr-days { background:transparent !important; }
+.flatpickr-day { color:#aaa !important; }
+.flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay) {
+  border: 1px solid rgba(232,93,4,0.4) !important;
+  border-radius: 50% !important;
+  color: var(--fire) !important;
+  background: transparent !important;
+}
+.flatpickr-day.selected {
+  background: var(--ember) !important;
+  border-color: var(--ember) !important;
+  color: #fff !important;
+}
+.flatpickr-day.disabled { text-decoration:line-through; color:rgba(255,255,255,0.1) !important; }
+.flatpickr-current-month .numInputWrapper { display:none; }
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month span { color: var(--fire) !important; }
+.flatpickr-calendar.arrowTop:before,.flatpickr-calendar.arrowTop:after,
+.flatpickr-calendar.arrowBottom:before,.flatpickr-calendar.arrowBottom:after { display:none !important; }
+
+/* ======================================
+   RODAPÉ
+====================================== */
+footer {
+  background: #030201;
+  border-top: 1px solid rgba(232,93,4,0.1);
+  padding: 60px 7% 30px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(248,244,238,0.05);
+  margin-bottom: 2rem;
+}
+.f-brand-name {
+  font-family: var(--big);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+}
+.f-brand-name em { color: var(--ember); font-style:normal; }
+.f-brand-desc {
+  font-size: 0.85rem;
+  color: var(--ash);
+  line-height: 1.75;
+  max-width: 240px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+.f-col h4 {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 1.5rem;
+}
+.f-col ul { list-style:none; }
+.f-col ul li {
+  font-size: 0.83rem;
+  color: rgba(248,244,238,0.4);
+  margin-bottom: 0.85rem;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.f-col ul li:hover { color: var(--ash); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(248,244,238,0.15);
+}
+.footer-bottom a { color: var(--ember); transition: color 0.3s; }
+.footer-bottom a:hover { color: var(--fire); }
+
+/* ======================================
+   WHATSAPP FLOAT
+====================================== */
+.wa {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  background: #1fad51;
+  color: #fff;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.4);
+  z-index: 800;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.wa:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 38px rgba(31,173,81,0.4);
+}
+.wa svg { width:28px; height:28px; fill:#fff; }
+
+/* ======================================
+   REVEAL ON SCROLL
+====================================== */
+.rv {
+  opacity:0;
+  transform: translateY(35px);
+  transition: opacity 0.9s cubic-bezier(0.25,1,0.5,1),
+              transform 0.9s cubic-bezier(0.25,1,0.5,1);
+}
+.rv.on { opacity:1; transform:translateY(0); }
+
+/* ======================================
+   RESPONSIVO
+====================================== */
+
+/* Garante que nada transborde no mobile */
+*, *::before, *::after { word-break: normal; overflow-wrap: break-word; }
+
+@media (max-width: 1024px) {
+  .cortes-layout  { grid-template-columns: 1fr; gap: 3rem; }
+  .diffs-header   { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cta-layout     { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-top     { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-links  { display: none; }
+  .hamburger  { display: flex; }
+  .nav-brand  { font-size: 1.1rem; letter-spacing: 0.05em; }
+
+  /* Hero mobile — vídeo fullscreen, texto embaixo */
+  .hero       { align-items: flex-end; min-height: 100svh; }
+  .hero::before { display: none; } /* sem linha divisória no mobile */
+  .hero-video { inset: 0; left: 0; } /* garante fullscreen no mobile */
+  .hero-video::after {
+    background:
+      linear-gradient(to top, rgba(6,4,2,1) 0%, rgba(6,4,2,0.5) 50%, rgba(6,4,2,0.15) 100%);
+  }
+  .hero-content { padding: 0 6% 10%; max-width: 100%; width: 100%; }
+  .hero-h1    { font-size: clamp(2.8rem, 12vw, 4.5rem); line-height: 0.95; }
+  .hero-h1 .fire-word { white-space: normal; } /* pode quebrar no mobile se precisar */
+  .hero-sub   { font-size: 0.93rem; max-width: 100%; }
+  .btn-fire, .btn-ghost {
+    padding: 0.9rem 1.8rem;
+    font-size: 0.78rem;
+    width: 100%;
+    text-align: center;
+  }
+  .hero-actions { flex-direction: column; gap: 10px; width: 100%; max-width: 360px; }
+
+  /* Statement */
+  .statement  { padding: 60px 6%; }
+  .statement-text { font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
+  .statement::before { display: none; }
+
+  /* Cortes */
+  .cortes     { padding: 80px 0; }
+  .cortes-layout { padding: 0 6%; gap: 2.5rem; }
+  .cut-note   { display: none; }
+  .cut-item   { gap: 0.5rem; }
+  .cut-name   { font-size: 1rem; }
+  .cortes-visual { gap: 4px; }
+
+  /* Galeria */
+  .gallery-section { padding: 80px 0 0; }
+  .gallery-header  { padding: 0 6%; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .gallery-track   { padding: 0 6% 60px; gap: 5px; }
+  .gallery-track-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; cursor: default; }
+  .gallery-item:nth-child(odd)  { width: 70vw; }
+  .gallery-item:nth-child(even) { width: 80vw; }
+
+  /* Parrilla */
+  .parrilla         { height: auto; min-height: auto; padding: 80px 0; }
+  .parrilla-content { padding: 0 6%; max-width: 100%; }
+  .parrilla-title   { font-size: clamp(3rem, 12vw, 5rem); }
+  .parrilla-stats   { gap: 2rem; flex-wrap: wrap; }
+  .p-stat-num       { font-size: 2.2rem; }
+  .parrilla-bg img  { transform: none !important; }
+
+  /* Diferenciais */
+  .diffs            { padding: 80px 0; }
+  .diffs-container  { padding: 0 6%; }
+  .diffs-grid       { grid-template-columns: 1fr 1fr; }
+  .diff-card        { padding: 2rem 1.5rem; }
+  .diff-num         { font-size: 2.8rem; }
+
+  /* CTA / Contato */
+  .cta-section      { min-height: auto; }
+  .cta-layout       { padding: 80px 6%; gap: 2.5rem; }
+  .cta-title        { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .cta-bg-text      { display: none; }
+  .form-box         { padding: 2rem 1.5rem; }
+
+  /* Footer */
+  .footer-top       { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom    { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  /* Nav */
+  .nav-brand { font-size: 0.95rem; }
+
+  /* Hero */
+  .hero-h1  { font-size: clamp(2.6rem, 12vw, 3.5rem); }
+  .hero-eyebrow { font-size: 0.62rem; letter-spacing: 2.5px; }
+  .hero-sub { font-size: 0.88rem; line-height: 1.7; }
+
+  /* Statement */
+  .statement-text { font-size: clamp(1.05rem, 4vw, 1.4rem); line-height: 1.6; }
+
+  /* Cortes */
+  .cut-name   { font-size: 0.95rem; }
+
+  /* Galeria */
+  .gallery-item:nth-child(odd),
+  .gallery-item:nth-child(even) { width: 80vw; }
+
+  /* Diferenciais */
+  .diffs-grid { grid-template-columns: 1fr; }
+  .diff-card  { padding: 1.8rem 1.2rem; }
+
+  /* CTA */
+  .cta-title  { font-size: clamp(2.2rem, 11vw, 3.2rem); line-height: 1; }
+  .cta-desc   { font-size: 0.88rem; }
+  .cta-perks li { font-size: 0.82rem; }
+
+  /* Parrilla */
+  .parrilla-title { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .p-stat-num     { font-size: 2rem; }
+  .p-stat-label   { font-size: 0.6rem; }
+
+  /* Preloader */
+  .pre-logo { font-size: clamp(1.8rem, 9vw, 3rem); padding: 0 5%; text-align: center; }
+
+  /* Footer */
+  .footer-top     { grid-template-columns: 1fr; gap: 1.8rem; }
+  .f-brand-name   { font-size: 1.2rem; }
+  .footer-bottom  { font-size: 0.7rem; }
+}
+</style>
 </head>
-
 <body>
 
-    <!-- BARRA DE ESCASSEZ -->
-    <div class="scarcity-bar">
-        🕒 Agenda 2026 — 50% das datas de sábado já reservadas. Consulte a sua agora.
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">PORTES DIAS <span>FOGO&BRASA</span></div>
+  <div class="pre-line"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">PORTES DIAS <em>FOGO&BRASA</em></div>
+  <ul class="nav-links">
+    <li><a href="#cortes">Cardápio</a></li>
+    <li><a href="#galeria">Portfólio</a></li>
+    <li><a href="#parrilla">Parrilla</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li><a href="https://wa.me/5521983710895?text=*Olá! Gostaria de um orçamento.*" target="_blank" class="nav-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a></li>
+  </ul>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline poster="portfolio_corte_fogo_vivo.jpg">
+      <source src="parrillaaovivo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Rio de Janeiro · Desde 2024</p>
+    <h1 class="hero-h1">
+      PORTES DIAS
+      <span class="fire-word">FOGO&BRASA</span>
+    </h1>
+    <p class="hero-sub">
+      Parrilla ao vivo. Cortes nobres. Uma experiência gastronômica que incendeia o paladar e transforma qualquer evento em memória inesquecível.
+    </p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-fire">Solicitar Orçamento</a>
+      <a href="#galeria" class="btn-ghost">Ver Portfólio</a>
     </div>
-
-    <!-- NAVEGAÇÃO -->
-    <nav id="navbar">
-        <div class="nav-inner">
-            <a href="#" class="nav-logo">
-                <img src="portesdias_logo.png" alt="Portes Dias Buffet">
-            </a>
-            <ul class="nav-links">
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#cardapio">Cardápio</a></li>
-                <li><a href="#agendar" class="nav-cta">Agendar</a></li>
-            </ul>
-            <div class="nav-hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO COM VÍDEO -->
-    <section class="hero">
-        <div class="hero-media">
-            <video autoplay muted loop playsinline poster="wedding_reception_1.png">
-                <source src="parrillaaovivo.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="hero-content">
-            <p class="hero-eyebrow">Parrilla Premium · Buffet de Alto Padrão</p>
-            <h1 class="hero-title">
-                A Experiência Gastronômica que<br>
-                <span class="gold">Transforma o Seu Evento</span>
-            </h1>
-            <p class="hero-sub">
-                Leve o luxo de um restaurante 5 estrelas para onde você estiver. Parrilla ao vivo, cortes nobres e serviço impecável para convidados exigentes.
-            </p>
-            <div class="hero-btns">
-                <a href="#agendar" class="btn-primary">Garantir Minha Data</a>
-                <a href="https://wa.me/5521983710895?text=*Olá! Vim pelo site e gostaria de tirar uma dúvida rápida.*" target="_blank" class="btn-secondary">Atendimento Exclusivo</a>
-            </div>
-            <p class="hero-badge">⭐ Desde 2024 &nbsp;·&nbsp; +100 Eventos Realizados &nbsp;·&nbsp; Alto Padrão</p>
-        </div>
-        <div class="hero-scroll">
-            <div class="scroll-line"></div>
-            <span>Scroll</span>
-        </div>
-    </section>
-
-    <!-- STATS BAR -->
-    <div class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item reveal">
-                    <div class="stat-number" data-target="100">0</div>
-                    <div class="stat-label">Eventos Realizados</div>
-                </div>
-                <div class="stat-item reveal" style="transition-delay:0.1s">
-                    <div class="stat-number" data-target="40">0</div>
-                    <div class="stat-label">Mínimo de Convidados</div>
-                </div>
-                <div class="stat-item reveal" style="transition-delay:0.2s">
-                    <div class="stat-number" data-target="5">0</div>
-                    <div class="stat-label">Min. p/ Resposta WA</div>
-                </div>
-                <div class="stat-item reveal" style="transition-delay:0.3s">
-                    <div class="stat-number" data-target="2024">0</div>
-                    <div class="stat-label">Ano de Fundação</div>
-                </div>
-            </div>
-        </div>
+    <div class="hero-badges">
+      <span class="hero-badge-item">⭐ +100 eventos</span>
+      <span class="hero-badge-sep">·</span>
+      <span class="hero-badge-item">Desde 2024</span>
+      <span class="hero-badge-sep">·</span>
+      <span class="hero-badge-item">Rio de Janeiro</span>
     </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-dot"></div>
+    Rolar para descobrir
+  </div>
+</section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="services">
-        <div class="container">
-            <div class="services-header">
-                <div>
-                    <p class="section-label reveal">O Que Oferecemos</p>
-                    <h2 class="section-title reveal">
-                        Um restaurante<br><span class="gold">de luxo móvel</span>
-                    </h2>
-                </div>
-                <p class="section-desc reveal">
-                    Cada evento é único. Por isso criamos uma experiência sob medida, combinando parrilla ao vivo, cortes nobres e serviço sofisticado onde você precisar.
-                </p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="service-icon">&#9650;</div>
-                    <h3>Parrilla Ao Vivo</h3>
-                    <p>A exclusividade de uma parrilla móvel que transforma o momento em entretenimento gastronômico. Seus convidados assistem e se deliciam ao mesmo tempo.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay:0.1s">
-                    <div class="service-icon">&#9671;</div>
-                    <h3>Cortes Nobres</h3>
-                    <p>Seleção criteriosa de carnes premium, preparadas com técnicas de parrilla argentina. Cada corte é uma obra de arte servida na tábua.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay:0.2s">
-                    <div class="service-icon">&#10022;</div>
-                    <h3>Finger Food Premium</h3>
-                    <p>Carnes filetadas e servidas em tábuas. Com mão de obra treinada circulando entre os convidados, entregando uma experiência dinâmica e sofisticada.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay:0.3s">
-                    <div class="service-icon">&#9670;</div>
-                    <h3>Estrutura Flexível</h3>
-                    <p>Nos adaptamos a qualquer espaço e tamanho de evento a partir de 40 convidados. Casamentos, corporativos, formaturas e eventos sociais.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay:0.4s">
-                    <div class="service-icon">&#9651;</div>
-                    <h3>Cardápio Exclusivo</h3>
-                    <p>De hambúrgueres artesanais smash a New York strip e mini steaks. Cada item pensado para surpreender o paladar mais exigente.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay:0.5s">
-                    <div class="service-icon">&#9633;</div>
-                    <h3>Atendimento Direto</h3>
-                    <p>Orçamento personalizado via WhatsApp. Respondemos em até 5 minutos no horário comercial. Sem intermediários, direto com a diretoria.</p>
-                </div>
-            </div>
+<!-- STATEMENT -->
+<div class="statement rv">
+  <div class="statement-inner">
+    <p class="statement-text">
+      "A brasa não mente — ela revela a verdadeira qualidade do corte, a dedicação do assador e a <strong>intensidade da experiência</strong> que só o fogo ao vivo pode entregar."
+    </p>
+  </div>
+</div>
+
+<!-- CORTES -->
+<section id="cortes" class="cortes">
+  <div class="cortes-layout">
+    <div class="cortes-text rv">
+      <p class="section-eyebrow">Cardápio</p>
+      <h2 class="section-h">Os cortes que <em>fazem a diferença</em></h2>
+      <p class="cortes-desc">
+        Cada peça é selecionada criteriosamente, temperada com simplicidade e entregue no ponto certo — direto da brasa para as mãos dos seus convidados.
+      </p>
+      <ul class="cut-list">
+        <li class="cut-item">
+          <span class="cut-name">New York Strip</span>
+          <span class="cut-note">Corte nobre grelhado na parrilla</span>
+          <span class="cut-dot"></span>
+        </li>
+        <li class="cut-item">
+          <span class="cut-name">Smash Steak</span>
+          <span class="cut-note">Hambúrguer artesanal prensado</span>
+          <span class="cut-dot"></span>
+        </li>
+        <li class="cut-item">
+          <span class="cut-name">Mini Steak</span>
+          <span class="cut-note">Finger food premium de circulação</span>
+          <span class="cut-dot"></span>
+        </li>
+        <li class="cut-item">
+          <span class="cut-name">Tábua de Cortes</span>
+          <span class="cut-note">Seleção especial servida na madeira</span>
+          <span class="cut-dot"></span>
+        </li>
+        <li class="cut-item">
+          <span class="cut-name">Receitas Especiais</span>
+          <span class="cut-note">Pães e acompanhamentos artesanais</span>
+          <span class="cut-dot"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="cortes-visual rv" style="transition-delay:0.15s">
+      <div class="cut-img">
+        <img src="new_york_steak.jpg" alt="New York Strip" loading="lazy">
+      </div>
+      <div class="cut-img">
+        <img src="smash_steak.jpg" alt="Smash Steak" loading="lazy">
+      </div>
+      <div class="cut-img">
+        <img src="mini_steak.jpg" alt="Mini Steak" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA HORIZONTAL -->
+<section id="galeria" class="gallery-section">
+  <div class="gallery-header rv">
+    <div>
+      <p class="section-eyebrow">Portfólio</p>
+      <h2 class="section-h" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">O fogo em cada <em>evento</em></h2>
+    </div>
+    <div class="gallery-drag-hint">
+      Arraste para navegar <span class="drag-arrow">→</span>
+    </div>
+  </div>
+  <div class="gallery-track-wrap" id="galleryWrap">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-item">
+        <img src="portfolio_corte_fogo_vivo.jpg" alt="Corte ao fogo vivo" loading="lazy">
+        <div class="gallery-item-cap">Corte ao Fogo Vivo</div>
+      </div>
+      <div class="gallery-item">
+        <img src="portfolio_ambiente_evento.jpg" alt="Ambiente" loading="lazy">
+        <div class="gallery-item-cap">Ambiente de Evento</div>
+      </div>
+      <div class="gallery-item">
+        <img src="portfolio_corte_parrilla.jpg" alt="Parrilla" loading="lazy">
+        <div class="gallery-item-cap">Parrilla Premium</div>
+      </div>
+      <div class="gallery-item">
+        <img src="portfolio_detalhe_brasa.jpg" alt="Brasa" loading="lazy">
+        <div class="gallery-item-cap">Detalhe da Brasa</div>
+      </div>
+      <div class="gallery-item">
+        <img src="portfolio_mesa_sequencia_carnes.jpg" alt="Mesa" loading="lazy">
+        <div class="gallery-item-cap">Sequência de Carnes</div>
+      </div>
+      <div class="gallery-item">
+        <img src="portfolio_servico_tabua.jpg" alt="Tábua" loading="lazy">
+        <div class="gallery-item-cap">Serviço na Tábua</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARRILLA DESTAQUE -->
+<section id="parrilla" class="parrilla">
+  <div class="parrilla-bg">
+    <img src="portfolio_corte_fogo_vivo.jpg" alt="Parrilla ao vivo" id="parallaxImg">
+  </div>
+  <div class="parrilla-content rv">
+    <p class="parrilla-label">Nossa Assinatura</p>
+    <h2 class="parrilla-title">
+      PARRILLA
+      <span>AO VIVO</span>
+    </h2>
+    <p class="parrilla-desc">
+      A parrilla móvel transforma o seu evento em um espetáculo gastronômico. Os convidados assistem, sentem o aroma e provam — tudo em tempo real.
+    </p>
+    <div class="parrilla-stats">
+      <div>
+        <div class="p-stat-num" data-target="100">100+</div>
+        <div class="p-stat-label">Eventos realizados</div>
+      </div>
+      <div>
+        <div class="p-stat-num" data-target="40">40+</div>
+        <div class="p-stat-label">Mínimo de convidados</div>
+      </div>
+      <div>
+        <div class="p-stat-num">5★</div>
+        <div class="p-stat-label">Avaliação média</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="diffs">
+  <div class="diffs-container">
+    <div class="diffs-header">
+      <div>
+        <p class="section-eyebrow rv">Por que a Portes Dias</p>
+        <h2 class="section-h rv">O que nos <em>torna únicos</em></h2>
+      </div>
+      <p style="font-size:0.92rem; color:var(--ash); line-height:1.8; font-weight:300;" class="rv">
+        Não somos apenas um serviço de buffet. Somos uma experiência completa — do fogo à tábua, do atendimento ao sabor.
+      </p>
+    </div>
+    <div class="diffs-grid">
+      <div class="diff-card rv">
+        <div class="diff-num">01</div>
+        <h3>Parrilla Móvel Exclusiva</h3>
+        <p>Uma estrutura de parrilla argentina que vai até o seu evento. O fogo ao vivo é o show antes do jantar.</p>
+      </div>
+      <div class="diff-card rv" style="transition-delay:0.1s">
+        <div class="diff-num">02</div>
+        <h3>Finger Food Premium</h3>
+        <p>Carnes filetadas e servidas em tábuas. Equipe treinada que circula entre os convidados com sofisticação.</p>
+      </div>
+      <div class="diff-card rv" style="transition-delay:0.2s">
+        <div class="diff-num">03</div>
+        <h3>Estrutura Flexível</h3>
+        <p>Atendemos a partir de 40 convidados, adaptados a qualquer espaço. Casamentos, corporativos e festas.</p>
+      </div>
+      <div class="diff-card rv" style="transition-delay:0.3s">
+        <div class="diff-num">04</div>
+        <h3>Atendimento Direto</h3>
+        <p>Sem intermediários. Você fala diretamente com a diretoria. Resposta em até 5 minutos pelo WhatsApp.</p>
+      </div>
+      <div class="diff-card rv" style="transition-delay:0.4s">
+        <div class="diff-num">05</div>
+        <h3>Cortes Selecionados</h3>
+        <p>Selecionamos apenas carnes premium. Cada corte passa por critérios rigorosos de qualidade antes do evento.</p>
+      </div>
+      <div class="diff-card rv" style="transition-delay:0.5s">
+        <div class="diff-num">06</div>
+        <h3>Experiência Completa</h3>
+        <p>Da brasa ao serviço, tudo pensado para criar uma experiência que os seus convidados vão lembrar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTATO -->
+<section id="contato" class="cta-section">
+  <div class="cta-bg-text">FOGO</div>
+  <div class="cta-layout">
+    <div class="cta-left rv">
+      <p class="section-eyebrow">Agendar</p>
+      <h2 class="cta-title">
+        LEVE O<br>
+        <span>FOGO AO<br>SEU EVENTO</span>
+      </h2>
+      <p class="cta-desc">
+        Solicite um orçamento gratuito. Respondemos em menos de 5 minutos no horário comercial, diretamente pelo WhatsApp.
+      </p>
+      <ul class="cta-perks">
+        <li>Orçamento 100% gratuito e sem compromisso</li>
+        <li>Cardápio personalizado para o seu evento</li>
+        <li>Agenda 2026 — datas ainda disponíveis</li>
+        <li>Cupom COPA15 — 15% OFF em junho e julho</li>
+      </ul>
+    </div>
+    <div class="rv" style="transition-delay:0.2s">
+      <div class="form-box">
+        <div class="form-box-header">
+          <h3>Solicitar Orçamento</h3>
+          <p>Fale com nossa diretoria agora.</p>
         </div>
-    </section>
+        <div class="coupon-tag">🔥 COPA15 — 15% OFF · Junho & Julho 2026</div>
+        <form onsubmit="sendWA(event)">
+          <div class="f-group">
+            <label>Nome completo</label>
+            <input type="text" id="fn" placeholder="Seu nome" required>
+          </div>
+          <div class="f-group">
+            <label>Tipo de evento</label>
+            <input type="text" id="fe" placeholder="Ex: Casamento, Corporativo..." required>
+          </div>
+          <div class="f-group">
+            <label>Data do evento</label>
+            <input type="text" id="fd" placeholder="Escolher no calendário" required readonly style="cursor:pointer">
+          </div>
+          <button type="submit" class="btn-submit">Garantir Meu Orçamento →</button>
+          <p class="f-note">Resposta em até 5 minutos · Horário comercial</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- PORTFÓLIO -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="portfolio-header">
-                <p class="section-label reveal">Portfólio</p>
-                <h2 class="section-title reveal">Cada evento,<br><span class="gold">uma obra prima</span></h2>
-            </div>
-        </div>
-        <div style="padding: 0 5%; max-width: 1440px; margin: 0 auto;">
-            <div class="portfolio-grid reveal">
-                <div class="portfolio-item">
-                    <img src="portfolio_corte_fogo_vivo.jpg" alt="Corte ao fogo vivo" loading="lazy">
-                    <div class="portfolio-overlay"><span>Corte ao Fogo Vivo</span></div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="portfolio_ambiente_evento.jpg" alt="Ambiente do evento" loading="lazy">
-                    <div class="portfolio-overlay"><span>Ambiente Exclusivo</span></div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="portfolio_corte_parrilla.jpg" alt="Corte na parrilla" loading="lazy">
-                    <div class="portfolio-overlay"><span>Parrilla Premium</span></div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="portfolio_detalhe_brasa.jpg" alt="Detalhe da brasa" loading="lazy">
-                    <div class="portfolio-overlay"><span>Detalhe da Brasa</span></div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="portfolio_mesa_sequencia_carnes.jpg" alt="Mesa com carnes" loading="lazy">
-                    <div class="portfolio-overlay"><span>Sequência de Carnes</span></div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="portfolio_servico_tabua.jpg" alt="Serviço na tábua" loading="lazy">
-                    <div class="portfolio-overlay"><span>Serviço na Tábua</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- RODAPÉ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="f-brand-name">PORTES DIAS <em>FOGO&BRASA</em></div>
+      <p class="f-brand-desc">Buffet premium com parrilla ao vivo para eventos de alto padrão no Rio de Janeiro. Casamentos, corporativos, festas e muito mais.</p>
+    </div>
+    <div class="f-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#cortes">Cardápio</a></li>
+        <li><a href="#galeria">Portfólio</a></li>
+        <li><a href="#parrilla">Parrilla</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Eventos</h4>
+      <ul>
+        <li>Casamentos</li>
+        <li>Corporativos</li>
+        <li>Formaturas</li>
+        <li>Festas Sociais</li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5521983710895">(21) 98371-0895</a></li>
+        <li>Rio de Janeiro, RJ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Portes Dias Fogo &amp; Brasa. Todos os direitos reservados.</span>
+    <a href="https://wa.me/5521983710895">WhatsApp: (21) 98371-0895</a>
+  </div>
+</footer>
 
-    <!-- CARDÁPIO / MENU PREVIEW -->
-    <section id="cardapio" class="menu-preview">
-        <div class="container">
-            <div class="menu-layout">
-                <div class="menu-text">
-                    <p class="section-label reveal">Cardápio</p>
-                    <h2 class="section-title reveal">Sabores que<br><span class="gold">ficam na memória</span></h2>
-                    <p class="section-desc reveal">
-                        Do hambúrguer artesanal ao corte nobre na parrilla. Cada prato é cuidadosamente preparado para oferecer uma experiência gastronômica inesquecível.
-                    </p>
-                    <ul class="menu-list reveal">
-                        <li>New York Strip — Corte premium grelhado na parrilla ao vivo</li>
-                        <li>Smash Steak — Hambúrguer artesanal prensado na chapa quente</li>
-                        <li>Mini Steak — Formato finger food, ideal para circulação</li>
-                        <li>Tábua de Cortes Nobres — Seleção especial servida na madeira</li>
-                        <li>Receitas Especiais — Pães e acompanhamentos artesanais</li>
-                    </ul>
-                    <a href="#agendar" class="btn-primary reveal" style="display:inline-block">Ver Cardápio Completo</a>
-                </div>
-                <div class="menu-images reveal">
-                    <div class="menu-img-item">
-                        <img src="new_york_steak.jpg" alt="New York Steak" loading="lazy">
-                    </div>
-                    <div class="menu-img-item">
-                        <img src="smash_steak.jpg" alt="Smash Steak" loading="lazy">
-                    </div>
-                    <div class="menu-img-item">
-                        <img src="mini_steak.jpg" alt="Mini Steak" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5521983710895?text=*Contato%20via%20Site*%0A_Olá!%20Quero%20um%20orçamento%20para%20meu%20evento._" class="wa" target="_blank" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
 
-    <!-- DEPOIMENTOS -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="testimonials-header">
-                <p class="section-label reveal">Depoimentos</p>
-                <h2 class="section-title reveal">O que nossos<br><span class="gold">clientes dizem</span></h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Contratamos para o nosso casamento e foi simplesmente incrível. A parrilla ao vivo virou o centro das atenções. Todos os convidados elogiaram muito a qualidade da carne e o atendimento da equipe."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">A</div>
-                        <div class="author-info">
-                            <div class="name">Ana & Ricardo</div>
-                            <div class="event">Casamento · 120 convidados</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal" style="transition-delay:0.15s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Perfeito para nosso evento corporativo de fim de ano. Profissionalismo do início ao fim, comida de altíssimo nível e apresentação impecável. Com certeza vamos contratar novamente."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">M</div>
-                        <div class="author-info">
-                            <div class="name">Marcos Andrade</div>
-                            <div class="event">Evento Corporativo · 80 pessoas</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal" style="transition-delay:0.3s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Festei de 15 anos da minha filha com a Portes Dias e não me arrependi. O finger food é sensacional e o serviço é muito sofisticado. Recomendo de olhos fechados para quem quer qualidade premium."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">C</div>
-                        <div class="author-info">
-                            <div class="name">Carla Mendes</div>
-                            <div class="event">Festa de 15 anos · 60 convidados</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+<script>
+/* ---- PRELOADER ---- */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('done');
+  }, 2000);
+});
 
-    <!-- FORMULÁRIO DE CONVERSÃO -->
-    <section id="agendar" class="conversion">
-        <div class="container">
-            <div class="conversion-layout">
-                <div class="conversion-left">
-                    <p class="section-label reveal">Agendar</p>
-                    <h2 class="section-title reveal">Leve esta<br><span class="gold">experiência ao seu<br>evento</span></h2>
-                    <p class="section-desc reveal">Fale diretamente com nossa diretoria comercial via WhatsApp. Orçamento personalizado e sem compromisso.</p>
-                    <div class="conversion-perks reveal">
-                        <div class="perk">
-                            <span class="perk-icon">◆</span>
-                            <span>Resposta em até 5 minutos no horário comercial</span>
-                        </div>
-                        <div class="perk">
-                            <span class="perk-icon">◆</span>
-                            <span>Orçamento 100% gratuito e sem compromisso</span>
-                        </div>
-                        <div class="perk">
-                            <span class="perk-icon">◆</span>
-                            <span>Atendimento direto com a diretoria, sem intermediários</span>
-                        </div>
-                        <div class="perk">
-                            <span class="perk-icon">◆</span>
-                            <span>Cardápio personalizado para o seu tipo de evento</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="reveal">
-                    <div class="form-card">
-                        <h3>Solicitar Orçamento</h3>
-                        <p>Preencha abaixo e receba sua proposta personalizada.</p>
-                        <div class="coupon-strip">
-                            🎟️ CUPOM: COPA15 — 15% OFF em eventos de Junho e Julho
-                        </div>
-                        <form onsubmit="sendWA(event)">
-                            <div class="field-group">
-                                <label>Seu nome completo</label>
-                                <input type="text" id="f-name" placeholder="Ex: João da Silva" required>
-                            </div>
-                            <div class="field-group">
-                                <label>Tipo de evento</label>
-                                <input type="text" id="f-event" placeholder="Ex: Casamento, Corporativo..." required>
-                            </div>
-                            <div class="field-group">
-                                <label>Data do evento</label>
-                                <input type="text" id="f-date" placeholder="Clique para escolher a data" required readonly style="cursor:pointer">
-                            </div>
-                            <button type="submit" class="btn-form">Garantir Meu Orçamento →</button>
-                            <p class="form-note">Solicitação gratuita. Resposta em até 5 min.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- RODAPÉ -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="portesdias_logo.png" alt="Portes Dias Buffet">
-                    <p>Buffet premium com parrilla ao vivo para eventos de alto padrão no Rio de Janeiro. Casamentos, corporativos, festas e muito mais.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#portfolio">Portfólio</a></li>
-                        <li><a href="#cardapio">Cardápio</a></li>
-                        <li><a href="#agendar">Agendar</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><a href="https://wa.me/5521983710895">(21) 98371-0895</a></li>
-                        <li>Rio de Janeiro, RJ</li>
-                        <li>contato@portesdias.com.br</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>&copy; 2026 Portes Dias Buffet. Todos os direitos reservados.</span>
-                <a href="https://wa.me/5521983710895">WhatsApp: (21) 98371-0895</a>
-            </div>
-        </div>
-    </footer>
+/* ---- NAV SCROLL ---- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 60);
+}, { passive: true });
 
-    <!-- WHATSAPP FLUTUANTE -->
-    <a href="https://wa.me/5521983710895?text=*Contato Rápido - Site*%0A%0A_Gostaria de mais informações sobre o Buffet Premium._" class="wa-float" target="_blank" title="Chamar no WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
+/* ---- HAMBURGER ---- */
+document.getElementById('ham').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open  = links.style.display === 'flex';
+  links.style.cssText = open ? '' :
+    'display:flex;flex-direction:column;position:fixed;top:72px;left:0;width:100%;background:rgba(6,4,2,0.97);padding:2rem 7%;gap:2rem;border-bottom:1px solid rgba(232,93,4,0.15);z-index:499';
+});
 
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
-    <script>
-        // Scarcity bar height para nav offset
-        const scarcityH = document.querySelector('.scarcity-bar').offsetHeight;
-        const navbar = document.getElementById('navbar');
+/* ---- REVEAL ON SCROLL ---- */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
-        // Nav scroll behavior
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+/* ---- PARALLAX (parrilla section) ---- */
+const pImg = document.getElementById('parallaxImg');
+window.addEventListener('scroll', () => {
+  if (!pImg) return;
+  const rect = pImg.closest('.parrilla').getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    const pct = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    pImg.style.transform = `translateY(${(pct - 0.5) * 60}px)`;
+  }
+}, { passive: true });
 
-        // Hamburger toggle (mobile)
-        document.getElementById('hamburger').addEventListener('click', () => {
-            const links = document.querySelector('.nav-links');
-            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-            links.style.position = 'fixed';
-            links.style.top = '106px';
-            links.style.left = '0';
-            links.style.width = '100%';
-            links.style.background = 'rgba(6,6,6,0.97)';
-            links.style.flexDirection = 'column';
-            links.style.padding = '2rem';
-            links.style.gap = '2rem';
-            links.style.borderBottom = '1px solid rgba(201,168,76,0.2)';
-        });
+/* ---- DRAG GALLERY (mouse + touch) ---- */
+const wrap  = document.getElementById('galleryWrap');
+let isDragging = false, startX, scrollLeft;
+wrap.addEventListener('mousedown',  e => { isDragging=true; startX=e.pageX-wrap.offsetLeft; scrollLeft=wrap.scrollLeft; wrap.style.cursor='grabbing'; });
+wrap.addEventListener('mouseleave', () => { isDragging=false; wrap.style.cursor='grab'; });
+wrap.addEventListener('mouseup',    () => { isDragging=false; wrap.style.cursor='grab'; });
+wrap.addEventListener('mousemove',  e => {
+  if (!isDragging) return;
+  e.preventDefault();
+  wrap.scrollLeft = scrollLeft - (e.pageX - wrap.offsetLeft - startX) * 1.5;
+});
+// Touch
+let touchStartX = 0, touchScrollLeft = 0;
+wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].pageX; touchScrollLeft = wrap.scrollLeft; }, { passive: true });
+wrap.addEventListener('touchmove',  e => {
+  const dx = touchStartX - e.touches[0].pageX;
+  wrap.scrollLeft = touchScrollLeft + dx;
+}, { passive: true });
 
-        // Reveal on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* ---- FLATPICKR ---- */
+flatpickr('#fd', {
+  locale: 'pt',
+  minDate: 'today',
+  dateFormat: 'd/m/Y',
+});
 
-        // Counter animation
-        function animateCounter(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const duration = 1800;
-            const start = performance.now();
-            const update = (now) => {
-                const elapsed = now - start;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.floor(eased * target) + (target >= 100 && target < 2000 ? '+' : '');
-                if (progress < 1) requestAnimationFrame(update);
-                else el.textContent = target + (target >= 100 && target < 2000 ? '+' : '');
-            };
-            requestAnimationFrame(update);
-        }
-        const counterObs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
-                    counterObs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        const statsEl = document.querySelector('.stats-grid');
-        if (statsEl) counterObs.observe(statsEl);
-
-        // Flatpickr
-        const datasOcupadas = [];
-        flatpickr("#f-date", {
-            locale: "pt",
-            minDate: "today",
-            disable: datasOcupadas,
-            dateFormat: "d/m/Y",
-        });
-
-        // WhatsApp form
-        function sendWA(e) {
-            e.preventDefault();
-            const name = document.getElementById('f-name').value;
-            const event = document.getElementById('f-event').value;
-            const date = document.getElementById('f-date').value;
-            const text = `*Orçamento Personalizado — Portes Dias Buffet*%0A%0A`
-                + `*Nome:* ${name}%0A`
-                + `*Evento:* ${event}%0A`
-                + `*Data Prevista:* ${date}%0A%0A`
-                + `_Vim pelo site e gostaria de um orçamento._`;
-            window.open(`https://wa.me/5521983710895?text=${text}`, '_blank');
-        }
-    </script>
+/* ---- WHATSAPP FORM ---- */
+function sendWA(e) {
+  e.preventDefault();
+  const n = document.getElementById('fn').value;
+  const ev= document.getElementById('fe').value;
+  const d = document.getElementById('fd').value;
+  const msg = `*Orçamento — Portes Dias Fogo & Brasa*%0A%0A`
+    + `*Nome:* ${n}%0A`
+    + `*Evento:* ${ev}%0A`
+    + `*Data:* ${d}%0A%0A`
+    + `_Vim pelo site e quero um orçamento personalizado._`;
+  window.open(`https://wa.me/5521983710895?text=${msg}`, '_blank');
+}
+</script>
 </body>
 </html>
